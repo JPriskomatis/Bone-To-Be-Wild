@@ -38,6 +38,10 @@ namespace PlayerSpace
             {
                 anim.SetTrigger("attack");
             }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                anim.SetTrigger("spell");
+            }
         }
 
         private void HandleMovement()
