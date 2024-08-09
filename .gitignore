@@ -1,0 +1,7 @@
+.collabignore
+.vsconfig
+Bone to Be Wild.sln
+Library/
+Logs/
+Temp/
+UserSettings/
