@@ -5,3 +5,6 @@ Library/
 Logs/
 Temp/
 UserSettings/
+.vs/
+Assembly-CSharp.csproj
+obj/
