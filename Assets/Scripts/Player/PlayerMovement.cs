@@ -16,6 +16,10 @@ namespace PlayerSpace
         private Camera playerCamera;
         private float rotationX = 0f;       // Current vertical rotation of the camera
 
+        [SerializeField] private Animator anim;
+        bool isWalking;
+
+
         private void Start()
         {
             controller = GetComponent<CharacterController>();
@@ -30,6 +34,10 @@ namespace PlayerSpace
         {
             HandleMovement();
             HandleMouseLook();
+            if(Input.GetMouseButtonDown(0))
+            {
+                anim.SetTrigger("attack");
+            }
         }
 
         private void HandleMovement()
@@ -40,6 +48,9 @@ namespace PlayerSpace
 
             Vector3 move = transform.right * moveDirectionX + transform.forward * moveDirectionY;
             controller.Move(move * Time.deltaTime);
+
+            bool isWalking = move.magnitude > 0.1f; // Adjust the threshold as needed
+            anim.SetBool("walk", isWalking);
         }
 
         private void HandleMouseLook()
