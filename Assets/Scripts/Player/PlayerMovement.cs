@@ -12,12 +12,15 @@ namespace PlayerSpace
         public float lookSpeed = 2f;        // Speed of mouse look
         public float upDownRange = 60f;     // Vertical camera rotation range
 
+
         private CharacterController controller;
         private Camera playerCamera;
         private float rotationX = 0f;       // Current vertical rotation of the camera
 
         [SerializeField] private Animator anim;
+
         bool isWalking;
+        private float lastMouseX;
 
 
         private void Start()
@@ -70,6 +73,19 @@ namespace PlayerSpace
             rotationX -= mouseY;
             rotationX = Mathf.Clamp(rotationX, -upDownRange, upDownRange);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+
+            lastMouseX = mouseX;
+
+            CheckTurnRightAnimation();
+
+        }
+
+        private void CheckTurnRightAnimation()
+        {
+            if (lastMouseX > 0.1f) // Adjust threshold as needed
+            {
+                anim.SetTrigger("turnRight");
+            }
         }
     }
 
