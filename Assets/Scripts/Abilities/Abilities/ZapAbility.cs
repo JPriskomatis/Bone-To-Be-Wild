@@ -45,10 +45,23 @@ namespace AbilitySpace
 
         public void CastSpell()
         {
+            // Find the closest target
+            GameObject closestEnemy = FindClosestTarget();
 
-            Vector3 spawnPosition = transform.position + transform.TransformDirection(offset);
-            GameObject fvxInstance = Instantiate(vfxPrefab, spawnPosition, Quaternion.identity);
-            Destroy(fvxInstance, 1f);
+            // Instantiate the VFX prefab at the closest target's position if a target exists
+            if (closestEnemy != null)
+            {
+                Vector3 targetPosition = closestEnemy.transform.position;
+                GameObject fvxInstance = Instantiate(vfxPrefab, targetPosition, Quaternion.identity);
+                Destroy(fvxInstance, 1f);
+            }
+            else
+            {
+                // If no target is found, instantiate VFX at the player's position (or handle accordingly)
+                Vector3 spawnPosition = transform.position + transform.TransformDirection(offset);
+                GameObject fvxInstance = Instantiate(vfxPrefab, spawnPosition, Quaternion.identity);
+                Destroy(fvxInstance, 1f);
+            }
         }
 
         public void Deactivate()
