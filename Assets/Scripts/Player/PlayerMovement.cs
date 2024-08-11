@@ -41,14 +41,10 @@ namespace PlayerSpace
         {
             HandleMovement();
             HandleMouseLook();
-            if(Input.GetMouseButtonDown(0))
-            {
-                anim.SetTrigger("attack");
-            }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                anim.SetTrigger("spell");
-            }
+            //if(Input.GetMouseButtonDown(0))
+            //{
+            //    anim.SetTrigger("attack");
+            //}
         }
 
         public void CastSpell()
