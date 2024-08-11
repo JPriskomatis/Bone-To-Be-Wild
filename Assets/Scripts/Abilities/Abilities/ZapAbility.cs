@@ -9,6 +9,7 @@ namespace AbilitySpace
         public float Cooldown { get; private set; } = 2f;
         private bool isAvailable = true;
 
+        [SerializeField] Animator anim;
         public void Activate()
         {
             if(isAvailable)
@@ -16,7 +17,7 @@ namespace AbilitySpace
                 Debug.Log("Zap");
 
                 //Perform the animation;
-                Animator anim = GetComponentInChildren<Animator>();
+                
 
                 anim.SetTrigger("spell");
 

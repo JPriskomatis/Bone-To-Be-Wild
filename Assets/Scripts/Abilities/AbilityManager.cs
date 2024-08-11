@@ -12,16 +12,6 @@ namespace AbilitySpace
     {
         private List<IABility> abilities = new List<IABility>();
 
-        private void Start()
-        {
-
-            //IABility[] foundAbilities = GetComponents<IABility>();
-
-            //foreach (IABility ability in foundAbilities)
-            //{
-            //    abilities.Add(ability);
-            //}
-        }
         public void AddAbility(IABility ability)
         {
             abilities.Add(ability);

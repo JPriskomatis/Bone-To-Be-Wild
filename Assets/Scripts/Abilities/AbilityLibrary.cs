@@ -4,16 +4,16 @@ namespace AbilitySpace
 {
     public class AbilityLibrary : MonoBehaviour
     {
-        // References to all abilities
+        //We reference our abilities here;
         public IABility zapAbility;
 
-        // Add more abilities as needed...
+
 
         private void Awake()
         {
-            // Assume the abilities are attached to the same GameObject or manually assigned
+            //We instantiate our abilities here;
             zapAbility = GetComponent<ZapAbility>();
-            // Initialize other abilities similarly...
+
         }
 
         public IABility GetAbilityByName(string abilityName)
