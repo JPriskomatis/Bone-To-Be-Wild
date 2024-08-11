@@ -17,6 +17,8 @@ namespace AbilitySpace
         public GameObject vfxPrefab; 
         public Vector3 offset = new Vector3(0, 0, 1);
 
+        private GameObject enemyToTrack;
+
         private void Start()
         {
             playerCamera = Camera.main;
@@ -27,11 +29,11 @@ namespace AbilitySpace
             {
                 Debug.Log("Zap");
 
-                GameObject closestEnemy = FindClosestTarget();
+                enemyToTrack = FindClosestTarget();
 
-                if(closestEnemy != null)
+                if(enemyToTrack != null)
                 {
-                    closestEnemy.GetComponent<TEST_ABILITY>().SpellDamageable();
+                    enemyToTrack.GetComponent<TEST_ABILITY>().SpellDamageable();
                 }
                 //Perform the animation;
                 anim.SetTrigger("spell");
@@ -45,13 +47,12 @@ namespace AbilitySpace
 
         public void CastSpell()
         {
-            // Find the closest target
-            GameObject closestEnemy = FindClosestTarget();
 
-            // Instantiate the VFX prefab at the closest target's position if a target exists
-            if (closestEnemy != null)
+
+            //Instantiate the VFX prefab at the closest target's position if a target exists
+            if (enemyToTrack != null)
             {
-                Vector3 targetPosition = closestEnemy.transform.position;
+                Vector3 targetPosition = enemyToTrack.transform.position;
                 GameObject fvxInstance = Instantiate(vfxPrefab, targetPosition, Quaternion.identity);
                 Destroy(fvxInstance, 1f);
             }
