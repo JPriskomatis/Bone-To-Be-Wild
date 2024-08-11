@@ -14,6 +14,7 @@ namespace AbilitySpace
         private Camera playerCamera;
         [SerializeField] private float maxDinstance = 100f;
 
+
         public GameObject vfxPrefab;
         public Vector3 offset = new Vector3(0, 0, 1);
 
