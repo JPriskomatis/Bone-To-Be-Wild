@@ -10,16 +10,29 @@ namespace AbilitySpace
         private bool isAvailable = true;
 
         [SerializeField] Animator anim;
+
+        private Camera playerCamera;
+
+        private void Start()
+        {
+            playerCamera = Camera.main;
+        }
         public void Activate()
         {
             if(isAvailable)
             {
                 Debug.Log("Zap");
 
-                //Perform the animation;
-                
+                GameObject closestEnemy = FindClosestTarget();
 
+                if(closestEnemy != null)
+                {
+                    closestEnemy.GetComponent<TEST_ABILITY>().SpellDamageable();
+                }
+                //Perform the animation;
                 anim.SetTrigger("spell");
+
+                //Deal Damage;
 
                 //Start Cooldown process;
                 StartCoroutine(StartCooldown());
@@ -41,6 +54,19 @@ namespace AbilitySpace
             isAvailable = false;
             yield return new WaitForSeconds(Cooldown);
             isAvailable = true;
+        }
+
+        private GameObject FindClosestTarget()
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
+            {
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    return hit.collider.gameObject;
+                }
+            }
+            return null;
         }
     }
 
