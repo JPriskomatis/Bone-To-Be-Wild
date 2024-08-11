@@ -4,10 +4,8 @@ namespace AbilitySpace
 {
     public class AbilityLibrary : MonoBehaviour
     {
-        //We reference our abilities here;
+        //We reference all our abilities here;
         public IABility zapAbility;
-
-
 
         private void Awake()
         {

@@ -4,8 +4,8 @@ namespace AbilitySpace
 {
     public class AcquireAbility : MonoBehaviour
     {
-        [SerializeField] private AbilityManager abilityManager; // Reference to AbilityManager
-        [SerializeField] private AbilityLibrary abilityLibrary; // Reference to AbilityLibrary
+        [SerializeField] private AbilityManager abilityManager;
+        [SerializeField] private AbilityLibrary abilityLibrary;
 
 
         private void Start()
@@ -22,6 +22,7 @@ namespace AbilitySpace
         }
 
 
+        //Method to acuqire a new ability through in-game;
         public void Acquire(string abilityName)
         {
             IABility ability = abilityLibrary.GetAbilityByName(abilityName);
