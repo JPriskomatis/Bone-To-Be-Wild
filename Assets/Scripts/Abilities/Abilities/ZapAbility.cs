@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AbilitySpace
@@ -12,6 +13,8 @@ namespace AbilitySpace
         [SerializeField] Animator anim;
 
         private Camera playerCamera;
+        [SerializeField] private float radius = 2f;
+        [SerializeField] private float maxDinstance = 100f;
 
 
         public GameObject vfxPrefab; 
@@ -29,22 +32,45 @@ namespace AbilitySpace
             {
                 Debug.Log("Zap");
 
+                //We find the closest enemy;
                 enemyToTrack = FindClosestTarget();
 
                 if(enemyToTrack != null)
                 {
-                    enemyToTrack.GetComponent<TEST_ABILITY>().SpellDamageable();
+                    //We check if the enemy has the ISpellDamageable interface, meaning if we can deal
+                    //damage to them with our spells;
+                    ISpellDamageable spellDamageable = enemyToTrack.GetComponent<ISpellDamageable>();
+                    if (spellDamageable != null)
+                    {
+                        spellDamageable.SpellDamageable();
+                    }
                 }
                 //Perform the animation;
                 anim.SetTrigger("spell");
-
-                //Deal Damage;
 
                 //Start Cooldown process;
                 StartCoroutine(StartCooldown());
             }
         }
 
+
+
+        public void Deactivate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IsAvailable()
+        {
+            return isAvailable;
+        }
+
+        private IEnumerator StartCooldown()
+        {
+            isAvailable = false;
+            yield return new WaitForSeconds(Cooldown);
+            isAvailable = true;
+        }
         public void CastSpell()
         {
 
@@ -64,36 +90,24 @@ namespace AbilitySpace
                 Destroy(fvxInstance, 1f);
             }
         }
-
-        public void Deactivate()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool IsAvailable()
-        {
-            return isAvailable;
-        }
-
-        private IEnumerator StartCooldown()
-        {
-            isAvailable = false;
-            yield return new WaitForSeconds(Cooldown);
-            isAvailable = true;
-        }
-
         private GameObject FindClosestTarget()
         {
             RaycastHit hit;
-            if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
+            
+
+            // Perform the raycast
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxDinstance))
             {
+                // Check if the hit object has the "Enemy" tag
                 if (hit.collider.CompareTag("Enemy"))
                 {
-                    return hit.collider.gameObject;
+                    return hit.collider.gameObject; // Return the GameObject that was hit
                 }
             }
             return null;
         }
+
+
     }
 
 }
