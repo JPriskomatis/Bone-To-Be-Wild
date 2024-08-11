@@ -25,6 +25,7 @@ public class TEST_ABILITY : MonoBehaviour, ISpellDamageable
 
     public void SpellDamageable()
     {
+
         Debug.Log("A spell attacked me!");
     }
 }

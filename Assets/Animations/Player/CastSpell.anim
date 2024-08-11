@@ -87856,7 +87856,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 1
   m_Events:
   - time: 0.95
-    functionName: CastSpellInstance
+    functionName: CastZap
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

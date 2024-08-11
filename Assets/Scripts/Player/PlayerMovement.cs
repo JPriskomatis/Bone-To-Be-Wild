@@ -23,8 +23,6 @@ namespace PlayerSpace
 
 
 
-        public GameObject vfxPrefab; // Drag your VFX prefab here in the Inspector
-        public Vector3 offset = new Vector3(0, 0, 1);
 
         private void Start()
         {
@@ -46,13 +44,7 @@ namespace PlayerSpace
             //}
         }
 
-        public void CastSpell()
-        {
-            
-            Vector3 spawnPosition = transform.position + transform.TransformDirection(offset);
-            GameObject fvxInstance = Instantiate(vfxPrefab, spawnPosition, Quaternion.identity);
-            Destroy(fvxInstance, 1f);
-        }
+        
 
         private void HandleMovement()
         {
