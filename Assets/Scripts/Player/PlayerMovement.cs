@@ -20,12 +20,11 @@ namespace PlayerSpace
         [SerializeField] private Animator anim;
 
         bool isWalking;
-        private float lastMouseX;
+
 
 
         public GameObject vfxPrefab; // Drag your VFX prefab here in the Inspector
         public Vector3 offset = new Vector3(0, 0, 1);
-
 
         private void Start()
         {
@@ -82,19 +81,10 @@ namespace PlayerSpace
             rotationX = Mathf.Clamp(rotationX, -upDownRange, upDownRange);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
 
-            lastMouseX = mouseX;
 
-            CheckTurnRightAnimation();
 
         }
 
-        private void CheckTurnRightAnimation()
-        {
-            if (lastMouseX > 0.1f) // Adjust threshold as needed
-            {
-                anim.SetTrigger("turnRight");
-            }
-        }
     }
 
 }

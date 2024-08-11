@@ -6,7 +6,7 @@ namespace AbilitySpace
     {
         [SerializeField] private AbilityManager abilityManager; // Reference to AbilityManager
         [SerializeField] private AbilityLibrary abilityLibrary; // Reference to AbilityLibrary
-        [SerializeField] private string abilityName; // The name of the ability to acquire
+
 
         private void Start()
         {
@@ -20,14 +20,9 @@ namespace AbilitySpace
                 abilityLibrary = FindObjectOfType<AbilityLibrary>();
             }
         }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.G)){
-                Acquire();
-            }
-        }
 
-        public void Acquire()
+
+        public void Acquire(string abilityName)
         {
             IABility ability = abilityLibrary.GetAbilityByName(abilityName);
 
