@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TEST_ABILITY : MonoBehaviour, ISpellDamageable
+public class TEST_ABILITY : MonoBehaviour
 {
     private AcquireAbility acquireAbility;
 
@@ -23,9 +23,5 @@ public class TEST_ABILITY : MonoBehaviour, ISpellDamageable
         }
     }
 
-    public void SpellDamageable()
-    {
 
-        Debug.Log("A spell attacked me!");
-    }
 }

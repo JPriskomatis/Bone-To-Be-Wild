@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AbilitySpace
@@ -13,11 +12,9 @@ namespace AbilitySpace
         [SerializeField] Animator anim;
 
         private Camera playerCamera;
-        [SerializeField] private float radius = 2f;
         [SerializeField] private float maxDinstance = 100f;
 
-
-        public GameObject vfxPrefab; 
+        public GameObject vfxPrefab;
         public Vector3 offset = new Vector3(0, 0, 1);
 
         private GameObject enemyToTrack;
@@ -26,34 +23,33 @@ namespace AbilitySpace
         {
             playerCamera = Camera.main;
         }
+
         public void Activate()
         {
-            if(isAvailable)
+            if (isAvailable)
             {
                 Debug.Log("Zap");
 
-                //We find the closest enemy;
+                // Find the closest enemy and check if it's damageable
                 enemyToTrack = FindClosestTarget();
 
-                if(enemyToTrack != null)
+                if (enemyToTrack != null)
                 {
-                    //We check if the enemy has the ISpellDamageable interface, meaning if we can deal
-                    //damage to them with our spells;
+                    // Check if the enemy has the ISpellDamageable interface
                     ISpellDamageable spellDamageable = enemyToTrack.GetComponent<ISpellDamageable>();
                     if (spellDamageable != null)
                     {
                         spellDamageable.SpellDamageable();
                     }
                 }
-                //Perform the animation;
+
+                // Perform the animation
                 anim.SetTrigger("spell");
 
-                //Start Cooldown process;
+                // Start cooldown process
                 StartCoroutine(StartCooldown());
             }
         }
-
-
 
         public void Deactivate()
         {
@@ -71,11 +67,10 @@ namespace AbilitySpace
             yield return new WaitForSeconds(Cooldown);
             isAvailable = true;
         }
+
         public void CastSpell()
         {
-
-
-            //Instantiate the VFX prefab at the closest target's position if a target exists
+            // Instantiate the VFX prefab at the closest target's position if a target exists
             if (enemyToTrack != null)
             {
                 Vector3 targetPosition = enemyToTrack.transform.position;
@@ -84,16 +79,16 @@ namespace AbilitySpace
             }
             else
             {
-                // If no target is found, instantiate VFX at the player's position (or handle accordingly)
+                // If no target is found, instantiate VFX at the player's position
                 Vector3 spawnPosition = transform.position + transform.TransformDirection(offset);
                 GameObject fvxInstance = Instantiate(vfxPrefab, spawnPosition, Quaternion.identity);
                 Destroy(fvxInstance, 1f);
             }
         }
+
         private GameObject FindClosestTarget()
         {
             RaycastHit hit;
-            
 
             // Perform the raycast
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxDinstance))
@@ -101,13 +96,16 @@ namespace AbilitySpace
                 // Check if the hit object has the "Enemy" tag
                 if (hit.collider.CompareTag("Enemy"))
                 {
-                    return hit.collider.gameObject; // Return the GameObject that was hit
+                    // Check if the enemy has the ISpellDamageable interface
+                    ISpellDamageable spellDamageable = hit.collider.GetComponent<ISpellDamageable>();
+                    if (spellDamageable != null)
+                    {
+                        return hit.collider.gameObject; // Return the GameObject that was hit
+                    }
                 }
             }
+
             return null;
         }
-
-
     }
-
 }
