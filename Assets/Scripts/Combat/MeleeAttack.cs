@@ -29,14 +29,18 @@ namespace combat
                 {
                     if (weapon_base != null)
                     {
-                        
-                        anim.SetTrigger("attack");
-                        weapon_base.TryDoAttack();
-                        lastAttackTime = Time.time; // Update last attack time
-                        EnableWeaponCollider();
+
+                        Attack();
                     }
                 }
             }
+        }
+        private void Attack()
+        {
+            anim.SetTrigger("attack");
+            weapon_base.TryDoAttack();
+            lastAttackTime = Time.time; // Update last attack time
+            EnableWeaponCollider();
         }
 
         private void EnableWeaponCollider()
