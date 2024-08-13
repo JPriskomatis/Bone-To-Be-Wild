@@ -62,6 +62,7 @@ namespace combat
             if (other.tag =="Enemy")
             {
                 Debug.Log(other.transform.root.name);
+                other.GetComponent<TEST_NPC>().Death();
             }
         }
     }
