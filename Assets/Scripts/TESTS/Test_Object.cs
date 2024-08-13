@@ -2,22 +2,23 @@ using Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UI;
 
 public class Test_Object : MonoBehaviour, IInteractable
 {
     public void Interact()
     {
         if(Input.GetKeyDown(KeyCode.E))
-            Debug.Log("Just interacted");
+            TextAppear.SetText("Interacted");
     }
 
     public void OnInteractEnter()
     {
-        Debug.Log("Can interact");
+        TextAppear.SetText("Interact");
     }
 
     public void OnInteractExit()
     {
-        Debug.Log("End of interaction");
+        TextAppear.SetText("End of Interaction");
     }
 }

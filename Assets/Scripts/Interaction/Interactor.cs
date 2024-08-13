@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UI;
 using UnityEngine;
 
 namespace Interaction
@@ -11,9 +12,12 @@ namespace Interaction
         void OnInteractEnter(); // Called when detection with the object starts
         void OnInteractExit();  // Called when detection with the object ends
     }
-
+    
     public class Interactor : MonoBehaviour
     {
+
+
+        
         [SerializeField] Transform InteractorSource;
         [SerializeField] float InteractRange;
 
@@ -22,6 +26,11 @@ namespace Interaction
 
         private IInteractable currentInteractable; // Track the currently detected interactable object
 
+        //We initialize the TextAppear in order to grab the textmeshpro text;
+        private void Start()
+        {
+            TextAppear.Initialize();
+        }
         private void Update()
         {
             Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
@@ -53,12 +62,8 @@ namespace Interaction
                     currentInteractable = null;
                 }
 
-                if(text!= null)
-                {
-                    text.text = "";
-                    text.gameObject.SetActive(false);
-
-                }
+                text.text = "";
+                text.gameObject.SetActive(false);
             }
         }
     }
