@@ -6,12 +6,12 @@ namespace PlayerSpace
 {
     public class PlayerMovement : MonoBehaviour
     {
-
         [Header("Movement Settings")]
         public float moveSpeed = 5f;        // Speed of movement
         public float lookSpeed = 2f;        // Speed of mouse look
         public float upDownRange = 60f;     // Vertical camera rotation range
-
+        public float gravity = -9.81f;      // Gravity force
+        public float terminalVelocity = -20f; // Maximum falling speed to avoid going too fast
 
         private CharacterController controller;
         private Camera playerCamera;
@@ -19,10 +19,8 @@ namespace PlayerSpace
 
         [SerializeField] private Animator anim;
 
-        bool isWalking;
-
-
-
+        private Vector3 velocity;           // Current velocity of the player
+        private bool isWalking;
 
         private void Start()
         {
@@ -38,13 +36,7 @@ namespace PlayerSpace
         {
             HandleMovement();
             HandleMouseLook();
-            //if(Input.GetMouseButtonDown(0))
-            //{
-            //    anim.SetTrigger("attack");
-            //}
         }
-
-        
 
         private void HandleMovement()
         {
@@ -53,9 +45,21 @@ namespace PlayerSpace
             float moveDirectionX = Input.GetAxis("Horizontal") * moveSpeed;
 
             Vector3 move = transform.right * moveDirectionX + transform.forward * moveDirectionY;
+
+            // Apply movement
             controller.Move(move * Time.deltaTime);
 
-            bool isWalking = move.magnitude > 0.1f; // Adjust the threshold as needed
+            // Apply gravity
+            if (velocity.y > terminalVelocity)
+            {
+                velocity.y += gravity * Time.deltaTime;
+            }
+
+            // Apply gravity to the movement
+            controller.Move(velocity * Time.deltaTime);
+
+            // Update walking animation
+            isWalking = move.magnitude > 0.1f; // Adjust the threshold as needed
             anim.SetBool("walk", isWalking);
         }
 
@@ -72,11 +76,6 @@ namespace PlayerSpace
             rotationX -= mouseY;
             rotationX = Mathf.Clamp(rotationX, -upDownRange, upDownRange);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
-
-
-
         }
-
     }
-
 }
