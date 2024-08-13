@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Damageables;
 
-public class TEST_NPC : MonoBehaviour, ISpellDamageable
+public class TEST_NPC : MonoBehaviour, ISpellDamageable, ISwordDamageable
 {
     [SerializeField] Animator anim;
     public void SpellDamageable()
@@ -13,5 +14,11 @@ public class TEST_NPC : MonoBehaviour, ISpellDamageable
     public void Death()
     {
         anim.SetTrigger("death");
+    }
+
+    public void SwordDamageable()
+    {
+        Debug.Log("SwordDamageable");
+        Death();
     }
 }

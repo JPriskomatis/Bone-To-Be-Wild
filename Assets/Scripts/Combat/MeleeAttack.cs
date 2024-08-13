@@ -1,3 +1,4 @@
+using Damageables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,7 +63,17 @@ namespace combat
             if (other.tag =="Enemy")
             {
                 Debug.Log(other.transform.root.name);
-                other.GetComponent<TEST_NPC>().Death();
+
+                //When we attack someone we must check if they can be damaged by sword;
+                //all these gameobjects implement the Interface IsSwordDamageable;
+                //Therefore we check if our collider implements that interface, and if it does
+                //we just call our SwordDamageable function;
+                ISwordDamageable swordDamageable = other.GetComponent<ISwordDamageable>();
+                if (swordDamageable != null)
+                {
+                    swordDamageable.SwordDamageable();
+                }
+
             }
         }
     }
