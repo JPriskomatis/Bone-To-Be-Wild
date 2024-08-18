@@ -1,4 +1,6 @@
+using Dialoguespace;
 using Interaction;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
@@ -16,7 +18,11 @@ namespace NPCspace
     {
         public string npcName;
 
+        [Header("Ink JSON")]
+        [SerializeField] private TextAsset inkJSON;
+
         public AudioSource greetingAudio;
+
 
 
         #region INTERACTION INTERFACE
@@ -27,6 +33,8 @@ namespace NPCspace
                 TextAppear.SetText("Hellos");
 
                 //Initiate Dialogue;
+                Debug.Log(inkJSON.text);
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
             }
         }
 

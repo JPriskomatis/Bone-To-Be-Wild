@@ -6,7 +6,12 @@ namespace NPCspace
 {
     public class NPC_Blacksmith : NPC
     {
+
+
+
         [SerializeField] private Animator anim;
+
+        
         public override void OnPlayerEnterRange(Collider Player)
         {
 
