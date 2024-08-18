@@ -5150,8 +5150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emit: 0
   _emitTime: 0
-  _material: {fileID: 2100000, guid: e97a79db1dd66ad4d8f70932abe94b73, type: 2}
-  _lifeTime: 0.1
+  _material: {fileID: 2100000, guid: 616a777eb757ff14c82a79feeb35d9b1, type: 2}
+  _lifeTime: 0.3
   _colors: []
   _sizes: []
   _minVertexDistance: 0.1
