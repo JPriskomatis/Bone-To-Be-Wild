@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Dialoguespace
 {
@@ -143,6 +144,7 @@ namespace Dialoguespace
                 choices[i].gameObject.SetActive(false);
 
             }
+            StartCoroutine(SelectFirstChoice());
 
         }
         public void MakeChoice(int choiceIndex)
@@ -157,6 +159,13 @@ namespace Dialoguespace
             {
                 Debug.LogError($"Choice index {choiceIndex} is out of range. Choices available: {currentStory.currentChoices.Count}");
             }
+        }
+
+        private IEnumerator SelectFirstChoice()
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            yield return new WaitForEndOfFrame();
+            EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
         }
 
     }
