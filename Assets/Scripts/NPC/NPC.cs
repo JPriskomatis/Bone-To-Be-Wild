@@ -18,6 +18,7 @@ namespace NPCspace
 
         public AudioSource greetingAudio;
 
+
         #region INTERACTION INTERFACE
         public void Interact()
         {

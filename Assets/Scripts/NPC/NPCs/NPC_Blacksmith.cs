@@ -6,11 +6,19 @@ namespace NPCspace
 {
     public class NPC_Blacksmith : NPC
     {
+        [SerializeField] private Animator anim;
         public override void OnPlayerEnterRange(Collider Player)
         {
+            
             base.OnPlayerEnterRange(Player);
-            Debug.Log(npcName + " says hello");
+            //We want to play this animation only for the blacksmith;
+            anim.SetTrigger("point");
+
         }
+
+
+
+
     }
     
 
