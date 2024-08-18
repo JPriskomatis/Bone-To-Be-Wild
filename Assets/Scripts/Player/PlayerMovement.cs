@@ -38,12 +38,13 @@ namespace PlayerSpace
             if (!DialogueManager.GetInstance().dialogueIsPlaying)
             {
                 HandleMovement();
+                HandleMouseLook();
             }
             else
             {
                 anim.SetBool("walk", false);
             }
-            HandleMouseLook();
+            
         }
 
         private void HandleMovement()
