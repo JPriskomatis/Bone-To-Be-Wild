@@ -9238,6 +9238,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 482608, guid: d24cbc466424f71408559463ee47e0cf, type: 3}
   m_PrefabInstance: {fileID: 1349488106}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1376554221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1948561988248527556, guid: a22dc0f371ea5274b8b78af537d84bdf, type: 3}
+  m_PrefabInstance: {fileID: 1714683006615683627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1376554226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376554221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07dbced34cd3df346a7588eecc8f7bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: Trevor
 --- !u!1001 &1389505068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12246,7 +12264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969771693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.8, y: 0, z: -9.7}
+  m_LocalPosition: {x: 37.77, y: 0, z: 33.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15243,6 +15261,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1714683006934676227, guid: a22dc0f371ea5274b8b78af537d84bdf, type: 3}
+      propertyPath: m_Radius
+      value: 2.6206627
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714683006934676227, guid: a22dc0f371ea5274b8b78af537d84bdf, type: 3}
+      propertyPath: m_Center.z
+      value: 1.6101418
+      objectReference: {fileID: 0}
     - target: {fileID: 1714683007600336506, guid: a22dc0f371ea5274b8b78af537d84bdf, type: 3}
       propertyPath: m_RootOrder
       value: 1
