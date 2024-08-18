@@ -27,6 +27,8 @@ namespace Dialoguespace
 
         private static DialogueManager instance;
 
+        private bool choicesActive = false;
+
         private void Awake()
         {
             // Check if there's already an instance
@@ -68,12 +70,19 @@ namespace Dialoguespace
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space) && !choicesActive)
                 {
+                    choicesActive = false;
                     ContinueStory();
+
                 }
+
             }
+            
         }
+
+
+
 
         public static DialogueManager GetInstance()
         {
@@ -97,6 +106,7 @@ namespace Dialoguespace
         {
             if (currentStory.canContinue)
             {
+
                 dialogueText.text = currentStory.Continue();
                 DisplayChoices();
             }
@@ -105,6 +115,7 @@ namespace Dialoguespace
                 StartCoroutine(ExitDialogueMode());
             }
         }
+
 
         private IEnumerator ExitDialogueMode()
         {
@@ -132,7 +143,8 @@ namespace Dialoguespace
             }
 
             int index = 0;
-            foreach(Choice choice in currentChoices)
+            bool hasActiveChoices = currentChoices.Count > 0;
+            foreach (Choice choice in currentChoices)
             {
                 choices[index].gameObject.SetActive(true);
                 choicesText[index].text = choice.text;
@@ -144,7 +156,9 @@ namespace Dialoguespace
                 choices[i].gameObject.SetActive(false);
 
             }
-            StartCoroutine(SelectFirstChoice());
+            choicesActive = hasActiveChoices;
+
+            //StartCoroutine(SelectFirstChoice());
 
         }
         public void MakeChoice(int choiceIndex)
@@ -153,6 +167,7 @@ namespace Dialoguespace
             {
                 Debug.Log("Choice Index: "+choiceIndex);
                 currentStory.ChooseChoiceIndex(choiceIndex);
+                choicesActive = false;
                 ContinueStory();
             }
             else
@@ -161,12 +176,12 @@ namespace Dialoguespace
             }
         }
 
-        private IEnumerator SelectFirstChoice()
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            yield return new WaitForEndOfFrame();
-            EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
-        }
+        //private IEnumerator SelectFirstChoice()
+        //{
+        //    EventSystem.current.SetSelectedGameObject(null);
+        //    yield return new WaitForEndOfFrame();
+        //    EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+        //}
 
     }
 }
