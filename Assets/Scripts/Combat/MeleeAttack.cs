@@ -1,4 +1,5 @@
 using Damageables;
+using Dialoguespace;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace combat
         }
         private void Update()
         {
-            if (Time.time >= lastAttackTime + cooldownTime)
+            if (Time.time >= lastAttackTime + cooldownTime && !DialogueManager.GetInstance().dialogueIsPlaying)
             {
                 if (Input.GetMouseButtonDown(0)) 
                 {
