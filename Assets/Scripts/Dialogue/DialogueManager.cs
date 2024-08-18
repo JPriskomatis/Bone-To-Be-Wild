@@ -17,7 +17,7 @@ namespace Dialoguespace
 
         private Story currentStory;
 
-        private bool dialogueIsPlaying;
+        public bool dialogueIsPlaying { get; private set; }
 
         
 
@@ -77,12 +77,14 @@ namespace Dialoguespace
             }
             else
             {
-                ExitDialogueMode();
+                StartCoroutine(ExitDialogueMode());
             }
         }
 
-        private void ExitDialogueMode()
+        private IEnumerator ExitDialogueMode()
         {
+            yield return new WaitForSeconds(0.2f);
+
             dialogueIsPlaying = false;
             dialogueCanvas.SetActive(false);
             dialogueText.text = "";

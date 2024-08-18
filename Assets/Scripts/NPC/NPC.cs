@@ -33,7 +33,7 @@ namespace NPCspace
                 TextAppear.SetText("Hellos");
 
                 //Initiate Dialogue;
-                Debug.Log(inkJSON.text);
+
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
             }
         }

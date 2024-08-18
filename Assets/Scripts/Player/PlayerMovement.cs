@@ -1,3 +1,4 @@
+using Dialoguespace;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +35,14 @@ namespace PlayerSpace
 
         private void Update()
         {
-            HandleMovement();
+            if (!DialogueManager.GetInstance().dialogueIsPlaying)
+            {
+                HandleMovement();
+            }
+            else
+            {
+                anim.SetBool("walk", false);
+            }
             HandleMouseLook();
         }
 
