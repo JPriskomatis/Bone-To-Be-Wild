@@ -2,6 +2,7 @@ using Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace NPCspace
@@ -15,6 +16,7 @@ namespace NPCspace
     {
         public string npcName;
 
+        public AudioSource greetingAudio;
 
         #region INTERACTION INTERFACE
         public void Interact()
@@ -34,6 +36,22 @@ namespace NPCspace
         {
             TextAppear.RemoveText();
 
+        }
+        #endregion
+
+        #region PLAYER ENTER -> NPC TALK
+        public virtual void OnPlayerEnterRange(Collider Player)
+        {
+            greetingAudio.Play();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                OnPlayerEnterRange(other);
+            }
+            
         }
         #endregion
     }

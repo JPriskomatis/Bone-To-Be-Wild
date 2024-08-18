@@ -6,10 +6,12 @@ namespace NPCspace
 {
     public class NPC_Blacksmith : NPC
     {
-        private void Start()
+        public override void OnPlayerEnterRange(Collider Player)
         {
-            Debug.Log("Hey");
+            base.OnPlayerEnterRange(Player);
+            Debug.Log(npcName + " says hello");
         }
     }
+    
 
 }
