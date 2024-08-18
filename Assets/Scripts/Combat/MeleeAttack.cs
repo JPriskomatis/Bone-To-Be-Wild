@@ -16,10 +16,12 @@ namespace combat
         private float lastAttackTime = 0f;
 
         private BoxCollider boxCollider;
+        private MeleeWeaponTrail meleeWeaponTrail;
 
         private void Start()
         {
             boxCollider = GetComponent<BoxCollider>();
+            meleeWeaponTrail = GetComponentInChildren<MeleeWeaponTrail>();
             boxCollider.enabled = false;
         }
         private void Update()
@@ -41,21 +43,23 @@ namespace combat
             anim.SetTrigger("attack");
             weapon_base.TryDoAttack();
             lastAttackTime = Time.time; // Update last attack time
-            EnableWeaponCollider();
+            EnableWeaponAttack();
         }
 
-        private void EnableWeaponCollider()
+        private void EnableWeaponAttack()
         {
             if (boxCollider != null)
             {
                 boxCollider.enabled = true;
-                Invoke("DisableWeaponCollider", 1f); // Disable collider after a short delay (adjust this timing based on your animation)
+                meleeWeaponTrail.Emit = enabled;
+                Invoke("DisableWeaponAttack", 1f); // Disable collider after a short delay (adjust this timing based on your animation)
             }
         }
 
-        private void DisableWeaponCollider()
+        private void DisableWeaponAttack()
         {
             boxCollider.enabled = false;
+            meleeWeaponTrail.Emit = false;
         }
 
         private void OnTriggerEnter(Collider other)
