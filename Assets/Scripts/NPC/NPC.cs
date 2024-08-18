@@ -25,6 +25,8 @@ namespace NPCspace
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 TextAppear.SetText("Hellos");
+
+                //Initiate Dialogue;
             }
         }
 

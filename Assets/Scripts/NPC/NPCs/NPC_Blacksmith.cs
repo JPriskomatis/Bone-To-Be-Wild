@@ -9,16 +9,17 @@ namespace NPCspace
         [SerializeField] private Animator anim;
         public override void OnPlayerEnterRange(Collider Player)
         {
-            
+
             base.OnPlayerEnterRange(Player);
             //We want to play this animation only for the blacksmith;
-            anim.SetTrigger("point");
+            PointAnimation();
 
         }
 
-
-
-
+        private void PointAnimation()
+        {
+            anim.SetTrigger("point");
+        }
     }
     
 
