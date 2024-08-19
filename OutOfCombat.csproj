@@ -68,6 +68,8 @@
     <Compile Include="Assets\Scripts\OutOfCombat\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\UI\Cursor\CursorController.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Interactor.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Audio\Sound.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\OutOfCombat\OutOfCombat.asmdef" />
