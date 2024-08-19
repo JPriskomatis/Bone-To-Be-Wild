@@ -12348,6 +12348,7 @@ MonoBehaviour:
   InteractorSource: {fileID: 963194228}
   InteractRange: 12
   text: {fileID: 291230037}
+  detectedObject: {fileID: 0}
 --- !u!4 &708595948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 482608, guid: d24cbc466424f71408559463ee47e0cf, type: 3}
@@ -36408,6 +36409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4913896224994152813}
+  - component: {fileID: 4913896224994152814}
   m_Layer: 0
   m_Name: Tavern
   m_TagString: Untagged
@@ -39714,6 +39716,18 @@ Transform:
   m_Father: {fileID: 1102277328}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4913896224994152814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212452209160027633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b262aa23d7e9a8408facc542e6bf0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4930031946896678747
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,20 +1,14 @@
 using Audio;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TEST_Tavern : Door
+public class Tavern_Door: Base_Door
 {
-    public void StartAudio()
-    {
-        AudioManager.instance.PlayMusic("Tavern Background");
+    public static event Action OnEntrance;
+    public static event Action OnExit;
 
-    }
-    public void StopAudio()
-    {
-        AudioManager.instance.StopMusic("Tavern Background");
-
-    }
 
     public override void Interact()
     {
@@ -24,12 +18,13 @@ public class TEST_Tavern : Door
             {
                 //Open Door
                 ToggleDoor();
-                StartAudio();
+                OnEntrance?.Invoke();
+                
             }
             else
             {
                 ToggleDoor();
-                StopAudio();
+                OnExit?.Invoke();
             }
 
             
