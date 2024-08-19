@@ -1,11 +1,7 @@
 using Dialoguespace;
-using Interaction;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
+using Interaction;
 
 namespace NPCspace
 {
@@ -16,6 +12,7 @@ namespace NPCspace
     
     public abstract class NPC : MonoBehaviour, IInteractable
     {
+
         public string npcName;
 
         [Header("Ink JSON")]
