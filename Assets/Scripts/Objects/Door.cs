@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IInteractable
+public abstract class Door : MonoBehaviour, IInteractable
 {
     public float rotationSpeed;
-    private bool isOpen = false;
+    public bool isOpen = false;
 
     private Quaternion openRotation;
     private Quaternion closedRotation;
 
-    [SerializeField] private bool locked;
+    public bool locked;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class Door : MonoBehaviour, IInteractable
         closedRotation = Quaternion.Euler(0f, 0f, 0f);
 
     }
-    public void Interact()
+    public virtual void Interact()
     {
         if(Input.GetKeyDown(KeyCode.E) && !locked)
         {
@@ -41,6 +41,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public void ToggleDoor()
     {
+        Debug.Log("dsf");
         if (isOpen)
         {
             StartCoroutine(RotateDoor(transform.rotation * Quaternion.Euler(0f, -90f, 0f)));
