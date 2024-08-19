@@ -10,24 +10,33 @@ public class TEST_Tavern : Door
         AudioManager.instance.PlayMusic("Tavern Background");
 
     }
+    public void StopAudio()
+    {
+        AudioManager.instance.StopMusic("Tavern Background");
+
+    }
 
     public override void Interact()
     {
         if (Input.GetKeyDown(KeyCode.E) && !locked)
         {
-            //Open Door
-            ToggleDoor();
-            StartAudio();
+            if (!isOpen)
+            {
+                //Open Door
+                ToggleDoor();
+                StartAudio();
+            }
+            else
+            {
+                ToggleDoor();
+                StopAudio();
+            }
+
+            
         }
 
 
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            AudioManager.instance.PlaySFX("Hey There");
-        }
-    }
+
 }

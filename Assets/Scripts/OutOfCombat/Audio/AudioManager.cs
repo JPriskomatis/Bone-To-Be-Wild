@@ -43,6 +43,14 @@ namespace Audio
                 musicSource.Play();
             }
         }
+
+        public void StopMusic(string name)
+        {
+            Sound s = Array.Find(musicSounds, x => x.name == name);
+            musicSource.clip = s.clip;
+            musicSource.Stop();
+
+        }
         public void PlaySFX(string name)
         {
             Sound s = Array.Find(sfxSounds, x => x.name == name);
