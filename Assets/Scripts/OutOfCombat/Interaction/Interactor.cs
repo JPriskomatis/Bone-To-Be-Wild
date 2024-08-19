@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interaction
 {
-    interface IInteractable
+    public interface IInteractable
     {
         void Interact();
         void OnInteractEnter(); // Called when detection with the object starts
