@@ -19,6 +19,9 @@ namespace combat
         private BoxCollider boxCollider;
         private MeleeWeaponTrail meleeWeaponTrail;
 
+        [SerializeField] private GameObject sheatedPosition;
+
+
         private void Start()
         {
             boxCollider = GetComponent<BoxCollider>();
@@ -37,7 +40,27 @@ namespace combat
                         Attack();
                     }
                 }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    StartCoroutine(SheathSword());
+                }
             }
+        }
+
+        private IEnumerator SheathSword()
+        {
+            anim.SetTrigger("sheath");
+
+            yield return new WaitForSeconds(1f);
+
+            this.transform.position = sheatedPosition.transform.position;
+            this.transform.rotation = sheatedPosition.transform.rotation;
+
+            // Make the sword a child of the sheathed position
+            this.transform.SetParent(sheatedPosition.transform);
+
+
+
         }
         private void Attack()
         {
