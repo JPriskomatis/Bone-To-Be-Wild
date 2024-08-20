@@ -11,7 +11,6 @@ namespace combat
     {
         [SerializeField] private Weapon_base weapon_base;
         [SerializeField] private Animator anim;
-
         [SerializeField] private float cooldownTime = 2f; // Cooldown time in seconds
 
         private float lastAttackTime = 0f;
@@ -19,14 +18,17 @@ namespace combat
         private BoxCollider boxCollider;
         private MeleeWeaponTrail meleeWeaponTrail;
 
-        [SerializeField] private GameObject sheatedPosition;
+        [SerializeField] private GameObject sheathedPosition; // Correct spelling: sheathed
         private bool sheathedSword;
-
 
         // Variables to store the original position, rotation, and parent of the sword
         private Vector3 originalPosition;
         private Quaternion originalRotation;
-        private Transform originalParent;
+        public Transform originalParent;
+
+        public Transform swordTransform;
+        private Vector3 initialSwordPosition;
+        private Quaternion initialSwordRotation;
 
         private void Start()
         {
@@ -34,17 +36,18 @@ namespace combat
             meleeWeaponTrail = GetComponentInChildren<MeleeWeaponTrail>();
             boxCollider.enabled = false;
 
-
+            initialSwordPosition = swordTransform.localPosition;
+            initialSwordRotation = swordTransform.localRotation;
         }
+
         private void Update()
         {
             if (Time.time >= lastAttackTime + cooldownTime && !DialogueManager.GetInstance().dialogueIsPlaying)
             {
-                if (Input.GetMouseButtonDown(0)) 
+                if (Input.GetMouseButtonDown(0))
                 {
                     if (weapon_base != null && !sheathedSword)
                     {
-
                         Attack();
                     }
                     else
@@ -52,7 +55,7 @@ namespace combat
                         StartCoroutine(UnSheathSword());
                     }
                 }
-                
+
                 if (Input.GetMouseButtonDown(1))
                 {
                     StartCoroutine(SheathSword());
@@ -66,40 +69,34 @@ namespace combat
 
             yield return new WaitForSeconds(0.51f);
 
-            // Restore the sword's original parent, position, and rotation
+            if (swordTransform != null)
+            {
+                swordTransform.SetParent(originalParent);
+                swordTransform.localPosition = initialSwordPosition;
+                swordTransform.localRotation = initialSwordRotation;
 
-            this.transform.SetParent(originalParent);
-
-            this.transform.localPosition = new Vector3(-0.0770029873f, 0.196003392f, -0.0280032828f);
-            this.transform.localRotation = new Quaternion(0.775775492f, -0.363568425f, 0.0150310155f, 0.515523553f);
-
-
-
+                
+            }
 
             sheathedSword = false;
         }
+
         private IEnumerator SheathSword()
         {
-
-            originalPosition = this.transform.position;
-            originalRotation = this.transform.rotation;
-            originalParent = this.transform.parent;
-
             anim.SetTrigger("sheath");
 
             yield return new WaitForSeconds(1f);
 
-            this.transform.position = sheatedPosition.transform.position;
-            this.transform.rotation = sheatedPosition.transform.rotation;
+            // Set position and rotation based on sheathedPosition
+            this.transform.position = sheathedPosition.transform.position;
+            this.transform.rotation = sheathedPosition.transform.rotation;
 
             // Make the sword a child of the sheathed position
-            this.transform.SetParent(sheatedPosition.transform);
+            this.transform.SetParent(sheathedPosition.transform);
 
             sheathedSword = true;
-
-
-
         }
+
         private void Attack()
         {
             anim.SetTrigger("attack");
@@ -113,7 +110,7 @@ namespace combat
             if (boxCollider != null)
             {
                 boxCollider.enabled = true;
-                meleeWeaponTrail.Emit = enabled;
+                meleeWeaponTrail.Emit = true; // Fixed from `enabled` to `true`
                 Invoke("DisableWeaponAttack", 1f); // Disable collider after a short delay (adjust this timing based on your animation)
             }
         }
@@ -126,22 +123,16 @@ namespace combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag =="Enemy")
+            if (other.CompareTag("Enemy")) // Use CompareTag for better performance
             {
                 Debug.Log(other.transform.root.name);
 
-                //When we attack someone we must check if they can be damaged by sword;
-                //all these gameobjects implement the Interface IsSwordDamageable;
-                //Therefore we check if our collider implements that interface, and if it does
-                //we just call our SwordDamageable function;
                 ISwordDamageable swordDamageable = other.GetComponent<ISwordDamageable>();
                 if (swordDamageable != null)
                 {
                     swordDamageable.SwordDamageable();
                 }
-
             }
         }
     }
-
 }
