@@ -69,7 +69,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Combat\MeleeWeaponTrail.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\ZapAnimation.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityLibrary.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\NPC\Civilian.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Base_TavernCivilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Tavern_Civilain.cs" />
   </ItemGroup>
   <ItemGroup>

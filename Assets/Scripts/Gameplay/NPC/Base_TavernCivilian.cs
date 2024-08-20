@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace NPCspace
 {
-    public abstract class Civilian : MonoBehaviour
+    public abstract class Base_TavernCivilian : MonoBehaviour
     {
+        //Animation states for our Tavern NPC;
+        //This allow us to easily go from one animation to the other
+        //and easily go to a specific animation if we want;
         protected enum AnimationState
         {
             Talking,
@@ -15,7 +18,7 @@ namespace NPCspace
         public string npcName;
 
         protected Animator anim;
-        private AnimationState currentState;
+        protected AnimationState currentState;
 
         private void Start()
         {
@@ -23,15 +26,15 @@ namespace NPCspace
 
             InitializeAnimator();
 
-            currentState = AnimationState.Talking;
-            PlayAnimation(currentState);
         }
 
+        //We override this method in our inheritant class to set
+        //the starting animation state;
         protected abstract void InitializeAnimator();
 
         protected void PlayAnimation(AnimationState state)
         {
-            // Set the parameter for transitioning
+            // Set the parameter for transitioning;
             anim.SetInteger("AnimationState", (int)state);
             currentState = state;
         }

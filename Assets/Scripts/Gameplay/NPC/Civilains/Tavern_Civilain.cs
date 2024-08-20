@@ -5,19 +5,16 @@ using UnityEngine;
 namespace NPCspace
 {
 
-    public class Tavern_Civilain : Civilian
+    public class Tavern_Civilain : Base_TavernCivilian
     {
+        [SerializeField]
+        AnimationState startingState;
         protected override void InitializeAnimator()
         {
-            anim.Play("Sitting_Talking");
+            currentState = startingState;
+            PlayAnimation(currentState);
         }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                CycleAnimation();
-            }
-        }
+
     }
 
 }
