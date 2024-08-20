@@ -33,6 +33,10 @@ public abstract class Base_Building : MonoBehaviour
         audioSource.clip = clip;
         audioSource.Play();
     }
+    public void StopBuildingAudio()
+    {
+        audioSource.Stop();
+    }
 
 
 }

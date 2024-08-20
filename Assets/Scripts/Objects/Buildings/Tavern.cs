@@ -13,13 +13,13 @@ namespace Buildings
         private void OnEnable()
         {
             Tavern_Door.OnEntrance += EntranceMusic;
-            Tavern_Door.OnExit += ExitMusic;
+            StopBuildingMusic.OnExit += ExitMusic;
 
         }
         private void OnDisable()
         {
             Tavern_Door.OnEntrance -= EntranceMusic;
-            Tavern_Door.OnExit -= ExitMusic;
+            StopBuildingMusic.OnExit -= ExitMusic;
 
         }
         public void PeopleTalking()
@@ -36,7 +36,7 @@ namespace Buildings
         public void ExitMusic()
         {
             ExitTheme(entranceTheme);
-
+            StopBuildingAudio();
 
         }
     }
