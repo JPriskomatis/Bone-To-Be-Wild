@@ -23,6 +23,8 @@ namespace Interaction
 
         [SerializeField] private TextMeshProUGUI text;
 
+        public GameObject detectedObject;
+
 
         private IInteractable currentInteractable; // Track the currently detected interactable object
 
@@ -36,7 +38,7 @@ namespace Interaction
             Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
             if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
             {
-                GameObject detectedObject = hitInfo.collider.gameObject;
+                detectedObject = hitInfo.collider.gameObject;
 
                 if (detectedObject.TryGetComponent(out IInteractable interactObj))
                 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
-public abstract class Door : MonoBehaviour, IInteractable
+public abstract class Base_Door : MonoBehaviour, IInteractable
 {
     public float rotationSpeed;
     public bool isOpen = false;

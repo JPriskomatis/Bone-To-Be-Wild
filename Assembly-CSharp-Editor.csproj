@@ -902,14 +902,14 @@
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core.Environments">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
@@ -939,10 +939,6 @@
       <Project>{6697500A-2FFA-ECFC-745E-6F680DF368D5}</Project>
       <Name>Ink-Libraries</Name>
     </ProjectReference>
-    <ProjectReference Include="InkEditor.csproj">
-      <Project>{7AFD585E-F675-EF42-8289-D276E5A656AF}</Project>
-      <Name>InkEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="Gameplay.csproj">
       <Project>{4F3FA09A-04CC-7FAA-3E78-F1B3389BB900}</Project>
       <Name>Gameplay</Name>
@@ -950,6 +946,10 @@
     <ProjectReference Include="OutOfCombat.csproj">
       <Project>{5A751762-F8A9-1245-136F-F61F81FD997F}</Project>
       <Name>OutOfCombat</Name>
+    </ProjectReference>
+    <ProjectReference Include="InkEditor.csproj">
+      <Project>{7AFD585E-F675-EF42-8289-D276E5A656AF}</Project>
+      <Name>InkEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -29,7 +29,7 @@ namespace Audio
             }
         }
 
-        public void PlayMusic(string name)
+        public void PlayMusic(string name, float volume=1f)
         {
             Sound s = Array.Find(musicSounds, x=> x.name == name);
 
@@ -40,6 +40,7 @@ namespace Audio
             else
             {
                 musicSource.clip = s.clip;
+                musicSource.volume = volume;
                 musicSource.Play();
             }
         }
