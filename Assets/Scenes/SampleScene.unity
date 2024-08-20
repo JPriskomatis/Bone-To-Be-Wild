@@ -4166,7 +4166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39558d7ffab333e40bfd0b3dd6568d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.52
+      value: -28.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39558d7ffab333e40bfd0b3dd6568d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30270,10 +30270,26 @@ PrefabInstance:
       propertyPath: startingState
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2914825952352568741, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3150236671924070142, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
       propertyPath: m_Name
       value: TavernCivilian
       objectReference: {fileID: 0}
+    - target: {fileID: 6543776097164789680, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1db8569813e821749927d4ad11460096, type: 2}
+    - target: {fileID: 6543776097164789680, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 42b35224d9ff17b4e9ab63ac4c511b8b, type: 2}
+    - target: {fileID: 6543776097164789680, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1db8569813e821749927d4ad11460096, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
 --- !u!4 &1717946202 stripped
