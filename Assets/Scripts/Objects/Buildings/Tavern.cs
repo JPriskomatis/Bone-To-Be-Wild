@@ -20,7 +20,7 @@ namespace Buildings
         }
         public void EntranceMusic()
         {
-            EntranceTheme("Tavern Background");
+            EntranceTheme("Tavern Background", 0.5f);
         }
 
         public void ExitMusic()

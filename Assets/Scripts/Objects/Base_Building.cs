@@ -18,9 +18,9 @@ public abstract class Base_Building : MonoBehaviour
 
 
 
-    public void EntranceTheme(string name)
+    public void EntranceTheme(string name, float volume=1f)
     {
-        AudioManager.instance.PlayMusic(name);
+        AudioManager.instance.PlayMusic(name, volume);
     }
 
     public void ExitTheme(string name)
