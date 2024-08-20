@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace NPCspace
         //Animation states for our Tavern NPC;
         //This allow us to easily go from one animation to the other
         //and easily go to a specific animation if we want;
+
         protected enum AnimationState
         {
             Talking,
@@ -32,7 +34,7 @@ namespace NPCspace
         //the starting animation state;
         protected abstract void InitializeAnimator();
 
-        protected void PlayAnimation(AnimationState state)
+        protected virtual void PlayAnimation(AnimationState state)
         {
             // Set the parameter for transitioning;
             anim.SetInteger("AnimationState", (int)state);
