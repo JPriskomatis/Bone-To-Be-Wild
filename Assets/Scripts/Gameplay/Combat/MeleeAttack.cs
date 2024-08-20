@@ -20,13 +20,21 @@ namespace combat
         private MeleeWeaponTrail meleeWeaponTrail;
 
         [SerializeField] private GameObject sheatedPosition;
+        private bool sheathedSword;
 
+
+        // Variables to store the original position, rotation, and parent of the sword
+        private Vector3 originalPosition;
+        private Quaternion originalRotation;
+        private Transform originalParent;
 
         private void Start()
         {
             boxCollider = GetComponent<BoxCollider>();
             meleeWeaponTrail = GetComponentInChildren<MeleeWeaponTrail>();
             boxCollider.enabled = false;
+
+
         }
         private void Update()
         {
@@ -34,12 +42,17 @@ namespace combat
             {
                 if (Input.GetMouseButtonDown(0)) 
                 {
-                    if (weapon_base != null)
+                    if (weapon_base != null && !sheathedSword)
                     {
 
                         Attack();
                     }
+                    else
+                    {
+                        StartCoroutine(UnSheathSword());
+                    }
                 }
+                
                 if (Input.GetMouseButtonDown(1))
                 {
                     StartCoroutine(SheathSword());
@@ -47,8 +60,31 @@ namespace combat
             }
         }
 
+        private IEnumerator UnSheathSword()
+        {
+            anim.SetTrigger("unSheath");
+
+            yield return new WaitForSeconds(0.51f);
+
+            // Restore the sword's original parent, position, and rotation
+
+            this.transform.SetParent(originalParent);
+
+            this.transform.localPosition = new Vector3(-0.0770029873f, 0.196003392f, -0.0280032828f);
+            this.transform.localRotation = new Quaternion(0.775775492f, -0.363568425f, 0.0150310155f, 0.515523553f);
+
+
+
+
+            sheathedSword = false;
+        }
         private IEnumerator SheathSword()
         {
+
+            originalPosition = this.transform.position;
+            originalRotation = this.transform.rotation;
+            originalParent = this.transform.parent;
+
             anim.SetTrigger("sheath");
 
             yield return new WaitForSeconds(1f);
@@ -58,6 +94,8 @@ namespace combat
 
             // Make the sword a child of the sheathed position
             this.transform.SetParent(sheatedPosition.transform);
+
+            sheathedSword = true;
 
 
 
