@@ -16,7 +16,7 @@ public abstract class Base_Building : MonoBehaviour
     public string Name { get; protected set; }
     public string Description { get; protected set; }
 
-
+    public AudioSource audioSource;
 
     public void EntranceTheme(string name, float volume=1f)
     {
@@ -26,6 +26,12 @@ public abstract class Base_Building : MonoBehaviour
     public void ExitTheme(string name)
     {
         AudioManager.instance.StopMusic(name);
+    }
+
+    public void BuildingAudio(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
 
