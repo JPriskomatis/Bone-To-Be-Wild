@@ -18,20 +18,13 @@ public class Tavern_Door: Base_Door
             {
                 //Open Door
                 ToggleDoor();
-                OnEntrance?.Invoke();
-                
+                OnEntrance?.Invoke();                
             }
             else
             {
                 ToggleDoor();
                 OnExit?.Invoke();
             }
-
-            
         }
-
-
     }
-
-
 }
