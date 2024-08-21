@@ -12,12 +12,15 @@ public abstract class Base_Door : MonoBehaviour, IInteractable
     private Quaternion openRotation;
     private Quaternion closedRotation;
 
+    private OcclusionPortal occlusionPorta;
+
     public bool locked;
 
     private void Start()
     {
         openRotation = Quaternion.Euler(0f, 90f, 0f);
         closedRotation = Quaternion.Euler(0f, 0f, 0f);
+        occlusionPorta = this.GetComponent<OcclusionPortal>();
 
     }
     public virtual void Interact()
@@ -45,10 +48,11 @@ public abstract class Base_Door : MonoBehaviour, IInteractable
         if (isOpen)
         {
             StartCoroutine(RotateDoor(transform.rotation * Quaternion.Euler(0f, -90f, 0f)));
-
+            occlusionPorta.open = false;
         }
         else
         {
+            occlusionPorta.open = true;
             StartCoroutine(RotateDoor(transform.rotation * Quaternion.Euler(0f, 90f, 0f)));
 
         }
