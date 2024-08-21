@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -45,13 +46,40 @@ public class HealthBar : MonoBehaviour
 
             _healthNormalized = value;
             _matInstance.SetColor("_fillColor", _lowToHighHealthTransition.Evaluate(_healthNormalized));
+            SetMaterialData();
         }
     }
-
+    
     void Start()
     {
         SetupUniqueMaterial();
         SetMaterialData();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(ReduceHealthOverTime(5f, 2f));
+        }
+    }
+
+    IEnumerator ReduceHealthOverTime(float amount, float duration)
+    {
+        float startHealth = HealthNormalized;
+        float targetHealth = Mathf.Clamp(startHealth - (amount / 100f), 0f, 1f);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            HealthNormalized = Mathf.Lerp(startHealth, targetHealth, elapsed / duration);
+            yield return null;
+        }
+
+        HealthNormalized = targetHealth;
+
+
     }
 
     void SetupUniqueMaterial()
