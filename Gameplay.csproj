@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Combat\Interpolate.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\IABility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AcquireAbility.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Base_TavernCivilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPC.cs" />
@@ -68,9 +69,8 @@
     <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\ZapAbility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\MeleeWeaponTrail.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\ZapAnimation.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityLibrary.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\NPC\Base_TavernCivilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Tavern_Civilain.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />
