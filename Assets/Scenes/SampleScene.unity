@@ -4290,7 +4290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39558d7ffab333e40bfd0b3dd6568d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.73
+      value: -29.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39558d7ffab333e40bfd0b3dd6568d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31344,7 +31344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843612351726960639, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
       propertyPath: startingState
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2914825952352568741, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
       propertyPath: m_IsActive
@@ -42565,6 +42565,10 @@ PrefabInstance:
       propertyPath: beerMug
       value: 
       objectReference: {fileID: 1105583856}
+    - target: {fileID: 2843612351726960639, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
+      propertyPath: startingState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3150236671924070142, guid: bee879c0309419f42a8ace486d53d61e, type: 3}
       propertyPath: m_Name
       value: TavernCivilian
