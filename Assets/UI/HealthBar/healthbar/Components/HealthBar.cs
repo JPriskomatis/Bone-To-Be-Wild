@@ -60,7 +60,8 @@ public class HealthBar : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(ReduceHealthOverTime(5f, 2f));
+            StartCoroutine(ReduceHealthOverTime(20f, 1f));
+
         }
     }
 
@@ -70,6 +71,10 @@ public class HealthBar : MonoBehaviour
         float targetHealth = Mathf.Clamp(startHealth - (amount / 100f), 0f, 1f);
         float elapsed = 0f;
 
+        _fillWaveAmplitude = 0.03f;
+        _fillWaveFrequency = 25f;
+        _fillWaveSpeed = 0.75f;
+
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -77,6 +82,11 @@ public class HealthBar : MonoBehaviour
             yield return null;
         }
 
+        _fillWaveAmplitude = 0.0107f;
+        _fillWaveFrequency = 15.1f;
+        _fillWaveSpeed = 0.436f;
+
+        SetMaterialData();
         HealthNormalized = targetHealth;
 
 
