@@ -10,6 +10,7 @@ namespace NPCspace
         public int health;
         [SerializeField] Animator anim;
 
+        public abstract void CloseToPlayer();
         public void SpellDamageable()
         {
             Debug.Log(transform.root.gameObject.name + " was hurt!");
