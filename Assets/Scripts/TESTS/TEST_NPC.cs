@@ -16,8 +16,7 @@ public class TEST_NPC : MonoBehaviour, ISpellDamageable, ISwordDamageable
     IEnumerator DelayedDeathAnima()
     {
         yield return new WaitForSeconds(1f);
-        GetComponentInParent<AudioSource>().Play();
-        anim.SetTrigger("death");
+        Death();
     }
 
     public void Death()

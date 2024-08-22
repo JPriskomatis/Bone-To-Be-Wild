@@ -10,7 +10,7 @@ namespace NPCspace
     /// Abstract class that every main NPC will inherit from;
     /// </summary>
     
-    public abstract class NPC : MonoBehaviour, IInteractable
+    public abstract class Base_NPC : MonoBehaviour, IInteractable
     {
 
         public string npcName;

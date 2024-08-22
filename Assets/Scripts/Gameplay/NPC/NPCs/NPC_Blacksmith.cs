@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NPCspace
 {
-    public class NPC_Blacksmith : NPC
+    public class NPC_Blacksmith : Base_NPC
     {
 
 
