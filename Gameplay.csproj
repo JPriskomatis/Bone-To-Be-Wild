@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\Base_Ability.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_NPC.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Enemy.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />
