@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\OutOfCombat\Weapons\DamageTypes\Icesword\IceSword.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Weapons\DamageTypes\Normal\NormalSword.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\UI\TextAppear.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISpellDamageable.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Weapons\DamageTypes\Icesword\IceDamage.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\PickUpWeapon.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\Sound.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Weapons\Weapon_base.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Weapons\IDoDamage.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\UI\Cursor\CursorController.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Interactor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -782,6 +780,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UI.csproj">
+      <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
+      <Name>UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

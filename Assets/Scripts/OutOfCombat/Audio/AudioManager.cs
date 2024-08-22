@@ -52,7 +52,7 @@ namespace Audio
             musicSource.Stop();
 
         }
-        public void PlaySFX(string name)
+        public void PlaySFX(string name, float volume = 1f)
         {
             Sound s = Array.Find(sfxSounds, x => x.name == name);
             if (s == null)
@@ -62,6 +62,7 @@ namespace Audio
             else
             {
                 sfxSource.clip = s.clip;
+                sfxSource.volume = volume;
                 sfxSource.Play();
             }
         }

@@ -40,6 +40,7 @@ namespace AbilitySpace
             {
                 if (abilities.Count < abilityKeys.Count)
                 {
+                    
                     abilities.Add(ability);
                     Debug.Log($"Ability added: {ability.GetType().Name} assigned to key {abilityKeys[abilities.Count - 1]}");
                 }

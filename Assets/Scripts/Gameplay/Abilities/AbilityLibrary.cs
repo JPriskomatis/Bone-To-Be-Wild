@@ -19,6 +19,8 @@ namespace AbilitySpace
             switch (abilityName)
             {
                 case "ZapAbility":
+                    
+                    FindObjectOfType<ZapAbility>().enabled = true;
                     return zapAbility;
                 default:
                     Debug.LogWarning("Ability not found!");

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Abilities\ZapAnimation.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Tavern_Civilain.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityLibrary.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\Base_Ability.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />
@@ -794,6 +795,10 @@
     <ProjectReference Include="InkEditor.csproj">
       <Project>{7AFD585E-F675-EF42-8289-D276E5A656AF}</Project>
       <Name>InkEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UI.csproj">
+      <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
+      <Name>UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

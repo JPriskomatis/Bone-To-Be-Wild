@@ -26,9 +26,11 @@ namespace AbilitySpace
         public void Acquire(string abilityName)
         {
             IABility ability = abilityLibrary.GetAbilityByName(abilityName);
+            
 
             if (ability != null)
             {
+                
                 abilityManager.AddAbility(ability);
                 Debug.Log($"{abilityName} has been acquired!");
             }
