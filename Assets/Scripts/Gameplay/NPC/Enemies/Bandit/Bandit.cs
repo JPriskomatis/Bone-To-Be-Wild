@@ -11,24 +11,61 @@ namespace NPCspace
     /// 
     public class Bandit : Base_Enemy
     {
+
+
         [SerializeField] private GameObject banditObject;
         private bool runningTowardsPlayer;
+
+        [SerializeField]
+        AnimationState startingState;
+
+        private void OnEnable()
+        {
+            Base_Enemy.OnDeath += DeathEvent;
+        }
+        private void OnDisable()
+        {
+            Base_Enemy.OnDeath -= DeathEvent;
+        }
+
+        private void DeathEvent()
+        {
+            //Stop movign the bandit;
+            StopAllCoroutines();
+            GetComponent<Bandit>().enabled = false;
+        }
         public override void CloseToPlayer(GameObject player)
         {
             if (!runningTowardsPlayer){
+
                 runningTowardsPlayer = true;
+
                 Debug.Log("Player is here");
                 //Start walking towards Player;
-                anim.SetTrigger("startWalking");
+                //anim.SetTrigger("startWalking");
+                CycleAnimation();
 
                 StartCoroutine(LookTowardsPlayer(player, 5f));
                 StartCoroutine(MoveTowardsPlayer(player));
             }
-
-            
-
-
         }
+
+        protected override void PlayAnimation(AnimationState state)
+        {
+            // Set the parameter for transitioning;
+            anim.SetInteger("AnimationState", (int)state);
+            currentState = state;
+            
+        }
+
+
+        protected override void InitializeAnimator()
+        {
+            currentState = startingState;
+
+            PlayAnimation(currentState);
+        }
+        
 
         IEnumerator LookTowardsPlayer(GameObject player, float rotationSpeed)
         {
@@ -37,7 +74,7 @@ namespace NPCspace
             Quaternion targetRotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
             // Smoothly rotate towards the target rotation
-            while (Quaternion.Angle(banditObject.transform.rotation, targetRotation) > 0.1f)
+            while (true)
             {
                 // Update the direction to the player
                 relativePos = player.transform.position - banditObject.transform.position;
@@ -53,9 +90,6 @@ namespace NPCspace
                 // Wait until the next frame before continuing the loop
                 yield return null;
             }
-
-            // Ensure final rotation is set exactly to the target rotation
-            banditObject.transform.rotation = targetRotation;
         }
 
         IEnumerator MoveTowardsPlayer(GameObject player)
