@@ -19,6 +19,8 @@ namespace AbilitySpace
             switch (abilityName)
             {
                 case "ZapAbility":
+                    //We activate the icon;
+                    FindObjectOfType<ZapAbility>().ActivateIcon();
                     return zapAbility;
                 default:
                     Debug.LogWarning("Ability not found!");

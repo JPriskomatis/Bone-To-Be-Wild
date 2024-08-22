@@ -41,6 +41,11 @@ namespace AbilitySpace
             playerCamera = Camera.main;
         }
 
+        public void ActivateIcon()
+        {
+            abilityIcon.gameObject.SetActive(true);
+        }
+
         public void Activate()
         {
             if (isAvailable)
