@@ -11,7 +11,7 @@ namespace PlayerSpace
         {
             if (other.CompareTag("Bandit"))
             {
-                other.GetComponentInParent<Bandit>().CloseToPlayer();
+                other.GetComponentInParent<Bandit>().CloseToPlayer(transform.root.gameObject);
             }
         }
     }

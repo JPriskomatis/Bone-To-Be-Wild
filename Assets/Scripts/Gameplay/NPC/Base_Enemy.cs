@@ -8,9 +8,11 @@ namespace NPCspace
     {
         public string npcName;
         public int health;
-        [SerializeField] Animator anim;
+        public Animator anim;
 
-        public abstract void CloseToPlayer();
+        public float speed;
+
+        public abstract void CloseToPlayer(GameObject player);
         public void SpellDamageable()
         {
             Debug.Log(transform.root.gameObject.name + " was hurt!");
