@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Damageables;
+using Audio;
 
 public class TEST_NPC : MonoBehaviour, ISpellDamageable, ISwordDamageable
 {
@@ -15,11 +16,13 @@ public class TEST_NPC : MonoBehaviour, ISpellDamageable, ISwordDamageable
     IEnumerator DelayedDeathAnima()
     {
         yield return new WaitForSeconds(1f);
+        GetComponentInParent<AudioSource>().Play();
         anim.SetTrigger("death");
     }
 
     public void Death()
     {
+        GetComponentInParent<AudioSource>().Play();
         anim.SetTrigger("death");
     }
 
