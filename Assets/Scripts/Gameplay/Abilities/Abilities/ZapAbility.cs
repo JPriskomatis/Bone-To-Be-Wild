@@ -14,7 +14,7 @@ namespace AbilitySpace
 
         [SerializeField] private float cooldown;
         public float Cooldown { get; private set; }
-        
+
 
         private bool isAvailable = true;
 
@@ -104,7 +104,7 @@ namespace AbilitySpace
             //Ensure cooldown is fully complete
             remainingCooldown = 0f;
             UpdateAbilityUI(abilityIcon, true, 1f, cooldownTimer, remainingCooldown);
-            cooldownTimer.SetActive(false); 
+            cooldownTimer.SetActive(false);
 
             isAvailable = true; // Make the ability available again
         }
@@ -136,22 +136,21 @@ namespace AbilitySpace
         {
             RaycastHit hit;
 
+            int enemyLayer = LayerMask.NameToLayer("Enemy");
+            int layerMask = 1 << enemyLayer;
+
             // Perform the raycast
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxDinstance))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxDinstance, layerMask))
             {
-                // Check if the hit object has the "Enemy" tag
-                if (hit.collider.CompareTag("Enemy"))
+                ISpellDamageable spellDamageable = hit.collider.GetComponentInChildren<ISpellDamageable>();
+                if (spellDamageable != null)
                 {
-                    // Check if the enemy has the ISpellDamageable interface
-                    ISpellDamageable spellDamageable = hit.collider.GetComponent<ISpellDamageable>();
-                    if (spellDamageable != null)
-                    {
-                        return hit.collider.gameObject; // Return the GameObject that was hit
-                    }
+                    return hit.collider.gameObject; // Return the GameObject that was hit
                 }
             }
 
             return null;
         }
     }
+
 }

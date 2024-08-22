@@ -9,6 +9,7 @@ namespace PlayerSpace
     {
         [Header("Movement Settings")]
         public float moveSpeed = 5f;        // Speed of movement
+        private float originalSpeed;
         public float lookSpeed = 2f;        // Speed of mouse look
         public float upDownRange = 60f;     // Vertical camera rotation range
         public float gravity = -9.81f;      // Gravity force
@@ -31,6 +32,9 @@ namespace PlayerSpace
             // Lock cursor to center and make it invisible
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            originalSpeed = moveSpeed;
+
         }
 
         private void Update()
@@ -49,6 +53,14 @@ namespace PlayerSpace
 
         private void HandleMovement()
         {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                moveSpeed = originalSpeed * 1.5f; // Increase speed by 50%
+            }
+            else
+            {
+                moveSpeed = originalSpeed; // Reset to original speed
+            }
             // Retrieve input for movement
             float moveDirectionY = Input.GetAxis("Vertical") * moveSpeed;
             float moveDirectionX = Input.GetAxis("Horizontal") * moveSpeed;
