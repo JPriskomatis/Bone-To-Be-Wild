@@ -12,14 +12,19 @@ namespace NPCspace
     public class Bandit : Base_Enemy
     {
         [SerializeField] private GameObject banditObject;
+        private bool runningTowardsPlayer;
         public override void CloseToPlayer(GameObject player)
         {
-            Debug.Log("Player is here");
-            //Start walking towards Player;
-            anim.SetTrigger("startWalking");
+            if (!runningTowardsPlayer){
+                runningTowardsPlayer = true;
+                Debug.Log("Player is here");
+                //Start walking towards Player;
+                anim.SetTrigger("startWalking");
 
-            StartCoroutine(LookTowardsPlayer(player, 5f));
-            StartCoroutine(MoveTowardsPlayer(player));
+                StartCoroutine(LookTowardsPlayer(player, 5f));
+                StartCoroutine(MoveTowardsPlayer(player));
+            }
+
             
 
 
@@ -55,13 +60,9 @@ namespace NPCspace
 
         IEnumerator MoveTowardsPlayer(GameObject player)
         {
-            Debug.Log("Starting MoveTowardsPlayer Coroutine");
-            Debug.Log("Initial Distance: " + Vector3.Distance(banditObject.transform.position, player.transform.position));
 
             while (Vector3.Distance(banditObject.transform.position, player.transform.position) > 0.1f)
             {
-                Debug.Log("Moving... Current Distance: " + Vector3.Distance(banditObject.transform.position, player.transform.position));
-
                 // Calculate the step to move towards the target
                 float step = speed * Time.deltaTime;
 
@@ -71,8 +72,6 @@ namespace NPCspace
                 // Wait until the next frame before continuing the loop
                 yield return null;
             }
-
-            Debug.Log("MoveTowardsPlayer Coroutine Ended");
         }
 
     }
