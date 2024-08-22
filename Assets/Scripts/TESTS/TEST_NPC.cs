@@ -14,7 +14,7 @@ public class TEST_NPC : MonoBehaviour, ISpellDamageable, ISwordDamageable
 
     IEnumerator DelayedDeathAnima()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         anim.SetTrigger("death");
     }
 

@@ -45,8 +45,6 @@ namespace AbilitySpace
         {
             if (isAvailable)
             {
-                Debug.Log("Zap");
-
                 // Find the closest enemy and check if it's damageable
                 enemyToTrack = FindClosestTarget();
 
