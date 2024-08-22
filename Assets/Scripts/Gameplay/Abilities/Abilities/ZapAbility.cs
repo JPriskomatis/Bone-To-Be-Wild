@@ -5,6 +5,7 @@ using Damageables;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using Audio;
 
 namespace AbilitySpace
 {
@@ -31,6 +32,7 @@ namespace AbilitySpace
         //UI
         [SerializeField] private Image abilityIcon;
         [SerializeField] private GameObject cooldownTimer;
+
 
         private void Awake()
         {
@@ -114,6 +116,8 @@ namespace AbilitySpace
             {
                 Vector3 targetPosition = enemyToTrack.transform.position;
                 GameObject fvxInstance = Instantiate(vfxPrefab, targetPosition, Quaternion.identity);
+
+                AudioManager.instance.PlaySFX("Zap Ability", 0.5f);
                 Destroy(fvxInstance, 1f);
             }
             else
@@ -121,6 +125,9 @@ namespace AbilitySpace
                 // If no target is found, instantiate VFX at the player's position
                 Vector3 spawnPosition = transform.position + transform.TransformDirection(offset);
                 GameObject fvxInstance = Instantiate(vfxPrefab, spawnPosition, Quaternion.identity);
+
+                //Audio
+                AudioManager.instance.PlaySFX("Zap Ability", 0.5f);
                 Destroy(fvxInstance, 1f);
             }
         }
