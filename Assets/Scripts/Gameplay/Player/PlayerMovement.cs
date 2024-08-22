@@ -55,11 +55,11 @@ namespace PlayerSpace
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                moveSpeed = originalSpeed * 1.5f; // Increase speed by 50%
+                moveSpeed = originalSpeed * 1.5f;
             }
             else
             {
-                moveSpeed = originalSpeed; // Reset to original speed
+                moveSpeed = originalSpeed;
             }
             // Retrieve input for movement
             float moveDirectionY = Input.GetAxis("Vertical") * moveSpeed;
