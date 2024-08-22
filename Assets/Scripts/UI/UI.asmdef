@@ -1,12 +1,8 @@
 {
-    "name": "Gameplay",
+    "name": "UI",
     "rootNamespace": "",
     "references": [
-        "OutOfCombat",
-        "Unity.TextMeshPro",
-        "Ink-Libraries",
-        "InkEditor",
-        "UI"
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

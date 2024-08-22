@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Damageables;
+using System;
+using UnityEngine.UI;
+using TMPro;
 
 namespace AbilitySpace
 {
-    public class ZapAbility : MonoBehaviour, IABility
+    public class ZapAbility : Base_Ability, IABility
     {
-        public float Cooldown { get; private set; } = 2f;
+
+        [SerializeField] private float cooldown;
+        public float Cooldown { get; private set; }
+        
+
         private bool isAvailable = true;
 
         [SerializeField] Animator anim;
@@ -21,6 +28,14 @@ namespace AbilitySpace
 
         private GameObject enemyToTrack;
 
+        //UI
+        [SerializeField] private Image abilityIcon;
+        [SerializeField] private GameObject cooldownTimer;
+
+        private void Awake()
+        {
+            Cooldown = cooldown;
+        }
         private void Start()
         {
             playerCamera = Camera.main;
@@ -65,9 +80,26 @@ namespace AbilitySpace
 
         private IEnumerator StartCooldown()
         {
-            isAvailable = false;
-            yield return new WaitForSeconds(Cooldown);
-            isAvailable = true;
+            float remainingCooldown = Cooldown;
+
+            while (remainingCooldown > 0)
+            {
+                // Update the UI every frame
+                UpdateAbilityUI(abilityIcon, false, 0.05f, cooldownTimer, remainingCooldown);
+
+                // Wait for the next frame
+                yield return null;
+
+                // Decrease the remaining cooldown
+                remainingCooldown -= Time.deltaTime;
+            }
+
+            // Ensure cooldown is fully complete
+            remainingCooldown = 0f;
+            UpdateAbilityUI(abilityIcon, true, 1f, cooldownTimer, remainingCooldown);
+            cooldownTimer.SetActive(false); 
+
+            isAvailable = true; // Make the ability available again
         }
 
         public void CastSpell()

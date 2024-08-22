@@ -951,6 +951,10 @@
       <Project>{7AFD585E-F675-EF42-8289-D276E5A656AF}</Project>
       <Name>InkEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="UI.csproj">
+      <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
+      <Name>UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
