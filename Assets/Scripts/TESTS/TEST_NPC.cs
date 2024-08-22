@@ -9,6 +9,13 @@ public class TEST_NPC : MonoBehaviour, ISpellDamageable, ISwordDamageable
     public void SpellDamageable()
     {
         Debug.Log(transform.root.gameObject.name + " was hurt!");
+        StartCoroutine(DelayedDeathAnima());
+    }
+
+    IEnumerator DelayedDeathAnima()
+    {
+        yield return new WaitForSeconds(0.8f);
+        anim.SetTrigger("death");
     }
 
     public void Death()

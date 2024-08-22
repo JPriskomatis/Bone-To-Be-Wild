@@ -80,21 +80,22 @@ namespace AbilitySpace
 
         private IEnumerator StartCooldown()
         {
+            isAvailable = false;
             float remainingCooldown = Cooldown;
 
             while (remainingCooldown > 0)
             {
-                // Update the UI every frame
+                //Update the UI every frame from our abstract class method;
                 UpdateAbilityUI(abilityIcon, false, 0.05f, cooldownTimer, remainingCooldown);
 
-                // Wait for the next frame
+                //Wait for the next frame
                 yield return null;
 
-                // Decrease the remaining cooldown
+                //Decrease the remaining cooldown
                 remainingCooldown -= Time.deltaTime;
             }
 
-            // Ensure cooldown is fully complete
+            //Ensure cooldown is fully complete
             remainingCooldown = 0f;
             UpdateAbilityUI(abilityIcon, true, 1f, cooldownTimer, remainingCooldown);
             cooldownTimer.SetActive(false); 
