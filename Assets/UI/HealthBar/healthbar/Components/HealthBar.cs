@@ -1,24 +1,38 @@
 using System.Collections;
 using UnityEngine;
+using PlayerSpace;
+using TMPro;
 
 [ExecuteInEditMode]
 public class HealthBar : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        AbilityScores.OnCurrentHealthIncrease += IncreaseHealth;
+        AbilityScores.OnCurrentHealthDecrease += DecreaseHealth;
+    }
+
+    private void OnDisable()
+    {
+        AbilityScores.OnCurrentHealthIncrease -= IncreaseHealth;
+        AbilityScores.OnCurrentHealthDecrease -= DecreaseHealth;
+    }
+
+    [SerializeField] private TextMeshPro HealthNumber;
     enum ShapeType
     {
         Circle, Box, Rhombus
     };
 
     [SerializeField] ShapeType _shape;
-    [SerializeField, Range(0,1)] float _healthNormalized;
-    [SerializeField, Range(0,1)] float _lowHealthThreshold;
+    [SerializeField, Range(0, 25)] float _healthNormalized;
 
     [Header("Fill")]
     [SerializeField] Gradient _lowToHighHealthTransition;
 
     [Header("Wave")]
-    [SerializeField, Range(0,0.1f)] float _fillWaveAmplitude;
-    [SerializeField, Range(0,100f)] float _fillWaveFrequency;
+    [SerializeField, Range(0, 0.1f)] float _fillWaveAmplitude;
+    [SerializeField, Range(0, 100f)] float _fillWaveFrequency;
     [SerializeField, Range(0, 1f)] float _fillWaveSpeed;
 
     [Header("Background")]
@@ -41,7 +55,7 @@ public class HealthBar : MonoBehaviour
         }
         set
         {
-            value = Mathf.Clamp(value, 0, 1);
+            value = Mathf.Clamp(value, 0, 25);
             if (value == _healthNormalized) return;
 
             _healthNormalized = value;
@@ -49,48 +63,106 @@ public class HealthBar : MonoBehaviour
             SetMaterialData();
         }
     }
-    
+
     void Start()
     {
+        var abilityScores = FindObjectOfType<AbilityScores>();
+        if (abilityScores == null) return;
+
+        float maxHealth = abilityScores.mainStats.maxHP;
+        float currentHealth = abilityScores.mainStats.currentHP;
+
+        // Set initial health normalized
+        _healthNormalized = Mathf.Clamp01(currentHealth / maxHealth);
+
+        // Set HealthNumber text
+        HealthNumber.text = $"{currentHealth}/{maxHealth}";
+
         SetupUniqueMaterial();
         SetMaterialData();
+        Debug.Log(_healthNormalized);
     }
 
-    void Update()
+    public void DecreaseHealth(int damage)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(ReduceHealthOverTime(20f, 1f));
-
-        }
+        StartCoroutine(ReduceHealthOverTime(damage, 1f));
+    }
+    public void IncreaseHealth(int healthAmount)
+    {
+        StartCoroutine(IncreaseHealthOverTime(healthAmount, 1f));
     }
 
-    IEnumerator ReduceHealthOverTime(float amount, float duration)
+    IEnumerator IncreaseHealthOverTime(float healAmount, float duration)
     {
-        float startHealth = HealthNormalized;
-        float targetHealth = Mathf.Clamp(startHealth - (amount / 100f), 0f, 1f);
+        var abilityScores = FindObjectOfType<AbilityScores>();
+        if (abilityScores == null) yield break;
+
+        float maxHealth = abilityScores.mainStats.maxHP;
+        float startHealth = abilityScores.mainStats.currentHP;
+        float targetHealth = Mathf.Clamp(startHealth + healAmount, 0f, maxHealth);
+
+        // Calculate normalized values
+        float startHealthNormalized = Mathf.Clamp01(startHealth / maxHealth);
+        float targetHealthNormalized = Mathf.Clamp01(targetHealth / maxHealth);
+
         float elapsed = 0f;
-
-        _fillWaveAmplitude = 0.03f;
-        _fillWaveFrequency = 25f;
-        _fillWaveSpeed = 0.75f;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            HealthNormalized = Mathf.Lerp(startHealth, targetHealth, elapsed / duration);
+
+            // Smoothly interpolate between the start and target normalized health values
+            float newNormalizedHealth = Mathf.Lerp(startHealthNormalized, targetHealthNormalized, elapsed / duration);
+
+            // Update HealthNormalized only if it has changed significantly to avoid redundant updates
+            if (!Mathf.Approximately(newNormalizedHealth, HealthNormalized))
+            {
+                HealthNormalized = newNormalizedHealth;
+            }
+
             yield return null;
         }
 
-        _fillWaveAmplitude = 0.0107f;
-        _fillWaveFrequency = 15.1f;
-        _fillWaveSpeed = 0.436f;
+        // Ensure the final value is set correctly
+        HealthNormalized = targetHealthNormalized;
 
-        SetMaterialData();
-        HealthNormalized = targetHealth;
+        // Update the current health display
+        HealthNumber.text = $"{Mathf.RoundToInt(targetHealth)}/{Mathf.RoundToInt(maxHealth)}";
 
-
+        // Update AbilityScores to reflect the healing
+        abilityScores.mainStats.currentHP = Mathf.RoundToInt(targetHealth);
     }
+
+
+    IEnumerator ReduceHealthOverTime(float damage, float duration)
+    {
+        var abilityScores = FindObjectOfType<AbilityScores>();
+        if (abilityScores == null) yield break;
+
+        float maxHealth = abilityScores.mainStats.maxHP;
+        float startHealth = abilityScores.mainStats.currentHP;
+        float targetHealth = Mathf.Clamp(startHealth - damage, 0f, maxHealth);
+
+        // Calculate normalized values
+        float startHealthNormalized = Mathf.Clamp01(startHealth / maxHealth);
+        float targetHealthNormalized = Mathf.Clamp01(targetHealth / maxHealth);
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            HealthNormalized = Mathf.Lerp(startHealthNormalized, targetHealthNormalized, elapsed / duration);
+            yield return null;
+        }
+
+        // Update current health
+        HealthNumber.text = $"{targetHealth}/{maxHealth}";
+
+        // Final update of HealthNormalized
+        HealthNormalized = targetHealthNormalized;
+    }
+
 
     void SetupUniqueMaterial()
     {
@@ -116,8 +188,6 @@ public class HealthBar : MonoBehaviour
 
         SetKeyword();
 
-        _matInstance.SetFloat("_lowLifeThreshold", _lowHealthThreshold);
-
         _matInstance.SetFloat("_waveAmp", _fillWaveAmplitude);
         _matInstance.SetFloat("_waveFreq", _fillWaveFrequency);
         _matInstance.SetFloat("_waveSpeed", _fillWaveSpeed);
@@ -139,7 +209,7 @@ public class HealthBar : MonoBehaviour
         else if (_shape == ShapeType.Box) _matInstance.EnableKeyword("_SHAPE_BOX");
         else if (_shape == ShapeType.Rhombus) _matInstance.EnableKeyword("_SHAPE_RHOMBUS");
 
-        //Sync shader keywordEnum
+        // Sync shader keywordEnum
         _matInstance.SetInt("_shape", (int)_shape);
     }
 
