@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Icesword\IceSword.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Normal\NormalSword.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Dialogue\DialogueManager.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Player\AbilityScores.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\Interpolate.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\IABility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Enemy.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Assets\Scripts\Gameplay\Weapons\Weapon_base.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\TransitionToChase.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Player\AbilityScores.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />

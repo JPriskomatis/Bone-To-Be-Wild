@@ -1,3 +1,4 @@
+using Audio;
 using Damageables;
 using Dialoguespace;
 using System.Collections;
@@ -67,6 +68,8 @@ namespace combat
         {
             anim.SetTrigger("unSheath");
 
+            yield return new WaitForSeconds(0.45f);
+            AudioManager.instance.PlaySFX("UnsheathSword", 0.15f);
             yield return new WaitForSeconds(0.51f);
 
             if (swordTransform != null)
@@ -101,6 +104,8 @@ namespace combat
         {
             anim.SetTrigger("attack");
             weapon_base.TryDoAttack();
+
+            AudioManager.instance.PlaySFX("SwordSwing", 0.3f);
             lastAttackTime = Time.time; // Update last attack time
             EnableWeaponAttack();
         }
