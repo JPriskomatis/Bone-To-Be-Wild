@@ -35,9 +35,7 @@ namespace Buildings
 
         public void ExitMusic()
         {
-            ExitTheme(entranceTheme);
             StopBuildingAudio();
-
         }
     }
 
