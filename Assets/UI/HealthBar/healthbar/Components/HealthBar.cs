@@ -8,12 +8,14 @@ public class HealthBar : MonoBehaviour
 {
     private void OnEnable()
     {
-        AbilityScores.OnCurrentHealthChange += DecreaseHealth;
+        AbilityScores.OnCurrentHealthIncrease += IncreaseHealth;
+        AbilityScores.OnCurrentHealthDecrease += DecreaseHealth;
     }
 
     private void OnDisable()
     {
-        AbilityScores.OnCurrentHealthChange -= DecreaseHealth;
+        AbilityScores.OnCurrentHealthIncrease -= IncreaseHealth;
+        AbilityScores.OnCurrentHealthDecrease -= DecreaseHealth;
     }
 
     [SerializeField] private TextMeshPro HealthNumber;
@@ -85,6 +87,52 @@ public class HealthBar : MonoBehaviour
     {
         StartCoroutine(ReduceHealthOverTime(damage, 1f));
     }
+    public void IncreaseHealth(int healthAmount)
+    {
+        StartCoroutine(IncreaseHealthOverTime(healthAmount, 1f));
+    }
+
+    IEnumerator IncreaseHealthOverTime(float healAmount, float duration)
+    {
+        var abilityScores = FindObjectOfType<AbilityScores>();
+        if (abilityScores == null) yield break;
+
+        float maxHealth = abilityScores.mainStats.maxHP;
+        float startHealth = abilityScores.mainStats.currentHP;
+        float targetHealth = Mathf.Clamp(startHealth + healAmount, 0f, maxHealth);
+
+        // Calculate normalized values
+        float startHealthNormalized = Mathf.Clamp01(startHealth / maxHealth);
+        float targetHealthNormalized = Mathf.Clamp01(targetHealth / maxHealth);
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            // Smoothly interpolate between the start and target normalized health values
+            float newNormalizedHealth = Mathf.Lerp(startHealthNormalized, targetHealthNormalized, elapsed / duration);
+
+            // Update HealthNormalized only if it has changed significantly to avoid redundant updates
+            if (!Mathf.Approximately(newNormalizedHealth, HealthNormalized))
+            {
+                HealthNormalized = newNormalizedHealth;
+            }
+
+            yield return null;
+        }
+
+        // Ensure the final value is set correctly
+        HealthNormalized = targetHealthNormalized;
+
+        // Update the current health display
+        HealthNumber.text = $"{Mathf.RoundToInt(targetHealth)}/{Mathf.RoundToInt(maxHealth)}";
+
+        // Update AbilityScores to reflect the healing
+        abilityScores.mainStats.currentHP = Mathf.RoundToInt(targetHealth);
+    }
+
 
     IEnumerator ReduceHealthOverTime(float damage, float duration)
     {

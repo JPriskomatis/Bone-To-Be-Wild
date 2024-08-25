@@ -7,7 +7,8 @@ namespace PlayerSpace
 {
     public class AbilityScores : MonoBehaviour
     {
-        public static event Action<int> OnCurrentHealthChange;
+        public static event Action<int> OnCurrentHealthIncrease;
+        public static event Action<int> OnCurrentHealthDecrease;
 
         [System.Serializable]   //We make them serializable so that we can modify them through inspector;
         public class MainStats
@@ -68,7 +69,13 @@ namespace PlayerSpace
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
-                //
+                
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
+                
             }
         }
 
@@ -98,6 +105,7 @@ namespace PlayerSpace
                     mainStats.luck += increaseAmount;
                     break;
                 case StatType.CurrentHP:
+                    OnCurrentHealthIncrease?.Invoke(increaseAmount);
                     mainStats.currentHP -= increaseAmount;
                     break;
                 case StatType.MaxHP:
@@ -132,7 +140,7 @@ namespace PlayerSpace
                     mainStats.luck -= decreaseAmount;
                     break;
                 case StatType.CurrentHP:
-                    OnCurrentHealthChange?.Invoke(5);
+                    OnCurrentHealthDecrease?.Invoke(decreaseAmount);
                     mainStats.currentHP -= decreaseAmount;
                     break;
                 case StatType.MaxHP:
