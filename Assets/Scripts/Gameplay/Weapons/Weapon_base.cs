@@ -12,10 +12,12 @@ namespace WeaponSpace
         
 
         public int playerStrength;
+        public int playerLuck;
 
         private void Start()
         {
             playerStrength = GetComponentInParent<AbilityScores>().mainStats.strength;
+            playerLuck = GetComponentInParent<AbilityScores>().mainStats.luck;
         }
 
         public void TryDoAttack()
@@ -33,8 +35,8 @@ namespace WeaponSpace
 
         public bool CriticalStrike()
         {
-            int randomNumber = Random.Range(0, 100);
-            if (randomNumber > 50)
+            int randomNumber = Random.Range(0, (100));
+            if (randomNumber + playerLuck > 75)
             {
                 Debug.Log("Critical Strike");
                 return true;
