@@ -1,3 +1,4 @@
+using Audio;
 using System;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Buildings
             if (other.CompareTag("Player"))
             {
                 OnExit?.Invoke();
+                AudioManager.instance.PlayMusic("TownBackground", 0.3f);
                 this.gameObject.SetActive(false);
             }
         }
