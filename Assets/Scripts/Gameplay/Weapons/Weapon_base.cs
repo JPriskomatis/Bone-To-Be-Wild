@@ -9,6 +9,7 @@ namespace WeaponSpace
     {
         public int damage = 0;
         public IDoDamage damageType;
+        
 
         public int playerStrength;
 
@@ -19,8 +20,27 @@ namespace WeaponSpace
 
         public void TryDoAttack()
         {
-            
-            damageType?.DoDamage(damage + playerStrength);
+            if (CriticalStrike())
+            {
+                damageType?.DoDamage(damage*2 + playerStrength);
+            }
+            else
+            {
+                damageType?.DoDamage(damage + playerStrength);
+
+            }
+        }
+
+        public bool CriticalStrike()
+        {
+            int randomNumber = Random.Range(0, 100);
+            if (randomNumber > 50)
+            {
+                Debug.Log("Critical Strike");
+                return true;
+            }
+            else
+                return false;
         }
 
         //To use this function do the following:
