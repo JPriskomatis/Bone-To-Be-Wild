@@ -14,7 +14,7 @@ namespace PlayerSpace
             public int currentHP;
 
             //How powerful our melee attacks are;
-            public int strength;
+            public int strength = 10;
             //How agile our player moves;
             public int agility;
             //How much damage our player can withstand;

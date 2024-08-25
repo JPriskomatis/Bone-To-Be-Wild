@@ -56,17 +56,11 @@
     <Analyzer Include="E:\VisualStudio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\OutOfCombat\Weapons\DamageTypes\Icesword\IceSword.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Weapons\DamageTypes\Normal\NormalSword.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISpellDamageable.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Weapons\DamageTypes\Icesword\IceDamage.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\PickUpWeapon.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Weapons\DamageTypes\Normal\NormalDamage.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISwordDamageable.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\Sound.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Weapons\Weapon_base.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Interactor.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ namespace WeaponSpace
     public class NormalSword : Weapon_base {
         public NormalSword()
         {
-            damage = 10;
+            damage = 10 + playerStrength;
             damageType = new NormalDamage();
         }
     }
