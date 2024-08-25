@@ -59,23 +59,24 @@
     <Compile Include="Assets\Scripts\Gameplay\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\Interpolate.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\IABility.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Enemy.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AcquireAbility.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\Bandit.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_TavernCivilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\Base_Ability.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Player\DetectEnemies.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\MeleeAttack.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Blacksmith.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Base_NPC.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\ZapAbility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\MeleeWeaponTrail.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\ZapAnimation.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Tavern_Civilain.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityLibrary.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\Base_Ability.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\NPC\Base_NPC.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Enemy.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\Bandit.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Player\DetectEnemies.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\TransitionToChase.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Player\AbilityScores.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />

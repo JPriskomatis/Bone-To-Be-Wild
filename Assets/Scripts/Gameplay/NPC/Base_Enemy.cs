@@ -1,4 +1,5 @@
 using Damageables;
+using PlayerSpace;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -65,6 +66,7 @@ namespace NPCspace
             GetComponentInParent<AudioSource>().Play();
             anim.SetTrigger("death");
             OnDeath?.Invoke();
+
         }
 
         public void SwordDamageable()
