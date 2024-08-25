@@ -1,16 +1,29 @@
 using System.Collections;
 using UnityEngine;
+using PlayerSpace;
+using TMPro;
+using System;
 
 [ExecuteInEditMode]
 public class HealthBar : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        AbilityScores.OnCurrentHealthChange += DecreaseHealth;
+    }
+    private void OnDisable()
+    {
+        AbilityScores.OnCurrentHealthChange -= DecreaseHealth;
+    }
+
+    [SerializeField] private TextMeshPro HealthNumber;
     enum ShapeType
     {
         Circle, Box, Rhombus
     };
 
     [SerializeField] ShapeType _shape;
-    [SerializeField, Range(0,1)] float _healthNormalized;
+    [SerializeField, Range(0,25)] float _healthNormalized;
     [SerializeField, Range(0,1)] float _lowHealthThreshold;
 
     [Header("Fill")]
@@ -49,28 +62,55 @@ public class HealthBar : MonoBehaviour
             SetMaterialData();
         }
     }
-    
+
+
     void Start()
     {
+        var abilityScores = FindObjectOfType<AbilityScores>();
+        if (abilityScores == null) return;
+
+        float maxHealth = abilityScores.mainStats.maxHP;
+        float currentHealth = abilityScores.mainStats.currentHP;
+
+        // Set initial health normalized
+        _healthNormalized = Mathf.Clamp01(currentHealth / maxHealth);
+
+        // Set HealthNumber text
+        HealthNumber.text = $"{currentHealth}/{maxHealth}";
+
         SetupUniqueMaterial();
         SetMaterialData();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(ReduceHealthOverTime(20f, 1f));
 
-        }
+    public void DecreaseHealth(int damage)
+    {
+        Debug.Log(damage);
+        StartCoroutine(ReduceHealthOverTime(damage, 1f));
     }
 
-    IEnumerator ReduceHealthOverTime(float amount, float duration)
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        StartCoroutine(ReduceHealthOverTime(20f, 1f));
+
+    //    }
+    //}
+
+    IEnumerator ReduceHealthOverTime(float damage, float duration)
     {
-        float startHealth = HealthNormalized;
-        float targetHealth = Mathf.Clamp(startHealth - (amount / 100f), 0f, 1f);
+        var abilityScores = FindObjectOfType<AbilityScores>();
+        if (abilityScores == null) yield break;
+
+        float maxHealth = abilityScores.mainStats.maxHP;
+        float currentHealth = abilityScores.mainStats.currentHP;
+        float startHealthNormalized = _healthNormalized;
+        float targetHealthNormalized = Mathf.Clamp01((currentHealth - damage) / maxHealth);
+
         float elapsed = 0f;
 
+        // Optionally, adjust the fill wave properties if needed
         _fillWaveAmplitude = 0.03f;
         _fillWaveFrequency = 25f;
         _fillWaveSpeed = 0.75f;
@@ -78,19 +118,21 @@ public class HealthBar : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            HealthNormalized = Mathf.Lerp(startHealth, targetHealth, elapsed / duration);
+            HealthNormalized = Mathf.Lerp(startHealthNormalized, targetHealthNormalized, elapsed / duration);
             yield return null;
         }
 
+        // Reset fill wave properties
         _fillWaveAmplitude = 0.0107f;
         _fillWaveFrequency = 15.1f;
         _fillWaveSpeed = 0.436f;
 
+        HealthNumber.text = (abilityScores.mainStats.currentHP.ToString()+"/"+abilityScores.mainStats.maxHP);
+
         SetMaterialData();
-        HealthNormalized = targetHealth;
-
-
+        HealthNormalized = targetHealthNormalized;
     }
+
 
     void SetupUniqueMaterial()
     {

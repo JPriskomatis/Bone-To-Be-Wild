@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,8 @@ namespace PlayerSpace
 {
     public class AbilityScores : MonoBehaviour
     {
-        
+        public static event Action<int> OnCurrentHealthChange;
+
         [System.Serializable]   //We make them serializable so that we can modify them through inspector;
         public class MainStats
         {
@@ -40,7 +42,9 @@ namespace PlayerSpace
             Endurance,
             Charm,
             Arcana,
-            Luck
+            Luck,
+            CurrentHP,
+            MaxHP
         }
 
         private void Awake()
@@ -59,13 +63,14 @@ namespace PlayerSpace
             mainStats.currentHP = mainStats.maxHP;
         }
 
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Tab))
-        //    {
-        //        IncreaseStat(AbilityScores.StatType.Luck, 5);
-        //    }
-        //}
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
+                OnCurrentHealthChange?.Invoke(5);
+            }
+        }
 
         //If we want to increase a player's stat
         //In order to use it, we call it as:
@@ -91,6 +96,12 @@ namespace PlayerSpace
                     break;
                 case StatType.Luck:
                     mainStats.luck += increaseAmount;
+                    break;
+                case StatType.CurrentHP:
+                    mainStats.currentHP -= increaseAmount;
+                    break;
+                case StatType.MaxHP:
+                    mainStats.maxHP -= increaseAmount;
                     break;
                 default:
                     Debug.LogError("Unknown stat type.");
@@ -119,6 +130,12 @@ namespace PlayerSpace
                     break;
                 case StatType.Luck:
                     mainStats.luck -= decreaseAmount;
+                    break;
+                case StatType.CurrentHP:
+                    mainStats.currentHP -= decreaseAmount;
+                    break;
+                case StatType.MaxHP:
+                    mainStats.maxHP -= decreaseAmount;
                     break;
                 default:
                     Debug.LogError("Unknown stat type.");
