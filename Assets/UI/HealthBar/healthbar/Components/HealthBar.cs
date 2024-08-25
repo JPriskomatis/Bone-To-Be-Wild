@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using PlayerSpace;
 using TMPro;
-using System;
 
 [ExecuteInEditMode]
 public class HealthBar : MonoBehaviour
@@ -11,6 +10,7 @@ public class HealthBar : MonoBehaviour
     {
         AbilityScores.OnCurrentHealthChange += DecreaseHealth;
     }
+
     private void OnDisable()
     {
         AbilityScores.OnCurrentHealthChange -= DecreaseHealth;
@@ -23,15 +23,14 @@ public class HealthBar : MonoBehaviour
     };
 
     [SerializeField] ShapeType _shape;
-    [SerializeField, Range(0,25)] float _healthNormalized;
-    [SerializeField, Range(0,1)] float _lowHealthThreshold;
+    [SerializeField, Range(0, 25)] float _healthNormalized;
 
     [Header("Fill")]
     [SerializeField] Gradient _lowToHighHealthTransition;
 
     [Header("Wave")]
-    [SerializeField, Range(0,0.1f)] float _fillWaveAmplitude;
-    [SerializeField, Range(0,100f)] float _fillWaveFrequency;
+    [SerializeField, Range(0, 0.1f)] float _fillWaveAmplitude;
+    [SerializeField, Range(0, 100f)] float _fillWaveFrequency;
     [SerializeField, Range(0, 1f)] float _fillWaveSpeed;
 
     [Header("Background")]
@@ -54,7 +53,7 @@ public class HealthBar : MonoBehaviour
         }
         set
         {
-            value = Mathf.Clamp(value, 0, 1);
+            value = Mathf.Clamp(value, 0, 25);
             if (value == _healthNormalized) return;
 
             _healthNormalized = value;
@@ -62,7 +61,6 @@ public class HealthBar : MonoBehaviour
             SetMaterialData();
         }
     }
-
 
     void Start()
     {
@@ -80,23 +78,13 @@ public class HealthBar : MonoBehaviour
 
         SetupUniqueMaterial();
         SetMaterialData();
+        Debug.Log(_healthNormalized);
     }
-
 
     public void DecreaseHealth(int damage)
     {
-        Debug.Log(damage);
         StartCoroutine(ReduceHealthOverTime(damage, 1f));
     }
-
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        StartCoroutine(ReduceHealthOverTime(20f, 1f));
-
-    //    }
-    //}
 
     IEnumerator ReduceHealthOverTime(float damage, float duration)
     {
@@ -104,16 +92,14 @@ public class HealthBar : MonoBehaviour
         if (abilityScores == null) yield break;
 
         float maxHealth = abilityScores.mainStats.maxHP;
-        float currentHealth = abilityScores.mainStats.currentHP;
-        float startHealthNormalized = _healthNormalized;
-        float targetHealthNormalized = Mathf.Clamp01((currentHealth - damage) / maxHealth);
+        float startHealth = abilityScores.mainStats.currentHP;
+        float targetHealth = Mathf.Clamp(startHealth - damage, 0f, maxHealth);
+
+        // Calculate normalized values
+        float startHealthNormalized = Mathf.Clamp01(startHealth / maxHealth);
+        float targetHealthNormalized = Mathf.Clamp01(targetHealth / maxHealth);
 
         float elapsed = 0f;
-
-        // Optionally, adjust the fill wave properties if needed
-        _fillWaveAmplitude = 0.03f;
-        _fillWaveFrequency = 25f;
-        _fillWaveSpeed = 0.75f;
 
         while (elapsed < duration)
         {
@@ -122,14 +108,10 @@ public class HealthBar : MonoBehaviour
             yield return null;
         }
 
-        // Reset fill wave properties
-        _fillWaveAmplitude = 0.0107f;
-        _fillWaveFrequency = 15.1f;
-        _fillWaveSpeed = 0.436f;
+        // Update current health
+        HealthNumber.text = $"{targetHealth}/{maxHealth}";
 
-        HealthNumber.text = (abilityScores.mainStats.currentHP.ToString()+"/"+abilityScores.mainStats.maxHP);
-
-        SetMaterialData();
+        // Final update of HealthNormalized
         HealthNormalized = targetHealthNormalized;
     }
 
@@ -158,8 +140,6 @@ public class HealthBar : MonoBehaviour
 
         SetKeyword();
 
-        _matInstance.SetFloat("_lowLifeThreshold", _lowHealthThreshold);
-
         _matInstance.SetFloat("_waveAmp", _fillWaveAmplitude);
         _matInstance.SetFloat("_waveFreq", _fillWaveFrequency);
         _matInstance.SetFloat("_waveSpeed", _fillWaveSpeed);
@@ -181,7 +161,7 @@ public class HealthBar : MonoBehaviour
         else if (_shape == ShapeType.Box) _matInstance.EnableKeyword("_SHAPE_BOX");
         else if (_shape == ShapeType.Rhombus) _matInstance.EnableKeyword("_SHAPE_RHOMBUS");
 
-        //Sync shader keywordEnum
+        // Sync shader keywordEnum
         _matInstance.SetInt("_shape", (int)_shape);
     }
 

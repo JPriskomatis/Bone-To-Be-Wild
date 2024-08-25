@@ -67,8 +67,8 @@ namespace PlayerSpace
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
-                OnCurrentHealthChange?.Invoke(5);
+                DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
+                //
             }
         }
 
@@ -132,10 +132,12 @@ namespace PlayerSpace
                     mainStats.luck -= decreaseAmount;
                     break;
                 case StatType.CurrentHP:
+                    OnCurrentHealthChange?.Invoke(5);
                     mainStats.currentHP -= decreaseAmount;
                     break;
                 case StatType.MaxHP:
                     mainStats.maxHP -= decreaseAmount;
+
                     break;
                 default:
                     Debug.LogError("Unknown stat type.");
