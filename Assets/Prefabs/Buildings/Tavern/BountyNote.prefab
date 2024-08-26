@@ -110,3 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36cde9d595e97094e8b20c5f898d76f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  notePosition: {fileID: 5982573922692813790}
+  zoomInFOV: 75
+  zoomSpeed: 2
