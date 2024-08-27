@@ -52,15 +52,19 @@ namespace Buildings
 
         private IEnumerator MoveCamera(Vector3 targetPosition, float duration)
         {
-            //Lock camera
+            // Lock player movement
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
             playerMovement.enabled = false;
 
             float elapsedTime = 0f;
             Vector3 initialPosition = Camera.main.transform.position;
+            Quaternion initialRotation = Camera.main.transform.rotation;
 
-            // Ensure the target position maintains the current z position
-            Vector3 targetPositionWithCurrentZ = new Vector3(targetPosition.x, targetPosition.y+0.7f, targetPosition.z-2f);
+            // Adjust target position to maintain the current z position
+            Vector3 targetPositionWithCurrentZ = new Vector3(targetPosition.x, targetPosition.y + 0.7f, targetPosition.z - 2f);
+
+            // Calculate the final rotation needed to look at the target
+            Quaternion targetRotation = Quaternion.LookRotation(targetPosition - targetPositionWithCurrentZ);
 
             while (elapsedTime < duration)
             {
@@ -69,14 +73,15 @@ namespace Buildings
                 // Smoothly interpolate the position
                 Camera.main.transform.position = Vector3.Lerp(initialPosition, targetPositionWithCurrentZ, t);
 
+                // Smoothly interpolate the rotation
+                Camera.main.transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, t);
+
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
-            // Ensure the final position is exact
+            // Ensure the final position and rotation are exact
             Camera.main.transform.position = targetPositionWithCurrentZ;
-
-
             Camera.main.transform.LookAt(targetPosition);
         }
 
@@ -84,7 +89,7 @@ namespace Buildings
         {
             float elapsedTime = 0f;
 
-            // Get the current world position and rotation of the camera
+            // Get the current world position, rotation, and FOV of the camera
             Vector3 currentWorldPosition = Camera.main.transform.position;
             Quaternion currentWorldRotation = Camera.main.transform.rotation;
             float currentFOV = Camera.main.fieldOfView;
@@ -92,13 +97,16 @@ namespace Buildings
             // Convert the original local position to world position
             Vector3 originalWorldPosition = Camera.main.transform.parent.TransformPoint(originalLocalPosition);
 
+            // Calculate the original rotation in world space
+            Quaternion originalWorldRotation = Camera.main.transform.parent.rotation;
+
             while (elapsedTime < duration)
             {
                 float t = Mathf.Clamp01(elapsedTime / duration);
 
                 // Smoothly interpolate position, rotation, and FOV
-                Vector3 newWorldPosition = Vector3.Lerp(currentWorldPosition, originalWorldPosition, t);
-                Camera.main.transform.position = newWorldPosition;
+                Camera.main.transform.position = Vector3.Lerp(currentWorldPosition, originalWorldPosition, t);
+                Camera.main.transform.rotation = Quaternion.Slerp(currentWorldRotation, originalWorldRotation, t);
                 Camera.main.fieldOfView = Mathf.Lerp(currentFOV, originalFOV, t);
 
                 elapsedTime += Time.deltaTime;
@@ -107,12 +115,13 @@ namespace Buildings
 
             // Ensure the final values are exact
             Camera.main.transform.position = originalWorldPosition;
+            Camera.main.transform.rotation = originalWorldRotation;
             Camera.main.fieldOfView = originalFOV;
 
+            // Unlock player movement
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
             playerMovement.enabled = true;
         }
-
         public void OnInteractEnter()
         {
             if (!isZoomedIn)
