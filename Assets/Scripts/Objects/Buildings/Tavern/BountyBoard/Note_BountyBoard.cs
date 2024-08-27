@@ -1,4 +1,5 @@
 using Interaction;
+using PlayerSpace;
 using System.Collections;
 using UI;
 using UnityEngine;
@@ -19,6 +20,10 @@ namespace Buildings
 
         private Vector3 originalPosition;
 
+
+        public float distance = 5.0f; // Distance from the GameObject
+        public Vector3 offset = Vector3.zero; // Optional offset to adjust the final position
+
         void Start()
         {
             // Initialize the original position
@@ -30,7 +35,9 @@ namespace Buildings
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                StartCoroutine(MoveCamera(this.transform.position, 0.5f));
+                Vector3 targetPosition = transform.position + transform.forward * distance + offset;
+                StartCoroutine(MoveCamera(targetPosition, 0.5f));
+                
             }
             if (Input.GetKeyDown(KeyCode.V))
             {
@@ -45,11 +52,15 @@ namespace Buildings
 
         private IEnumerator MoveCamera(Vector3 targetPosition, float duration)
         {
+            //Lock camera
+            PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+            playerMovement.enabled = false;
+
             float elapsedTime = 0f;
             Vector3 initialPosition = Camera.main.transform.position;
 
             // Ensure the target position maintains the current z position
-            Vector3 targetPositionWithCurrentZ = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - 2.5f);
+            Vector3 targetPositionWithCurrentZ = new Vector3(targetPosition.x, targetPosition.y+0.7f, targetPosition.z-2f);
 
             while (elapsedTime < duration)
             {
@@ -64,6 +75,9 @@ namespace Buildings
 
             // Ensure the final position is exact
             Camera.main.transform.position = targetPositionWithCurrentZ;
+
+
+            Camera.main.transform.LookAt(targetPosition);
         }
 
         private IEnumerator MoveCameraBack(Vector3 originalLocalPosition, float originalFOV, float duration)
@@ -94,6 +108,9 @@ namespace Buildings
             // Ensure the final values are exact
             Camera.main.transform.position = originalWorldPosition;
             Camera.main.fieldOfView = originalFOV;
+
+            PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+            playerMovement.enabled = true;
         }
 
         public void OnInteractEnter()
