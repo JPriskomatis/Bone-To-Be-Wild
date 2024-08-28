@@ -6,7 +6,8 @@
         "Unity.TextMeshPro",
         "Ink-Libraries",
         "InkEditor",
-        "UI"
+        "UI",
+        "gameStateSpace"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

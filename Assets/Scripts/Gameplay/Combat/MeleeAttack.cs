@@ -1,6 +1,7 @@
 using Audio;
 using Damageables;
 using Dialoguespace;
+using gameStateSpace;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace combat
         private Vector3 initialSwordPosition;
         private Quaternion initialSwordRotation;
 
+        private bool paused;
         private void Start()
         {
             boxCollider = GetComponent<BoxCollider>();
@@ -41,11 +43,25 @@ namespace combat
             initialSwordRotation = swordTransform.localRotation;
         }
 
+        private void OnEnable()
+        {
+            GameStatController.OnPause += PauseGame;
+        }
+
+        private void OnDisable()
+        {
+            GameStatController.OnPause -= PauseGame;
+        }
+
+        public void PauseGame(bool isPaused)
+        {
+            paused = isPaused;
+        }
         private void Update()
         {
             if (Time.time >= lastAttackTime + cooldownTime && !DialogueManager.GetInstance().dialogueIsPlaying)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !paused)
                 {
                     if (weapon_base != null && !sheathedSword)
                     {

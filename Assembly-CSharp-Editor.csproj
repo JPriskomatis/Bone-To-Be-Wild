@@ -939,6 +939,10 @@
       <Project>{6697500A-2FFA-ECFC-745E-6F680DF368D5}</Project>
       <Name>Ink-Libraries</Name>
     </ProjectReference>
+    <ProjectReference Include="InkEditor.csproj">
+      <Project>{7AFD585E-F675-EF42-8289-D276E5A656AF}</Project>
+      <Name>InkEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Gameplay.csproj">
       <Project>{4F3FA09A-04CC-7FAA-3E78-F1B3389BB900}</Project>
       <Name>Gameplay</Name>
@@ -947,13 +951,13 @@
       <Project>{5A751762-F8A9-1245-136F-F61F81FD997F}</Project>
       <Name>OutOfCombat</Name>
     </ProjectReference>
-    <ProjectReference Include="InkEditor.csproj">
-      <Project>{7AFD585E-F675-EF42-8289-D276E5A656AF}</Project>
-      <Name>InkEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="UI.csproj">
       <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
       <Name>UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="gameStateSpace.csproj">
+      <Project>{DA7FA456-569A-647E-D9C1-FC3188002FC7}</Project>
+      <Name>gameStateSpace</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

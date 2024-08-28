@@ -62,6 +62,9 @@
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISwordDamageable.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\Sound.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Interactor.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Quest\QuestManager.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Quest\Base_Quest.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Quest\Quests\Quest_Sample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\OutOfCombat\OutOfCombat.asmdef" />
@@ -777,6 +780,10 @@
     <ProjectReference Include="UI.csproj">
       <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
       <Name>UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="gameStateSpace.csproj">
+      <Project>{DA7FA456-569A-647E-D9C1-FC3188002FC7}</Project>
+      <Name>gameStateSpace</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

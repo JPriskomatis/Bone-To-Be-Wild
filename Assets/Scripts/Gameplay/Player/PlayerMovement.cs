@@ -1,4 +1,6 @@
 using Dialoguespace;
+using gameStateSpace;
+using questSpace;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +26,8 @@ namespace PlayerSpace
         private Vector3 velocity;           // Current velocity of the player
         private bool isWalking;
 
+        private bool isPaused;
+
         private void Start()
         {
             controller = GetComponent<CharacterController>();
@@ -36,13 +40,29 @@ namespace PlayerSpace
             originalSpeed = moveSpeed;
 
         }
+        private void OnEnable()
+        {
+            GameStatController.OnPause += PauseCamera;
+        }
+
+        private void OnDisable()
+        {
+            GameStatController.OnPause -= PauseCamera;
+        }
+
+        public void PauseCamera(bool pause)
+        {
+            isPaused = pause;
+        }
 
         private void Update()
         {
             if (!DialogueManager.GetInstance().dialogueIsPlaying)
             {
                 HandleMovement();
-                HandleMouseLook();
+                
+                if(!isPaused)
+                    HandleMouseLook();
             }
             else
             {
@@ -86,6 +106,7 @@ namespace PlayerSpace
 
         private void HandleMouseLook()
         {
+            
             // Retrieve input for mouse look
             float mouseX = Input.GetAxis("Mouse X") * lookSpeed;
             float mouseY = Input.GetAxis("Mouse Y") * lookSpeed;
