@@ -24,6 +24,8 @@ namespace Buildings
         public float distance = 5.0f; // Distance from the GameObject
         public Vector3 offset = Vector3.zero; // Optional offset to adjust the final position
 
+        private bool isReading;
+
         void Start()
         {
             // Initialize the original position
@@ -33,25 +35,30 @@ namespace Buildings
 
         public void Interact()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !isReading)
             {
+               
                 Vector3 targetPosition = transform.position + transform.forward * distance + offset;
                 StartCoroutine(MoveCamera(targetPosition, 0.5f));
                 
+
             }
-            if (Input.GetKeyDown(KeyCode.V))
+            if (Input.GetKeyDown(KeyCode.E) && isReading)
             {
+                
                 Vector3 originalLocalPosition = new Vector3(0f, 0f, 0f);
                 float originalFOV = 60f;
                 float zoomDuration = 0.5f;
 
                 StartCoroutine(MoveCameraBack(originalLocalPosition, originalFOV, zoomDuration));
-                TextAppear.RemoveText();
+                
+                
             } 
         }
 
         private IEnumerator MoveCamera(Vector3 targetPosition, float duration)
         {
+            TextAppear.RemoveText();
             // Lock player movement
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
             playerMovement.enabled = false;
@@ -83,6 +90,8 @@ namespace Buildings
             // Ensure the final position and rotation are exact
             Camera.main.transform.position = targetPositionWithCurrentZ;
             Camera.main.transform.LookAt(targetPosition);
+
+            isReading = true;
         }
 
         private IEnumerator MoveCameraBack(Vector3 originalLocalPosition, float originalFOV, float duration)
@@ -118,9 +127,13 @@ namespace Buildings
             Camera.main.transform.rotation = originalWorldRotation;
             Camera.main.fieldOfView = originalFOV;
 
+            isReading = false;
+            TextAppear.SetText("Read Note");
             // Unlock player movement
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
             playerMovement.enabled = true;
+
+            
         }
         public void OnInteractEnter()
         {
