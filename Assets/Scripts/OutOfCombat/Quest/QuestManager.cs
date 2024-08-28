@@ -1,4 +1,5 @@
 using Codice.Client.BaseCommands;
+using gameStateSpace;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -53,6 +54,8 @@ namespace questSpace
         public void SetUIQuest(Base_Quest quest)
         {
 
+
+
             OnQuestOpen?.Invoke(true);
 
             questPanel.SetActive(true);
@@ -67,6 +70,7 @@ namespace questSpace
             Cursor.lockState = CursorLockMode.None;
 
             //Freeze player Camera;
+            GameStatController.Instance.SetState(GameStatController.CurrentGameState.Paused);
             
         }
 
@@ -78,6 +82,8 @@ namespace questSpace
             //Enable mouse;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Locked;
+
+            GameStatController.Instance.SetState(GameStatController.CurrentGameState.Resume);
         }
     }
 

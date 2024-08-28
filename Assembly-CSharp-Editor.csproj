@@ -955,6 +955,10 @@
       <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
       <Name>UI</Name>
     </ProjectReference>
+    <ProjectReference Include="gameStateSpace.csproj">
+      <Project>{DA7FA456-569A-647E-D9C1-FC3188002FC7}</Project>
+      <Name>gameStateSpace</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

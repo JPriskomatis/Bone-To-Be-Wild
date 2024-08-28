@@ -8053,7 +8053,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &351591676
 GameObject:
@@ -10602,6 +10602,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458435389}
   m_CullTransparentMesh: 1
+--- !u!1 &471395866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 39558d7ffab333e40bfd0b3dd6568d2e, type: 3}
+  m_PrefabInstance: {fileID: 312295801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &471395868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471395866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de485da4a790404489dfe351ac807c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questName: Quest test
+  questDescription: By order of His Majesty, King Aldric, all knights of the realm
+    are called upon to embark on a perilous quest to retrieve the Sacred Chalice,
+    a holy relic stolen from the king's chapel. The chalice, believed to grant divine
+    protection, has been taken by the notorious outlaw Roderic Blackthorn and is
+    hidden deep within the Enchanted Forest. The knight who bravely ventures into
+    this dark and treacherous land, overcomes its many dangers, and returns with
+    the chalice shall be richly rewarded and honored by the crown.
+  xpReward: 25
+--- !u!114 &471395869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471395866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f766a13f6c61d3439bcc16f1a35bbe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &471395870
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471395866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.4619007
+  m_Center: {x: 0.09251785, y: 6.460889, z: -0.50834656}
 --- !u!1001 &471528945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13217,7 +13268,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &529514444
 PrefabInstance:
@@ -14427,7 +14478,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &573282187
 PrefabInstance:
@@ -18887,7 +18938,7 @@ PrefabInstance:
     - target: {fileID: 7549146502472829231, guid: 64731391435630f4996775ff398bd95f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1458868091}
+      objectReference: {fileID: 1739935607}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64731391435630f4996775ff398bd95f, type: 3}
 --- !u!1 &807635593
@@ -22576,7 +22627,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &937161920
 MonoBehaviour:
@@ -31901,40 +31952,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d24cbc466424f71408559463ee47e0cf, type: 3}
---- !u!21 &1458868091
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: CustomShaders/HealthBar
-  m_Shader: {fileID: 4800000, guid: 8b409af744179ac48ae9717baa10feb5, type: 3}
-  m_ValidKeywords:
-  - _SHAPE_CIRCLE
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _borderWidth: 0
-    - _healthNormalized: NaN
-    - _shape: 0
-    - _waveAmp: 0.0107
-    - _waveFreq: 15.1
-    - _waveSpeed: 0.436
-    m_Colors:
-    - _backgroundColor: {r: 0.047169805, g: 0.045122813, b: 0.045122813, a: 0.5882353}
-    - _borderColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
-    - _fillColor: {r: 0, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1001 &1467286739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34140,7 +34157,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1617859681}
-  - component: {fileID: 1617859682}
   m_Layer: 0
   m_Name: NPCs
   m_TagString: Untagged
@@ -34166,24 +34182,8 @@ Transform:
   - {fileID: 543450653573616925}
   - {fileID: 1717946202}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1617859682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617859680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07dbced34cd3df346a7588eecc8f7bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcName: 
-  inkJSON: {fileID: 0}
-  greetingAudio: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!1001 &1621207240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35383,7 +35383,7 @@ Transform:
   - {fileID: 473363484}
   - {fileID: 89915707}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1664019176
 MonoBehaviour:
@@ -37009,6 +37009,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4721780193091316, guid: efdb3ed10ba9c6b418a492aa30ba0edd, type: 3}
   m_PrefabInstance: {fileID: 1732267470}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1739935607
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CustomShaders/HealthBar
+  m_Shader: {fileID: 4800000, guid: 8b409af744179ac48ae9717baa10feb5, type: 3}
+  m_ValidKeywords:
+  - _SHAPE_CIRCLE
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _borderWidth: 0
+    - _healthNormalized: NaN
+    - _shape: 0
+    - _waveAmp: 0.0107
+    - _waveFreq: 15.1
+    - _waveSpeed: 0.436
+    m_Colors:
+    - _backgroundColor: {r: 0.047169805, g: 0.045122813, b: 0.045122813, a: 0.5882353}
+    - _borderColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+    - _fillColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1 &1742651911
 GameObject:
   m_ObjectHideFlags: 0
@@ -41401,6 +41435,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d24cbc466424f71408559463ee47e0cf, type: 3}
+--- !u!1 &1955531518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1955531520}
+  - component: {fileID: 1955531519}
+  m_Layer: 0
+  m_Name: GameState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1955531519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955531518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dce4b3d9572f214ca4aad4fe8c5fba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 1
+--- !u!4 &1955531520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955531518}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 44.52322, y: 0.8368426, z: 53.455738}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1959553893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44577,6 +44656,22 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0bb4b6a1611d8624390fadeba5ef82ce, type: 3}
   m_PrefabInstance: {fileID: 2099991726}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2099991731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099991728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07dbced34cd3df346a7588eecc8f7bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: 
+  inkJSON: {fileID: 0}
+  greetingAudio: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1001 &2109663422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83500,32 +83595,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8db8a4cdab941d4fa7fe21243d611df, type: 3}
---- !u!1 &5982573922841929624 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5982573922692813791, guid: b8db8a4cdab941d4fa7fe21243d611df, type: 3}
-  m_PrefabInstance: {fileID: 5982573922841929623}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5982573922841929625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5982573922841929624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de485da4a790404489dfe351ac807c1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questName: Quest test
-  questDescription: By order of His Majesty, King Aldric, all knights of the realm
-    are called upon to embark on a perilous quest to retrieve the Sacred Chalice,
-    a holy relic stolen from the king's chapel. The chalice, believed to grant divine
-    protection, has been taken by the notorious outlaw Roderic Blackthorn and is
-    hidden deep within the Enchanted Forest. The knight who bravely ventures into
-    this dark and treacherous land, overcomes its many dangers, and returns with
-    the chalice shall be richly rewarded and honored by the crown.
-  xpReward: 25
 --- !u!4 &6002049227047163793
 Transform:
   m_ObjectHideFlags: 0

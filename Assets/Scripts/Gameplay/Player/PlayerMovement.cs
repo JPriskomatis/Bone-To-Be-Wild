@@ -1,4 +1,5 @@
 using Dialoguespace;
+using gameStateSpace;
 using questSpace;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,12 +42,12 @@ namespace PlayerSpace
         }
         private void OnEnable()
         {
-            QuestManager.OnQuestOpen += PauseCamera;
+            GameStatController.OnPause += PauseCamera;
         }
 
         private void OnDisable()
         {
-            QuestManager.OnQuestOpen -= PauseCamera;
+            GameStatController.OnPause -= PauseCamera;
         }
 
         public void PauseCamera(bool pause)
