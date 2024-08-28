@@ -1,4 +1,6 @@
+using Codice.Client.BaseCommands;
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +10,8 @@ namespace questSpace
 {
     public class QuestManager : MonoBehaviour
     {
+        public static event Action<bool> OnQuestOpen;
+
         public static QuestManager Instance;
         public Base_Quest currentQuest;
 
@@ -48,10 +52,32 @@ namespace questSpace
 
         public void SetUIQuest(Base_Quest quest)
         {
+
+            OnQuestOpen?.Invoke(true);
+
             questPanel.SetActive(true);
             questTitle.text = quest.questName;
             questInfo.text = quest.questDescription;
             questReward.text = quest.xpReward.ToString();
+
+            //Activate cursor;
+            Cursor.visible = true;
+
+            // Lock the cursor to the center of the screen
+            Cursor.lockState = CursorLockMode.None;
+
+            //Freeze player Camera;
+            
+        }
+
+        public void RemoveUI()
+        {
+            questPanel.SetActive(false);
+            OnQuestOpen?.Invoke(false);
+
+            //Enable mouse;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
