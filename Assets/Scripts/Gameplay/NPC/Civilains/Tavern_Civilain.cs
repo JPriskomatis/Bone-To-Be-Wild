@@ -13,6 +13,15 @@ namespace NPCspace
 
         [SerializeField] private GameObject beerMug;
 
+        public CivilainState npcState;
+        public enum CivilainState
+        {
+            Company,
+            Alone,
+            Drinking,
+            All
+        }
+
 
         private void DrinkBeer()
         {
@@ -35,6 +44,22 @@ namespace NPCspace
             {
                 DrinkBeer();
 
+            }
+
+            //Based on
+            if(npcState == CivilainState.Alone)
+            {
+                if(this.currentState == AnimationState.Talking || this.currentState == AnimationState.Laugh)
+                {
+                    CycleAnimation();
+                }
+            }
+            if(npcState == CivilainState.Drinking)
+            {
+                if (this.currentState == AnimationState.Talking)
+                {
+                    CycleAnimation();
+                }
             }
         }
         
