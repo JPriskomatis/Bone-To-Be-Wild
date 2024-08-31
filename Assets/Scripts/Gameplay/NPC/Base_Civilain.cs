@@ -70,19 +70,19 @@ namespace NPCspace
             //We move the civilian towards the guard;
             transform.position = Vector3.MoveTowards(transform.position, targetGuard.position, step);
 
-            //Smoothly rotate the NPC to face the guard
+            //Smoothly rotate the NPC to face the guard;
             Vector3 directionToGuard = targetGuard.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(directionToGuard);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, step);
 
-            // Stop moving if the NPC is very close to the guard
-            if (Vector3.Distance(transform.position, targetGuard.position) <= 5f)
+            //Stop moving if the NPC is very close to the guard;
+            if (Vector3.Distance(transform.position, targetGuard.position) <= 8f)
             {
                 Debug.Log("Reached the guard!");
                 reachedGuard = true;
                 anim.SetTrigger("talking");
                 anim.ResetTrigger("Run");
-                targetGuard = null; // Stop moving by nullifying the target
+                targetGuard = null; //Stop moving by nullifying the target;
             }
         }
     }
