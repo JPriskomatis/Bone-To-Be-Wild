@@ -2,6 +2,7 @@ using Audio;
 using Damageables;
 using Dialoguespace;
 using gameStateSpace;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace combat
 {
     public class MeleeAttack : MonoBehaviour
     {
+        public static event Action OnAttack;
         [SerializeField] private Weapon_base weapon_base;
         [SerializeField] private Animator anim;
         [SerializeField] private float cooldownTime = 2f; // Cooldown time in seconds
@@ -118,6 +120,8 @@ namespace combat
 
         private void Attack()
         {
+            OnAttack?.Invoke();
+
             anim.SetTrigger("attack");
             weapon_base.TryDoAttack();
 

@@ -1,3 +1,5 @@
+using combat;
+using PlayerSpace;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,53 +20,69 @@ namespace NPCspace
         private Transform targetGuard;
         private bool reachedGuard;
 
+        private void OnEnable()
+        {
+            MeleeAttack.OnAttack += FindGuard;
+        }
+
+        private void OnDisable()
+        {
+            MeleeAttack.OnAttack -= FindGuard;
+        }
+
         private void Update()
         {
-            // Only search for a guard if the NPC hasn't already reached one
-            if (!reachedGuard)
+            
+            if (targetGuard != null && !reachedGuard)
             {
-                FindGuard();
+                MoveTowardsGuard();
             }
         }
 
         public void FindGuard()
         {
-            Debug.Log("Hey There");
+            // Reset reachedGuard if we're looking for a new guard
+            reachedGuard = false;
+
             Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, guardLayerMask);
 
             foreach (Collider collider in colliders)
             {
                 Debug.Log("Guard Detected");
                 targetGuard = collider.transform;
-                anim.SetTrigger("Run"); // Trigger the run animation
-                break; // Exit the loop after finding the first guard
-            }
-
-            // If a guard is detected, move towards it
-            if (targetGuard != null)
-            {
-                MoveTowardsGuard();
+                anim.SetTrigger("Run");
+                break;
             }
         }
 
         public void MoveTowardsGuard()
         {
-            // Safety check to ensure targetGuard is not null
-            if (targetGuard == null) return;
+            if (targetGuard == null)
+            {
+                //TODO:
+                //Add a begging mechanic or running away;
+                return;
+            }
+
 
             float step = moveSpeed * Time.deltaTime;
 
+            //We move the civilian towards the guard;
             transform.position = Vector3.MoveTowards(transform.position, targetGuard.position, step);
-            transform.LookAt(targetGuard);
 
-            //Stop moving if the NPC is very close to the guard;
-            if (Vector3.Distance(transform.position, targetGuard.position) < 5f)
+            //Smoothly rotate the NPC to face the guard
+            Vector3 directionToGuard = targetGuard.position - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToGuard);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, step);
+
+            // Stop moving if the NPC is very close to the guard
+            if (Vector3.Distance(transform.position, targetGuard.position) <= 5f)
             {
                 Debug.Log("Reached the guard!");
                 reachedGuard = true;
-                targetGuard = null;
                 anim.SetTrigger("talking");
                 anim.ResetTrigger("Run");
+                targetGuard = null; // Stop moving by nullifying the target
             }
         }
     }
