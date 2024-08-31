@@ -76,13 +76,16 @@ namespace NPCspace
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, step);
 
             //Stop moving if the NPC is very close to the guard;
-            if (Vector3.Distance(transform.position, targetGuard.position) <= 8f)
+            if (Vector3.Distance(transform.position, targetGuard.position) <= 6f)
             {
                 Debug.Log("Reached the guard!");
                 reachedGuard = true;
                 anim.SetTrigger("talking");
                 anim.ResetTrigger("Run");
                 targetGuard = null; //Stop moving by nullifying the target;
+
+                //TODO:
+                //Alert Guard Script;
             }
         }
     }
