@@ -54,18 +54,15 @@ namespace UI
                 //similar to above;
                 var itemIcon = obj.transform.Find("ItemImage").GetComponent<Image>();
 
-                var itemDescription = obj.transform.Find("ItemDescription").GetComponent<TMP_Text>();
+                var itemDescriptionBackground = obj.transform.Find("ItemDescriptionBackground");
+
+                var itemDescription = itemDescriptionBackground.gameObject.transform.Find("ItemDescription").GetComponent<TMP_Text>();
 
                 //We pass the scriptable object's values to the UI;
                 itemName.text = item.itemName;
                 itemIcon.sprite = item.icon;
                 itemDescription.text = item.itemDescription;
             }
-        }
-
-        public void EnableItemDescription()
-        {
-            transform.Find("ItemDescription").gameObject.SetActive(true);
         }
 
     }
