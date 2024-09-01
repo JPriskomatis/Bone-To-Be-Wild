@@ -18,6 +18,7 @@ namespace NPCspace
         [SerializeField] private float detectionRadius;
         public LayerMask guardLayerMask;
         private Transform targetGuard;
+        GameObject guardToAlert;
         private bool reachedGuard;
 
         private void OnEnable()
@@ -85,11 +86,17 @@ namespace NPCspace
 
                 //TODO:
                 //Alert Guard Script;
-                targetGuard.gameObject.GetComponent<Base_Guard>().StartChasing();
-
+                //targetGuard.gameObject.GetComponent<Base_Guard>().StartChasing();
+                //AlertGuard(targetGuard.gameObject);
+                guardToAlert = targetGuard.gameObject;
                 targetGuard = null; //Stop moving by nullifying the target;
 
             }
+        }
+
+        public void AlertGuard(GameObject guard)
+        {
+            guardToAlert.gameObject.GetComponent<Base_Guard>().StartChasing();
         }
     }
 }
