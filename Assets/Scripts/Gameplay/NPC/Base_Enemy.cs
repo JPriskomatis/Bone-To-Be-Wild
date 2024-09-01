@@ -12,8 +12,7 @@ namespace NPCspace
         protected enum AnimationState
         {
             Idle,
-            StartWalking,
-            Walking
+            Running
         }
 
         protected AnimationState currentState;
@@ -42,7 +41,7 @@ namespace NPCspace
         public void CycleAnimation()
         {
             // Move to the next animation state
-            currentState = (AnimationState)(((int)currentState + 1) % 3);
+            currentState = (AnimationState)(((int)currentState + 1) % 2);
             PlayAnimation(currentState);
         }
         public void OnAnimationEnd()

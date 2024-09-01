@@ -80,7 +80,6 @@ namespace UI
 
             SetupUniqueMaterial();
             SetMaterialData();
-            Debug.Log(_healthNormalized);
         }
 
         public void DecreaseHealth(int damage)

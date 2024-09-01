@@ -2,6 +2,7 @@ using Audio;
 using Damageables;
 using Dialoguespace;
 using gameStateSpace;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace combat
 {
     public class MeleeAttack : MonoBehaviour
     {
+        public static event Action OnAttack;
         [SerializeField] private Weapon_base weapon_base;
         [SerializeField] private Animator anim;
         [SerializeField] private float cooldownTime = 2f; // Cooldown time in seconds
@@ -33,6 +35,10 @@ namespace combat
         private Quaternion initialSwordRotation;
 
         private bool paused;
+
+
+        [SerializeField] private float detectionRadius;
+        [SerializeField] LayerMask civilianLayerMask;
         private void Start()
         {
             boxCollider = GetComponent<BoxCollider>();
@@ -118,12 +124,29 @@ namespace combat
 
         private void Attack()
         {
+            //Check if peasants are nearby
+            CheckForNearbyPeasants();
+            
+
             anim.SetTrigger("attack");
             weapon_base.TryDoAttack();
 
             AudioManager.instance.PlaySFX("SwordSwing", 0.3f);
             lastAttackTime = Time.time; // Update last attack time
             EnableWeaponAttack();
+        }
+
+        private void CheckForNearbyPeasants()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, civilianLayerMask);
+
+            foreach (Collider collider in colliders)
+            {
+                Debug.Log("Civilian Detected");
+                OnAttack?.Invoke();
+                break;
+            }
+
         }
 
         private void EnableWeaponAttack()
