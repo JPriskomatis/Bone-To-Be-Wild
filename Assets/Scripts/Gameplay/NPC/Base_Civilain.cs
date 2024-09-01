@@ -84,16 +84,14 @@ namespace NPCspace
                 anim.SetTrigger("talking");
                 anim.ResetTrigger("Run");
 
-                //TODO:
-                //Alert Guard Script;
-                //targetGuard.gameObject.GetComponent<Base_Guard>().StartChasing();
-                //AlertGuard(targetGuard.gameObject);
+
+                
                 guardToAlert = targetGuard.gameObject;
                 targetGuard = null; //Stop moving by nullifying the target;
 
             }
         }
-
+        //Alert Guard Script;
         public void AlertGuard(GameObject guard)
         {
             guardToAlert.gameObject.GetComponent<Base_Guard>().StartChasing();

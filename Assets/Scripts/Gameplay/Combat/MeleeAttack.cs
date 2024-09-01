@@ -35,6 +35,10 @@ namespace combat
         private Quaternion initialSwordRotation;
 
         private bool paused;
+
+
+        [SerializeField] private float detectionRadius;
+        [SerializeField] LayerMask civilianLayerMask;
         private void Start()
         {
             boxCollider = GetComponent<BoxCollider>();
@@ -120,7 +124,9 @@ namespace combat
 
         private void Attack()
         {
-            OnAttack?.Invoke();
+            //Check if peasants are nearby
+            CheckForNearbyPeasants();
+            
 
             anim.SetTrigger("attack");
             weapon_base.TryDoAttack();
@@ -128,6 +134,19 @@ namespace combat
             AudioManager.instance.PlaySFX("SwordSwing", 0.3f);
             lastAttackTime = Time.time; // Update last attack time
             EnableWeaponAttack();
+        }
+
+        private void CheckForNearbyPeasants()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, civilianLayerMask);
+
+            foreach (Collider collider in colliders)
+            {
+                Debug.Log("Civilian Detected");
+                OnAttack?.Invoke();
+                break;
+            }
+
         }
 
         private void EnableWeaponAttack()

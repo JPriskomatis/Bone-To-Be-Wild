@@ -18,11 +18,13 @@ namespace NPCspace
         [Header("Guard Settings")]
         public string npcName;
         public float moveSpeed = 3f;
+        [SerializeField] private Animator anim;
 
         public float detectionRadius = 10f; // Radius to detect the player
         public float chaseSpeed = 5f; // Speed at which the guard chases the player
         public float stopChaseDistance = 2f; // Distance at which the guard stops chasing
         public float checkInterval = 0.5f; // How often to check for the player
+        public float lostPlayerDistance;
 
         private bool isChasing = false;
 
@@ -49,6 +51,7 @@ namespace NPCspace
 
         private IEnumerator ChasePlayerCoroutine()
         {
+            anim.SetTrigger("run");
             while (true)
             {
                 if (player == null) yield break;
@@ -66,10 +69,16 @@ namespace NPCspace
                 // Check the distance to the player
                 float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+
                 // Move the guard towards the player
                 if (distanceToPlayer > stopChaseDistance)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, player.position, step);
+                    if(distanceToPlayer > lostPlayerDistance)
+                    {
+                        LostPlayer();
+                        yield break;
+                    }
                 }
                 else
                 {
@@ -94,6 +103,13 @@ namespace NPCspace
             }
         }
 
+        public void LostPlayer()
+        {
+            isChasing = false;
+            Debug.Log("Lost Player");
+            anim.SetTrigger("idle");
+
+        }
 
 
 
