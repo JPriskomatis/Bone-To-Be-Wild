@@ -13,11 +13,13 @@ namespace NPCspace
     {
 
 
-        [SerializeField] private GameObject banditObject;
+        //[SerializeField] private GameObject banditObject;
         private bool runningTowardsPlayer;
 
         [SerializeField]
         AnimationState startingState;
+
+        [SerializeField] private GameObject banditGameobject;
 
         private void OnEnable()
         {
@@ -45,7 +47,7 @@ namespace NPCspace
                 //anim.SetTrigger("startWalking");
                 CycleAnimation();
 
-                StartCoroutine(LookTowardsPlayer(player, 5f));
+                StartCoroutine(LookTowardsPlayer(player, 10f));
                 StartCoroutine(MoveTowardsPlayer(player));
             }
         }
@@ -70,19 +72,19 @@ namespace NPCspace
         IEnumerator LookTowardsPlayer(GameObject player, float rotationSpeed)
         {
             // Calculate the direction to the player
-            Vector3 relativePos = player.transform.position - banditObject.transform.position;
+            Vector3 relativePos = player.transform.position - banditGameobject.transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
             // Smoothly rotate towards the target rotation
             while (true)
             {
                 // Update the direction to the player
-                relativePos = player.transform.position - banditObject.transform.position;
+                relativePos = player.transform.position - banditGameobject.transform.position;
                 targetRotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
                 // Interpolate towards the target rotation
-                banditObject.transform.rotation = Quaternion.Lerp(
-                    banditObject.transform.rotation,
+                banditGameobject.transform.rotation = Quaternion.Lerp(
+                    banditGameobject.transform.rotation,
                     targetRotation,
                     rotationSpeed * Time.deltaTime
                 );
@@ -94,18 +96,21 @@ namespace NPCspace
 
         IEnumerator MoveTowardsPlayer(GameObject player)
         {
-
-            while (Vector3.Distance(banditObject.transform.position, player.transform.position) > 0.1f)
+            while (Vector3.Distance(banditGameobject.transform.position, player.transform.position) > 4f)
             {
+                Debug.Log(Vector3.Distance(banditGameobject.transform.position, player.transform.position));
+
                 // Calculate the step to move towards the target
                 float step = speed * Time.deltaTime;
 
                 // Move the object towards the target
-                banditObject.transform.position = Vector3.MoveTowards(banditObject.transform.position, player.transform.position, step);
+                banditGameobject.transform.position = Vector3.MoveTowards(banditGameobject.transform.position, player.transform.position, step);
 
                 // Wait until the next frame before continuing the loop
                 yield return null;
             }
+            Debug.Log("Bandit reached the player.");
+            CycleAnimation();
         }
 
     }

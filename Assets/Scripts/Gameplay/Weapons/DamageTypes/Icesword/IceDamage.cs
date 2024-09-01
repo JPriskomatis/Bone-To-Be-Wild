@@ -12,9 +12,6 @@ namespace WeaponSpace
         public Transform swordTransform;
         public void DoDamage(int damage)
         {
-            Debug.Log("Deal: " + damage);
-            Debug.Log("Dealth ice damage");
-
             IceParticle();
         }
         public async void IceParticle()

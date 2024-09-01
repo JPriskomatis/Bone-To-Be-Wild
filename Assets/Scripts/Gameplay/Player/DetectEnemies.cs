@@ -7,11 +7,13 @@ namespace PlayerSpace
 {
     public class DetectEnemies : MonoBehaviour
     {
+        [SerializeField] private GameObject player;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Bandit"))
             {
-                other.GetComponentInParent<Bandit>().CloseToPlayer(transform.root.gameObject);
+                other.GetComponentInChildren<Bandit>().CloseToPlayer(player.transform.gameObject);
+                Debug.Log("dsf");
             }
         }
     }
