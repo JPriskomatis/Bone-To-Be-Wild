@@ -2,7 +2,8 @@
     "name": "UI",
     "rootNamespace": "",
     "references": [
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "gameStateSpace"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

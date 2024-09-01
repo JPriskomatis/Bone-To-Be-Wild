@@ -110,6 +110,9 @@ namespace NPCspace
                 yield return null;
             }
             Debug.Log("Bandit reached the player.");
+
+            //This transitions to Idle now;
+            //Make this start Combat;
             CycleAnimation();
         }
 

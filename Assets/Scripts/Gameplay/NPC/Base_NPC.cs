@@ -25,7 +25,7 @@ namespace NPCspace
         #region INTERACTION INTERFACE
         public void Interact()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 TextAppear.SetText("Hellos");
 

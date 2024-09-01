@@ -25,6 +25,10 @@ namespace Interaction
         }
         private void WeaponPickUp()
         {
+            //We add the weapon to our inventory;
+            Inventory.Instance.Add(GetComponent<ItemController>().item);
+            Inventory.Instance.ListItems();
+
             GameObject activeWeapo = CheckForActiveWeapon();
             if(activeWeapo != null)
             {
