@@ -82,10 +82,13 @@ namespace NPCspace
                 reachedGuard = true;
                 anim.SetTrigger("talking");
                 anim.ResetTrigger("Run");
-                targetGuard = null; //Stop moving by nullifying the target;
 
                 //TODO:
                 //Alert Guard Script;
+                targetGuard.gameObject.GetComponent<Base_Guard>().StartChasing();
+
+                targetGuard = null; //Stop moving by nullifying the target;
+
             }
         }
     }

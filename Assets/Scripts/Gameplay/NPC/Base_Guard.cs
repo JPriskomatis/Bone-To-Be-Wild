@@ -26,6 +26,8 @@ namespace NPCspace
 
         private bool isChasing = false;
 
+        private Coroutine chaseCoroutine;
+
 
         private void Start()
         {
@@ -36,31 +38,63 @@ namespace NPCspace
 
 
 
-        private void ChasePlayer()
+
+        public void StartChasing()
         {
-            if (player == null) return;
-
-            // Move towards the player
-            float step = chaseSpeed * Time.deltaTime;
-            Vector3 directionToPlayer = player.position - transform.position;
-
-            // Move the guard towards the player
-            transform.position = Vector3.MoveTowards(transform.position, player.position, step);
-
-            // Smoothly rotate the guard to face the player
-            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, step);
-
-            // Stop chasing if within stopChaseDistance
-            if (Vector3.Distance(transform.position, player.position) <= stopChaseDistance)
+            if (chaseCoroutine == null)
             {
-
-                Debug.Log("Guard has stopped chasing the player.");
-                isChasing = false;
+                chaseCoroutine = StartCoroutine(ChasePlayerCoroutine());
             }
         }
 
-        
+        private IEnumerator ChasePlayerCoroutine()
+        {
+            while (true)
+            {
+                if (player == null) yield break;
+
+                // Calculate the step for movement
+                float step = chaseSpeed * Time.deltaTime;
+
+                // Direction towards the player
+                Vector3 directionToPlayer = player.position - transform.position;
+
+                // Smoothly rotate the guard to face the player
+                Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, step);
+
+                // Check the distance to the player
+                float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+                // Move the guard towards the player
+                if (distanceToPlayer > stopChaseDistance)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, player.position, step);
+                }
+                else
+                {
+                    // Stop chasing if within the stopChaseDistance
+                    Debug.Log("Guard has stopped chasing the player.");
+                    isChasing = false;
+                    chaseCoroutine = null; // Reset the coroutine reference
+                    yield break; // Exit the coroutine
+                }
+
+                // Wait until the next frame before continuing the loop
+                yield return null;
+            }
+        }
+
+        public void StopChasing()
+        {
+            if (chaseCoroutine != null)
+            {
+                StopCoroutine(chaseCoroutine);
+                chaseCoroutine = null;
+            }
+        }
+
+
 
 
     }
