@@ -103,7 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shape: 1
   _healthNormalized: 0.65
-  _lowHealthThreshold: 0.2
   _lowToHighHealthTransition:
     serializedVersion: 2
     key0: {r: 0.754717, g: 0.1737273, b: 0.1737273, a: 1}

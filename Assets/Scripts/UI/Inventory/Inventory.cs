@@ -46,16 +46,14 @@ namespace UI
             foreach(ItemSO item in Items)
             {
                 //We create a new gameobject in the UI, we create the item prefab;
-                GameObject obj = Instantiate(InventoryItem, itemContent);
-
-                //We find the ItemName gameobject from the item prefab that we just spawned;
-                var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
+                GameObject obj = Instantiate(InventoryItem, itemContent);                
 
                 //similar to above;
                 var itemIcon = obj.transform.Find("ItemImage").GetComponent<Image>();
 
                 var itemDescriptionBackground = obj.transform.Find("ItemDescriptionBackground");
 
+                var itemName = itemDescriptionBackground.gameObject.transform.Find("ItemDescriptionTitle").GetComponent<TMP_Text>();
                 var itemDescription = itemDescriptionBackground.gameObject.transform.Find("ItemDescription").GetComponent<TMP_Text>();
 
                 //We pass the scriptable object's values to the UI;
