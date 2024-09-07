@@ -42,10 +42,12 @@ namespace gameStateSpace
             currentState = state;
             if(state == CurrentGameState.Paused)
             {
-                OnPause?.Invoke(true);
+                //OnPause?.Invoke(true);
+                PauseGame();
             } else
             {
-                OnPause?.Invoke(false);
+                //OnPause?.Invoke(false);
+                ResumeGame();
             }
                 
         }
@@ -53,6 +55,19 @@ namespace gameStateSpace
         public CurrentGameState GetState()
         {
             return currentState;
+        }
+
+        public void PauseGame()
+        {
+            OnPause?.Invoke(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        public void ResumeGame()
+        {
+            OnPause?.Invoke(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
