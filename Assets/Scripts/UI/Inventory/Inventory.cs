@@ -27,7 +27,7 @@ namespace UI
         }
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(Input.GetKeyDown(KeyCode.I))
             {
                 GameStatController.Instance.SetState(GameStatController.CurrentGameState.Paused);
 
