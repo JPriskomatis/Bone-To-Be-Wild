@@ -16,8 +16,8 @@ namespace WeaponSpace
 
         private void Start()
         {
-            playerStrength = GetComponentInParent<AbilityScores>().mainStats.strength;
-            playerLuck = GetComponentInParent<AbilityScores>().mainStats.luck;
+            playerStrength = GetComponentInParent<AbilityScores>().mainStats.power;
+            playerLuck = GetComponentInParent<AbilityScores>().mainStats.fate;
         }
 
         public void TryDoAttack()

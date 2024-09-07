@@ -36,7 +36,11 @@ namespace gameStateSpace
             }
         }
 
-
+        //Helper method
+        public void SetToResumeState()
+        {
+            SetState(CurrentGameState.Resume);
+        }
         public void SetState(CurrentGameState state)
         {
             currentState = state;
@@ -62,12 +66,15 @@ namespace gameStateSpace
             OnPause?.Invoke(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            //SetState(CurrentGameState.Paused);
         }
+
         public void ResumeGame()
         {
             OnPause?.Invoke(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            //SetState(CurrentGameState.Resume);
         }
     }
 

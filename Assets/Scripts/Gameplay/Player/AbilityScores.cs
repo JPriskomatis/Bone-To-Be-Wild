@@ -16,18 +16,12 @@ namespace PlayerSpace
             public int maxHP;
             public int currentHP;
 
-            //How powerful our melee attacks are;
-            public int strength = 10;
-            //How agile our player moves;
-            public int agility;
-            //How much damage our player can withstand;
-            public int endurance;
-            //How good our player is in social encoutners - get discounts, more dialogue options;
-            public int charm;
-            //How powerful our player's magical attacks are;
-            public int arcana;
-            //How lucky our player is - better loot drops, weapons, critical strikes;
-            public int luck;
+            public int power = 10;
+            public int vigor;
+            public int knowledge;
+            public int fate;
+            public int charisma;
+
 
         }
 
@@ -38,12 +32,11 @@ namespace PlayerSpace
         //We use an enum so we can "select" which mainStat to modify;
         public enum StatType
         {
-            Strength,
-            Agility,
-            Endurance,
-            Charm,
-            Arcana,
-            Luck,
+            Power,
+            Vigor,
+            Knowledge,
+            Fate,
+            Charisma,
             CurrentHP,
             MaxHP
         }
@@ -51,12 +44,11 @@ namespace PlayerSpace
         private void Awake()
         {
             //Initialize all ability scores to 10;
-            mainStats.strength = 10;
-            mainStats.agility = 10;
-            mainStats.endurance = 10;
-            mainStats.charm = 10;
-            mainStats.arcana = 10;
-            mainStats.luck = 10;
+            mainStats.power = 10;
+            mainStats.vigor = 10;
+            mainStats.knowledge = 10;
+            mainStats.fate = 10;
+            mainStats.charisma = 10;
 
             mainStats.maxHP = 25;
 
@@ -64,20 +56,21 @@ namespace PlayerSpace
             mainStats.currentHP = mainStats.maxHP;
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
+        // ONLY FOR TESTING PURPOSES;
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Tab))
+        //    {
+        //        DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
                 
-            }
+        //    }
 
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
+        //    if (Input.GetKeyDown(KeyCode.Y))
+        //    {
+        //        IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
                 
-            }
-        }
+        //    }
+        //}
 
         //If we want to increase a player's stat
         //In order to use it, we call it as:
@@ -86,23 +79,20 @@ namespace PlayerSpace
         {
             switch (statType)
             {
-                case StatType.Strength:
-                    mainStats.strength += increaseAmount;
+                case StatType.Power:
+                    mainStats.power += increaseAmount;
                     break;
-                case StatType.Agility:
-                    mainStats.agility += increaseAmount;
+                case StatType.Vigor:
+                    mainStats.vigor += increaseAmount;
                     break;
-                case StatType.Endurance:
-                    mainStats.endurance += increaseAmount;
+                case StatType.Knowledge:
+                    mainStats.knowledge += increaseAmount;
                     break;
-                case StatType.Charm:
-                    mainStats.charm += increaseAmount;
+                case StatType.Fate:
+                    mainStats.fate += increaseAmount;
                     break;
-                case StatType.Arcana:
-                    mainStats.arcana += increaseAmount;
-                    break;
-                case StatType.Luck:
-                    mainStats.luck += increaseAmount;
+                case StatType.Charisma:
+                    mainStats.charisma += increaseAmount;
                     break;
                 case StatType.CurrentHP:
                     OnCurrentHealthIncrease?.Invoke(increaseAmount);
@@ -121,23 +111,20 @@ namespace PlayerSpace
         {
             switch (statType)
             {
-                case StatType.Strength:
-                    mainStats.strength -= decreaseAmount;
+                case StatType.Power:
+                    mainStats.power -= decreaseAmount;
                     break;
-                case StatType.Agility:
-                    mainStats.agility -= decreaseAmount;
+                case StatType.Vigor:
+                    mainStats.vigor -= decreaseAmount;
                     break;
-                case StatType.Endurance:
-                    mainStats.endurance -= decreaseAmount;
+                case StatType.Knowledge:
+                    mainStats.knowledge -= decreaseAmount;
                     break;
-                case StatType.Charm:
-                    mainStats.charm -= decreaseAmount;
+                case StatType.Fate:
+                    mainStats.fate -= decreaseAmount;
                     break;
-                case StatType.Arcana:
-                    mainStats.arcana -= decreaseAmount;
-                    break;
-                case StatType.Luck:
-                    mainStats.luck -= decreaseAmount;
+                case StatType.Charisma:
+                    mainStats.charisma -= decreaseAmount;
                     break;
                 case StatType.CurrentHP:
                     OnCurrentHealthDecrease?.Invoke(decreaseAmount);

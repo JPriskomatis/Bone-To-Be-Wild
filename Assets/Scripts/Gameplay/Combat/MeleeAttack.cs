@@ -49,41 +49,48 @@ namespace combat
             initialSwordRotation = swordTransform.localRotation;
         }
 
-        private void OnEnable()
-        {
-            GameStatController.OnPause += PauseGame;
-        }
+        //private void OnEnable()
+        //{
+        //    GameStatController.OnPause += PauseGame;
+        //}
 
-        private void OnDisable()
-        {
-            GameStatController.OnPause -= PauseGame;
-        }
+        //private void OnDisable()
+        //{
+        //    GameStatController.OnPause -= PauseGame;
+        //}
 
-        public void PauseGame(bool isPaused)
-        {
-            paused = isPaused;
-        }
+        //public void PauseGame(bool isPaused)
+        //{
+        //    paused = isPaused;
+        //}
         private void Update()
         {
-            if (Time.time >= lastAttackTime + cooldownTime && !DialogueManager.GetInstance().dialogueIsPlaying)
+            Debug.Log(GameStatController.Instance.currentState);
+            if(!(GameStatController.Instance.currentState == GameStatController.CurrentGameState.Paused))
             {
-                if (Input.GetMouseButtonDown(0) && !paused)
+                if (Time.time >= lastAttackTime + cooldownTime && !DialogueManager.GetInstance().dialogueIsPlaying)
                 {
-                    if (weapon_base != null && !sheathedSword)
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        Attack();
+                        if (weapon_base != null && !sheathedSword)
+                        {
+                            Attack();
+                        }
+                        else
+                        {
+                            StartCoroutine(UnSheathSword());
+                        }
                     }
-                    else
-                    {
-                        StartCoroutine(UnSheathSword());
-                    }
-                }
 
-                if (Input.GetMouseButtonDown(1))
-                {
-                    StartCoroutine(SheathSword());
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        StartCoroutine(SheathSword());
+                    }
                 }
             }
+
+            
+            
         }
 
         private IEnumerator UnSheathSword()
