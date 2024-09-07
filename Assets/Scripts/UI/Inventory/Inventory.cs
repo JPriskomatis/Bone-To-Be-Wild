@@ -19,6 +19,8 @@ namespace UI
         public Transform itemContent;
         public GameObject InventoryItem;
 
+        [SerializeField] private GameObject renderTextureCam;
+
         private void Awake()
         {
             Instance = this;
@@ -29,7 +31,7 @@ namespace UI
             {
                 GameStatController.Instance.SetState(GameStatController.CurrentGameState.Paused);
 
-               
+                renderTextureCam.SetActive(true);
                 inventory.SetActive(true);
 
             }
