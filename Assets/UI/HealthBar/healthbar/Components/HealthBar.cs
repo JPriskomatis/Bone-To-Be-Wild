@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // Required for handling UI elements like Slider
 using PlayerSpace;
+using TMPro;
 
 namespace UI
 {
@@ -17,17 +18,20 @@ namespace UI
         [SerializeField] private Sprite highHealthIcon;
 
         [SerializeField] private Image heroIcon;
+        [SerializeField] private TextMeshProUGUI heroLevel;
 
         private void OnEnable()
         {
             AbilityScores.OnCurrentHealthIncrease += IncreaseHealth;
             AbilityScores.OnCurrentHealthDecrease += DecreaseHealth;
+            AbilityScores.OnLevelUp += IncreaseLevelTxt;
         }
 
         private void OnDisable()
         {
             AbilityScores.OnCurrentHealthIncrease -= IncreaseHealth;
             AbilityScores.OnCurrentHealthDecrease -= DecreaseHealth;
+            AbilityScores.OnLevelUp -= IncreaseLevelTxt;
         }
 
         void Start()
@@ -45,6 +49,7 @@ namespace UI
                 healthSlider.maxValue = maxHealth;
                 healthSlider.value = currentHealth;
             }
+            heroLevel.text = abilityScores.level.ToString();
         }
 
         // This method is called when health is increased, with an integer parameter representing the health increase amount
@@ -89,6 +94,11 @@ namespace UI
             {
                 heroIcon.sprite = highHealthIcon;
             }
+        }
+
+        private void IncreaseLevelTxt()
+        {
+            heroLevel.text = abilityScores.level.ToString();
         }
     }
 }

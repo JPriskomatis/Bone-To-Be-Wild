@@ -1,3 +1,4 @@
+using log4net.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,8 +8,12 @@ namespace PlayerSpace
 {
     public class AbilityScores : MonoBehaviour
     {
+        public static AbilityScores Instance;
+
+
         public static event Action<int> OnCurrentHealthIncrease;
         public static event Action<int> OnCurrentHealthDecrease;
+        public static event Action OnLevelUp;
 
         [System.Serializable]   //We make them serializable so that we can modify them through inspector;
         public class MainStats
@@ -21,9 +26,8 @@ namespace PlayerSpace
             public int knowledge;
             public int fate;
             public int charisma;
-
-
         }
+        public int level;
 
 
 
@@ -43,6 +47,15 @@ namespace PlayerSpace
 
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+
             //Initialize all ability scores to 10;
             mainStats.power = 10;
             mainStats.vigor = 10;
@@ -54,6 +67,7 @@ namespace PlayerSpace
 
             //Set our Health;
             mainStats.currentHP = mainStats.maxHP;
+            level = 1;
         }
 
         //ONLY FOR TESTING PURPOSES;
@@ -61,6 +75,7 @@ namespace PlayerSpace
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
+                //IncreaseLevel();
                 DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
 
             }
@@ -95,6 +110,10 @@ namespace PlayerSpace
                     mainStats.charisma += increaseAmount;
                     break;
                 case StatType.CurrentHP:
+                    if(mainStats.currentHP +  increaseAmount > mainStats.maxHP)
+                    {
+                        increaseAmount =  mainStats.maxHP - mainStats.currentHP;
+                    }
                     OnCurrentHealthIncrease?.Invoke(increaseAmount);
                     mainStats.currentHP += increaseAmount;
                     break;
@@ -127,6 +146,10 @@ namespace PlayerSpace
                     mainStats.charisma -= decreaseAmount;
                     break;
                 case StatType.CurrentHP:
+                    if (mainStats.currentHP - decreaseAmount < 0)
+                    {
+                        decreaseAmount = mainStats.currentHP;
+                    }
                     OnCurrentHealthDecrease?.Invoke(decreaseAmount);
                     mainStats.currentHP -= decreaseAmount;
                     break;
@@ -140,6 +163,11 @@ namespace PlayerSpace
             }
         }
 
+        public void IncreaseLevel()
+        {
+            level++;
+            OnLevelUp?.Invoke();
+        }
     }
 
 }
