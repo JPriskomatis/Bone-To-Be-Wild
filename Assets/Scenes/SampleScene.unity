@@ -15230,14 +15230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de485da4a790404489dfe351ac807c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questName: Quest test
-  questDescription: By order of His Majesty, King Aldric, all knights of the realm
-    are called upon to embark on a perilous quest to retrieve the Sacred Chalice,
-    a holy relic stolen from the king's chapel. The chalice, believed to grant divine
-    protection, has been taken by the notorious outlaw Roderic Blackthorn and is
-    hidden deep within the Enchanted Forest. The knight who bravely ventures into
-    this dark and treacherous land, overcomes its many dangers, and returns with
-    the chalice shall be richly rewarded and honored by the crown.
+  questName: Goblin Slayer
+  questIcon: {fileID: 21300000, guid: fc476c862eab60d4da1e9e2879fcd844, type: 3}
+  questDescription: Venture into the darkened cave and rid the land of the marauding
+    goblin menace. Battle through their ranks and defeat the cunning goblin chieftain.
+    Restore peace to the region and end their raids for good!
+  questCurrencyReward: 10
   xpReward: 25
 --- !u!114 &471395869
 MonoBehaviour:
@@ -17684,7 +17682,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30104
+  m_Name: pb_Mesh1663398
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26179,7 +26177,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 866241891}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 937161920}
+        m_TargetAssemblyTypeName: questSpace.QuestManager, OutOfCombat
+        m_MethodName: SetCurrentQuest
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: questSpace.Base_Quest, OutOfCombat
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &866241891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29668,8 +29678,9 @@ MonoBehaviour:
   currentQuest: {fileID: 0}
   questPanel: {fileID: 1170883734}
   questTitle: {fileID: 2005653639}
-  questInfo: {fileID: 1997307601}
-  questReward: {fileID: 1846391378}
+  questIcon: {fileID: 1917312699}
+  questDescription: {fileID: 1997307601}
+  questCurrencyReward: {fileID: 1846391378}
 --- !u!4 &943924324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 482608, guid: d24cbc466424f71408559463ee47e0cf, type: 3}
@@ -45498,7 +45509,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30540
+  m_Name: pb_Mesh1663906
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
