@@ -1,228 +1,104 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI; // Required for handling UI elements like Slider
 using PlayerSpace;
+using TMPro;
 
 namespace UI
 {
-
     [ExecuteInEditMode]
     public class HealthBar : MonoBehaviour
     {
+        [SerializeField] private Slider healthSlider; // Reference to the UI Slider component
+        private AbilityScores abilityScores;
+        [SerializeField] private float smoothSpeed = 0.5f; // Speed for smooth transition
+
+        //Sprite change when low health;
+        [SerializeField] private Sprite lowHealthIcon;
+        [SerializeField] private Sprite highHealthIcon;
+
+        [SerializeField] private Image heroIcon;
+        [SerializeField] private TextMeshProUGUI heroLevel;
+
         private void OnEnable()
         {
             AbilityScores.OnCurrentHealthIncrease += IncreaseHealth;
             AbilityScores.OnCurrentHealthDecrease += DecreaseHealth;
+            AbilityScores.OnLevelUp += IncreaseLevelTxt;
         }
 
         private void OnDisable()
         {
             AbilityScores.OnCurrentHealthIncrease -= IncreaseHealth;
             AbilityScores.OnCurrentHealthDecrease -= DecreaseHealth;
-        }
-
-
-        enum ShapeType
-        {
-            Circle, Box, Rhombus
-        };
-
-        [SerializeField] ShapeType _shape;
-        [SerializeField, Range(0, 25)] float _healthNormalized;
-
-        [Header("Fill")]
-        [SerializeField] Gradient _lowToHighHealthTransition;
-
-        [Header("Wave")]
-        [SerializeField, Range(0, 0.1f)] float _fillWaveAmplitude;
-        [SerializeField, Range(0, 100f)] float _fillWaveFrequency;
-        [SerializeField, Range(0, 1f)] float _fillWaveSpeed;
-
-        [Header("Background")]
-        [SerializeField] Color _backgroundColor;
-
-        [Header("Border")]
-        [SerializeField, Range(0, 0.15f)] float _borderWidth;
-        [SerializeField] Color _borderColor;
-
-        Material _matInstance;
-
-        /// <summary>
-        /// Health value between 0 and 1
-        /// </summary>
-        public float HealthNormalized
-        {
-            get
-            {
-                return _healthNormalized;
-            }
-            set
-            {
-                value = Mathf.Clamp(value, 0, 25);
-                if (value == _healthNormalized) return;
-
-                _healthNormalized = value;
-                _matInstance.SetColor("_fillColor", _lowToHighHealthTransition.Evaluate(_healthNormalized));
-                SetMaterialData();
-            }
+            AbilityScores.OnLevelUp -= IncreaseLevelTxt;
         }
 
         void Start()
         {
-            var abilityScores = FindObjectOfType<AbilityScores>();
+            abilityScores = FindObjectOfType<AbilityScores>();
+
             if (abilityScores == null) return;
 
+            // Set the slider's max value to match the max health
             float maxHealth = abilityScores.mainStats.maxHP;
             float currentHealth = abilityScores.mainStats.currentHP;
 
-            // Set initial health normalized
-            _healthNormalized = Mathf.Clamp01(currentHealth / maxHealth);
-
-
-            SetupUniqueMaterial();
-            SetMaterialData();
-        }
-
-        public void DecreaseHealth(int damage)
-        {
-            StartCoroutine(ReduceHealthOverTime(damage, 1f));
-        }
-        public void IncreaseHealth(int healthAmount)
-        {
-            StartCoroutine(IncreaseHealthOverTime(healthAmount, 1f));
-        }
-
-        IEnumerator IncreaseHealthOverTime(float healAmount, float duration)
-        {
-            var abilityScores = FindObjectOfType<AbilityScores>();
-            if (abilityScores == null) yield break;
-
-            float maxHealth = abilityScores.mainStats.maxHP;
-            float startHealth = abilityScores.mainStats.currentHP;
-            float targetHealth = Mathf.Clamp(startHealth + healAmount, 0f, maxHealth);
-
-            // Calculate normalized values
-            float startHealthNormalized = Mathf.Clamp01(startHealth / maxHealth);
-            float targetHealthNormalized = Mathf.Clamp01(targetHealth / maxHealth);
-
-            float elapsed = 0f;
-
-            while (elapsed < duration)
+            if (healthSlider != null)
             {
-                elapsed += Time.deltaTime;
+                healthSlider.maxValue = maxHealth;
+                healthSlider.value = currentHealth;
+            }
+            heroLevel.text = abilityScores.level.ToString();
+        }
 
-                // Smoothly interpolate between the start and target normalized health values
-                float newNormalizedHealth = Mathf.Lerp(startHealthNormalized, targetHealthNormalized, elapsed / duration);
+        // This method is called when health is increased, with an integer parameter representing the health increase amount
+        public void IncreaseHealth(int health)
+        {
+            if (abilityScores == null || healthSlider == null) return;
 
-                // Update HealthNormalized only if it has changed significantly to avoid redundant updates
-                if (!Mathf.Approximately(newNormalizedHealth, HealthNormalized))
-                {
-                    HealthNormalized = newNormalizedHealth;
-                }
+            float targetHealth = abilityScores.mainStats.currentHP + health;
+            targetHealth = Mathf.Clamp(targetHealth, 0, abilityScores.mainStats.maxHP);
+            StartCoroutine(SmoothHealthChange(targetHealth));
+        }
 
+        // This method is called when health is decreased, with an integer parameter representing the health decrease amount
+        public void DecreaseHealth(int health)
+        {
+            if (abilityScores == null || healthSlider == null) return;
+
+            float targetHealth = abilityScores.mainStats.currentHP - health;
+            targetHealth = Mathf.Clamp(targetHealth, 0, abilityScores.mainStats.maxHP);
+            StartCoroutine(SmoothHealthChange(targetHealth));
+        }
+
+        // Coroutine to smoothly transition the slider's value to the target value
+        private IEnumerator SmoothHealthChange(float targetHealth)
+        {
+            float initialHealth = healthSlider.value;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < smoothSpeed)
+            {
+                elapsedTime += Time.deltaTime;
+                healthSlider.value = Mathf.Lerp(initialHealth, targetHealth, elapsedTime / smoothSpeed);
                 yield return null;
             }
 
-            // Ensure the final value is set correctly
-            HealthNormalized = targetHealthNormalized;
-
-
-
-            // Update AbilityScores to reflect the healing
-            abilityScores.mainStats.currentHP = Mathf.RoundToInt(targetHealth);
-        }
-
-
-        IEnumerator ReduceHealthOverTime(float damage, float duration)
-        {
-            var abilityScores = FindObjectOfType<AbilityScores>();
-            if (abilityScores == null) yield break;
-
-            float maxHealth = abilityScores.mainStats.maxHP;
-            float startHealth = abilityScores.mainStats.currentHP;
-            float targetHealth = Mathf.Clamp(startHealth - damage, 0f, maxHealth);
-
-            // Calculate normalized values
-            float startHealthNormalized = Mathf.Clamp01(startHealth / maxHealth);
-            float targetHealthNormalized = Mathf.Clamp01(targetHealth / maxHealth);
-
-            float elapsed = 0f;
-
-            while (elapsed < duration)
+            // Set the final value to avoid small precision errors
+            healthSlider.value = targetHealth;
+            if(healthSlider.value < healthSlider.maxValue * 0.25)
             {
-                elapsed += Time.deltaTime;
-                HealthNormalized = Mathf.Lerp(startHealthNormalized, targetHealthNormalized, elapsed / duration);
-                yield return null;
-            }
-
-
-            // Final update of HealthNormalized
-            HealthNormalized = targetHealthNormalized;
-        }
-
-
-        void SetupUniqueMaterial()
-        {
-            if (_matInstance != null) return;
-
-            Debug.Log("Setup Material", this.gameObject);
-            _matInstance = new Material(Shader.Find("CustomShaders/HealthBar"));
-            if (Application.isPlaying)
+                heroIcon.sprite = lowHealthIcon;
+            } else if(healthSlider.value > healthSlider.maxValue * 0.26)
             {
-                GetComponent<Renderer>().material = _matInstance;
-            }
-            else
-            {
-                GetComponent<Renderer>().sharedMaterial = _matInstance;
+                heroIcon.sprite = highHealthIcon;
             }
         }
 
-        void SetMaterialData()
+        private void IncreaseLevelTxt()
         {
-            if (_matInstance == null) return;
-
-            _matInstance.SetFloat("_healthNormalized", _healthNormalized);
-
-            SetKeyword();
-
-            _matInstance.SetFloat("_waveAmp", _fillWaveAmplitude);
-            _matInstance.SetFloat("_waveFreq", _fillWaveFrequency);
-            _matInstance.SetFloat("_waveSpeed", _fillWaveSpeed);
-
-            _matInstance.SetColor("_fillColor", _lowToHighHealthTransition.Evaluate(_healthNormalized));
-
-            _matInstance.SetColor("_backgroundColor", _backgroundColor);
-            _matInstance.SetFloat("_borderWidth", _borderWidth);
-            _matInstance.SetColor("_borderColor", _borderColor);
-        }
-
-        void SetKeyword()
-        {
-            foreach (var kword in _matInstance.shaderKeywords)
-            {
-                _matInstance.DisableKeyword(kword);
-            }
-            if (_shape == ShapeType.Circle) _matInstance.EnableKeyword("_SHAPE_CIRCLE");
-            else if (_shape == ShapeType.Box) _matInstance.EnableKeyword("_SHAPE_BOX");
-            else if (_shape == ShapeType.Rhombus) _matInstance.EnableKeyword("_SHAPE_RHOMBUS");
-
-            // Sync shader keywordEnum
-            _matInstance.SetInt("_shape", (int)_shape);
-        }
-
-        void OnValidate()
-        {
-            SetMaterialData();
-        }
-
-        void OnDestroy()
-        {
-            if (_matInstance != null)
-            {
-                if (Application.isPlaying)
-                    Destroy(_matInstance);
-                else
-                    DestroyImmediate(_matInstance);
-            }
+            heroLevel.text = abilityScores.level.ToString();
         }
     }
 }
