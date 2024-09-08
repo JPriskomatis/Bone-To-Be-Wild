@@ -43347,6 +43347,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 2042562125}
   smoothSpeed: 0.5
+  lowHealthIcon: {fileID: 21300000, guid: 995d25df5d569054f92db06a05658378, type: 3}
+  highHealthIcon: {fileID: 21300000, guid: 90e99ee31082a974d8fe466a02d2195a, type: 3}
+  heroIcon: {fileID: 1382286333}
 --- !u!1001 &1469097107
 PrefabInstance:
   m_ObjectHideFlags: 0

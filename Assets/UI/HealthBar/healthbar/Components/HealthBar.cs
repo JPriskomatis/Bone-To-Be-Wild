@@ -12,6 +12,12 @@ namespace UI
         private AbilityScores abilityScores;
         [SerializeField] private float smoothSpeed = 0.5f; // Speed for smooth transition
 
+        //Sprite change when low health;
+        [SerializeField] private Sprite lowHealthIcon;
+        [SerializeField] private Sprite highHealthIcon;
+
+        [SerializeField] private Image heroIcon;
+
         private void OnEnable()
         {
             AbilityScores.OnCurrentHealthIncrease += IncreaseHealth;
@@ -76,6 +82,13 @@ namespace UI
 
             // Set the final value to avoid small precision errors
             healthSlider.value = targetHealth;
+            if(healthSlider.value < healthSlider.maxValue * 0.25)
+            {
+                heroIcon.sprite = lowHealthIcon;
+            } else if(healthSlider.value > healthSlider.maxValue * 0.26)
+            {
+                heroIcon.sprite = highHealthIcon;
+            }
         }
     }
 }
