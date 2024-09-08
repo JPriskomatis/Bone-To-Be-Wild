@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace questSpace
 {
@@ -20,8 +21,10 @@ namespace questSpace
         //UI Elements;
         [SerializeField] private GameObject questPanel;
         [SerializeField] private TextMeshProUGUI questTitle;
-        [SerializeField] private TextMeshProUGUI questInfo;
-        [SerializeField] private TextMeshProUGUI questReward;
+        [SerializeField] private Image questIcon;
+        [SerializeField] private TextMeshProUGUI questDescription;
+        [SerializeField] private TextMeshProUGUI questCurrencyReward;
+        //[SerializeField] private TextMeshProUGUI questReward;
 
 
         private void Awake()
@@ -60,8 +63,10 @@ namespace questSpace
 
             questPanel.SetActive(true);
             questTitle.text = quest.questName;
-            questInfo.text = quest.questDescription;
-            questReward.text = quest.xpReward.ToString();
+            questDescription.text = quest.questDescription;
+            questIcon.sprite = quest.questIcon;
+            questCurrencyReward.text = quest.questCurrencyReward.ToString();
+            //questReward.text = quest.xpReward.ToString();
 
             //Activate cursor;
             Cursor.visible = true;
