@@ -65,7 +65,6 @@ namespace combat
         //}
         private void Update()
         {
-            Debug.Log(GameStatController.Instance.currentState);
             if(!(GameStatController.Instance.currentState == GameStatController.CurrentGameState.Paused))
             {
                 if (Time.time >= lastAttackTime + cooldownTime && !DialogueManager.GetInstance().dialogueIsPlaying)

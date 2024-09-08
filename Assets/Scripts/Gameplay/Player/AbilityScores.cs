@@ -56,21 +56,21 @@ namespace PlayerSpace
             mainStats.currentHP = mainStats.maxHP;
         }
 
-        // ONLY FOR TESTING PURPOSES;
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Tab))
-        //    {
-        //        DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
-                
-        //    }
+        //ONLY FOR TESTING PURPOSES;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
 
-        //    if (Input.GetKeyDown(KeyCode.Y))
-        //    {
-        //        IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
-                
-        //    }
-        //}
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
+
+            }
+        }
 
         //If we want to increase a player's stat
         //In order to use it, we call it as:
@@ -96,10 +96,10 @@ namespace PlayerSpace
                     break;
                 case StatType.CurrentHP:
                     OnCurrentHealthIncrease?.Invoke(increaseAmount);
-                    mainStats.currentHP -= increaseAmount;
+                    mainStats.currentHP += increaseAmount;
                     break;
                 case StatType.MaxHP:
-                    mainStats.maxHP -= increaseAmount;
+                    mainStats.maxHP += increaseAmount;
                     break;
                 default:
                     Debug.LogError("Unknown stat type.");
