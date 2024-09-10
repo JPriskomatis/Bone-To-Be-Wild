@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4c380615fa4b44310871604139b4cf0e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Exterior Building Tavern 2/LOD1/Tavern2_WallsOutside_LOD1.prefab
+  uploadId: 652796

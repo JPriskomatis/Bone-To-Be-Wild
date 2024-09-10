@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 670adf27333cb488d8cd2a419731ef2c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Basic Building 1/LOD0/BasicBuilding1_WindowCoverA.prefab
+  uploadId: 652796

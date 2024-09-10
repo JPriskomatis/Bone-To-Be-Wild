@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6ccf292b7f14547b1b71c2947917a478
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Basic Building 2/BasicBuilding2Ceiling.prefab
+  uploadId: 652796

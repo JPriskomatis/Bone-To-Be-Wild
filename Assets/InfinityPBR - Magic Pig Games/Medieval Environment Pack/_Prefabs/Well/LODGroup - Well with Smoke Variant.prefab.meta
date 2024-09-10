@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da3f950e6106845a9b0a7a15cfc111d1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Well/LODGroup
+    - Well with Smoke Variant.prefab
+  uploadId: 652796

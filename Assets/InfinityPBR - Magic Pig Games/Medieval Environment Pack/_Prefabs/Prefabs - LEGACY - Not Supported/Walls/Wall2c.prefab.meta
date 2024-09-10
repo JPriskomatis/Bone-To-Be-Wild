@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ef0bb11c4cb53431d8a545e5b8921f60
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Prefabs
+    - LEGACY - Not Supported/Walls/Wall2c.prefab
+  uploadId: 652796

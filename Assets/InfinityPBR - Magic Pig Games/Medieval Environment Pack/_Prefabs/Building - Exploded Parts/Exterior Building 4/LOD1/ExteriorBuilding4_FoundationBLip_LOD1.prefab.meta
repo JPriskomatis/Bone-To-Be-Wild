@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2fd2acbe0d239476bb60d1e8e2bb2874
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Exterior Building 4/LOD1/ExteriorBuilding4_FoundationBLip_LOD1.prefab
+  uploadId: 652796
