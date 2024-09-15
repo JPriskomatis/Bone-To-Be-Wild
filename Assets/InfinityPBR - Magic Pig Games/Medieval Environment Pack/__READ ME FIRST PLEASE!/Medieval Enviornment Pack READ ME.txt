@@ -26,7 +26,8 @@ This version contains many buildings, textures and objects/props to help you bui
 
 We will be adding more content to the package over time, including based on suggestions we get from our active users on our Discord channel (https://discord.gg/NP7YbM)
 
-IMPORTANT: Create your own original prefabs by copying ours and moving them, or dragging them from the scene into the project and select "Original Prefab". This way, when we update our main prefabs, what you've created won't be affected.
+IMPORTANT: Create your own original prefabs by copying ours and moving them, or dragging them from the scene
+into the project and select "Original Prefab". This way, when we update our main prefabs, what you've created won't be affected.
 
 
 -- TREES, ROCKS, AND OTHER ITEMS --
@@ -50,7 +51,9 @@ To save resources, the package re-uses textures as much as possible, and combine
 
 -- PREFABS / DOORS / WINDOWS --
 
-The prefabs for doors and windows often will have many door options at once. Most will use the "Prefab Child Manager" script which makes it easy to activate or deactivate children, at run time and in the inspector. This can be coded, and even randomized at runtime.
+The prefabs for doors and windows often will have many door options at once. Most will use the "Prefab Child Manager" 
+script which makes it easy to activate or deactivate children, at run time and in the inspector. 
+This can be coded, and even randomized at runtime.
 
 Most buildings should already have the door/window prefabs attached. They use nested prefabs, so if you change the underlying prefabs, all buildings will be affected.
 
