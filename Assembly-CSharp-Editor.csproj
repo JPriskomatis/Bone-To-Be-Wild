@@ -61,6 +61,8 @@
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Medieval Environment Pack\Post Processing\Editor\SplatMapImporterEditor.cs" />
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Medieval Environment Pack\Post Processing\Editor\MedievalEnvironmentSceneManagerEditor.cs" />
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\Editor\BasicInkExampleEditor.cs" />
+    <Compile Include="Assets\FolderColor\Editor\CustomWindowFileImage.cs" />
+    <Compile Include="Assets\FolderColor\Editor\ProjectAssetViewerCustomisation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -969,9 +971,9 @@
       <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
       <Name>UI</Name>
     </ProjectReference>
-    <ProjectReference Include="NewAssembly.csproj">
-      <Project>{7320C472-870D-C509-5596-41D7A0B61EA1}</Project>
-      <Name>NewAssembly</Name>
+    <ProjectReference Include="Objects.csproj">
+      <Project>{2687C87F-9822-5A6F-34C0-2B4D1E5425AC}</Project>
+      <Name>Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
