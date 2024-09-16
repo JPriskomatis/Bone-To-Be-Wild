@@ -969,6 +969,10 @@
       <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
       <Name>UI</Name>
     </ProjectReference>
+    <ProjectReference Include="NewAssembly.csproj">
+      <Project>{7320C472-870D-C509-5596-41D7A0B61EA1}</Project>
+      <Name>NewAssembly</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
