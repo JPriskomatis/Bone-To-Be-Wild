@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Objects\Buildings\Base_Building.cs" />
     <Compile Include="Assets\Scripts\Objects\Buildings\Tavern\Tavern_Door.cs" />
+    <Compile Include="Assets\Scripts\Objects\Doors\MainGate.cs" />
     <Compile Include="Assets\Scripts\Objects\Doors\Standard_door.cs" />
     <Compile Include="Assets\Scripts\Objects\Doors\Base_Door.cs" />
     <Compile Include="Assets\Scripts\Objects\Town.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="Assets\Scripts\Objects\Buildings\Tavern\Tavern.cs" />
     <Compile Include="Assets\Scripts\Objects\Buildings\StopBuildingMusic.cs" />
     <Compile Include="Assets\Scripts\Objects\Buildings\Tavern\BountyBoard\BountyBoard.cs" />
-    <Compile Include="Assets\Scripts\Objects\Doors\MainGate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Objects\Objects.asmdef" />
