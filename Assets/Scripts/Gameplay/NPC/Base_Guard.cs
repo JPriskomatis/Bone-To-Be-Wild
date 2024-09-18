@@ -35,7 +35,7 @@ namespace NPCspace
         {
 
             player = FindObjectOfType<PlayerMovement>().transform;
-            
+            anim.SetTrigger("idle");
         }
 
 
