@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 88e8ad63d34824eb385b95a0569fe4ff
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Pushout 2/LOD0/PushoutBFoundationBLip.prefab
+  uploadId: 652796

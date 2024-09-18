@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 6e501a997cb121b4ba86cef2f7091d4e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_skybox: {fileID: 2100000, guid: 3586113d1ef95cc488746106a4f743ea, type: 2}
+  - m_sunLight: {instanceID: 0}
+  - m_postProcessingProfile: {fileID: 11400000, guid: 458a785a6015cab42a3600292db797a5,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/Post
+    Processing/Scripts/DemoLighting.cs
+  uploadId: 652796

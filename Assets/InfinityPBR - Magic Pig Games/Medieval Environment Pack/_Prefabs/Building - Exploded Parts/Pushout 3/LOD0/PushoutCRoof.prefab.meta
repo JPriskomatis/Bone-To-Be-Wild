@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c84b8602ab4f84d7ab114cafb6f6043b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Pushout 3/LOD0/PushoutCRoof.prefab
+  uploadId: 652796

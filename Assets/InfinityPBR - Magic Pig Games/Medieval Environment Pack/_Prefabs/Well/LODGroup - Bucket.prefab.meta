@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b05bd82fac661401491f1f43e4d0f0d8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Well/LODGroup
+    - Bucket.prefab
+  uploadId: 652796

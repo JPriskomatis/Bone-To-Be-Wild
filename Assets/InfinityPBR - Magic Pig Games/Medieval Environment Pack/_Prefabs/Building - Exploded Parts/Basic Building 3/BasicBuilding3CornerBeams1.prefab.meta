@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6a8c7f2fe47a943a895cf70fc6d4d6d9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Basic Building 3/BasicBuilding3CornerBeams1.prefab
+  uploadId: 652796

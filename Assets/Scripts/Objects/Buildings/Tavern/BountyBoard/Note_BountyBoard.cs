@@ -1,8 +1,8 @@
 using Interaction;
-using PlayerSpace;
 using System.Collections;
 using UI;
 using UnityEngine;
+using PlayerSpace;
 
 namespace Buildings
 {

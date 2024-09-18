@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b2adf9d152c8a4464ae07479f3850f23
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107464
+  packageName: Medieval Fantasy Town Village Environment for RPG FPS
+  packageVersion: 4.2.1
+  assetPath: Assets/InfinityPBR - Magic Pig Games/Medieval Environment Pack/_Prefabs/Building
+    - Exploded Parts/Exterior Building 3/ExteriorBuilding3_OverhangA_LODGroup.prefab
+  uploadId: 652796
