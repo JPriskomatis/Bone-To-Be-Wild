@@ -1,24 +1,26 @@
-using Dialoguespace;
 using Interaction;
-using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
 namespace Dialoguespace
 {
-
-    public class HasDialogue : MonoBehaviour, IInteractable
+    public abstract class HasDialogue : MonoBehaviour, IInteractable
     {
-        [SerializeField] string npcName;
-        [SerializeField] private TextAsset inkJSON;
+        [SerializeField] protected TextAsset inkJSON;
 
-        public void Interact()
+        public virtual void Interact()
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+                var externalFunctionsDictionary = GetExternalFunctions();
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON, externalFunctionsDictionary);
             }
+        }
+
+        protected virtual Dictionary<string, System.Action> GetExternalFunctions()
+        {
+            return new Dictionary<string, System.Action>();
         }
 
         public void OnInteractEnter()
@@ -30,7 +32,5 @@ namespace Dialoguespace
         {
             TextAppear.RemoveText();
         }
-
     }
-
 }

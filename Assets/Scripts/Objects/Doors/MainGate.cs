@@ -4,19 +4,35 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using PlayerSpace;
 using Audio;
+using Dialoguespace;
 
 public class MainGate : Base_Door
 {
     private Vector3 originalPos;
     private bool open;
 
+
+    private void OnEnable()
+    {
+        Gate_Guard_Dialogue.OnGateOpen += UnlockGate;
+    }
+
+    private void OnDisable()
+    {
+        Gate_Guard_Dialogue.OnGateOpen -= UnlockGate;
+    }
+    private void Awake()
+    {
+        locked = true;
+    }
     private void Start()
     {
         originalPos = transform.position;
+        
     }
     public override void Interact()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) && !locked)
         {
             //Opening the Gate;
             open = true;
@@ -69,5 +85,11 @@ public class MainGate : Base_Door
             await UniTask.Delay(1);
         }
         MoveGateOverTime(this.transform.position, originalPos, 2.5f).Forget();
+    }
+
+    public void UnlockGate()
+    {
+        Debug.Log("Unlocked");
+        locked = false;
     }
 }

@@ -20,7 +20,7 @@ namespace Dialoguespace
         private TextMeshProUGUI[] choicesText;
 
 
-        private Story currentStory;
+        public Story currentStory;
 
         public bool dialogueIsPlaying { get; private set; }
 
@@ -88,15 +88,23 @@ namespace Dialoguespace
             return instance;
         }
 
-        public void EnterDialogueMode(TextAsset inkJSON)
+        public void EnterDialogueMode(TextAsset inkJSON, Dictionary<string, System.Action> externalFunctionsDictionary = null)
         {
             Cursor.lockState = CursorLockMode.None;  // Unlock the cursor
             Cursor.visible = true;
 
             currentStory = new Story(inkJSON.text);
 
-            dialogueIsPlaying = true;
+            // Check if the dictionary is provided, and bind functions if it is
+            if (externalFunctionsDictionary != null)
+            {
+                foreach (var function in externalFunctionsDictionary)
+                {
+                    currentStory.BindExternalFunction(function.Key, function.Value);
+                }
+            }
 
+            dialogueIsPlaying = true;
             dialogueCanvas.SetActive(true);
             ContinueStory();
         }
@@ -124,6 +132,7 @@ namespace Dialoguespace
             dialogueCanvas.SetActive(false);
             dialogueText.text = "";
 
+            currentStory.UnbindExternalFunction("OpenGate");
             //Hide cursor again
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
