@@ -61,13 +61,14 @@
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\Quests\Quest_Sample.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\PickUpWeapon.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\QuestManager.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\HasDialogue.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\OnDialogue.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISwordDamageable.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\Sound.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Interactor.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\Base_Quest.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\OnDialogue.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\HasDialogue.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\FPSCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\OutOfCombat\OutOfCombat.asmdef" />
