@@ -7,7 +7,7 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GoblinHead
-  m_Mask: 00000000010000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
+  m_Mask: 00000000010000000000000001000000010000000100000001000000010000000100000000000000000000000000000000000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -48,7 +48,7 @@ AvatarMask:
   - m_Path: Root/BN_Hips/BN_Spine/BN_Spine1/BN_Neck
     m_Weight: 1
   - m_Path: Root/BN_Hips/BN_Spine/BN_Spine1/BN_Neck/BN_Head
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/BN_Hips/BN_Spine/BN_Spine1/BN_RightShoulder
     m_Weight: 1
   - m_Path: Root/BN_Hips/BN_Spine/BN_Spine1/BN_RightShoulder/BN_RightArm
