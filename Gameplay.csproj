@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\Base_Ability.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\DetectEnemies.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\MeleeAttack.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Goblin\Goblin.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Normal\NormalDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Blacksmith.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Civilain.cs" />
