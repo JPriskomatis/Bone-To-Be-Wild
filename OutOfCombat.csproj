@@ -56,13 +56,17 @@
     <Analyzer Include="E:\VisualStudio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\OutOfCombat\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISpellDamageable.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\Quests\Quest_Sample.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\PickUpWeapon.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\QuestManager.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\HasDialogue.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISwordDamageable.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Audio\Sound.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Gate_Guard_Dialogue.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Interactor.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\Base_Quest.cs" />
   </ItemGroup>
@@ -784,6 +788,14 @@
     <ProjectReference Include="gameStateSpace.csproj">
       <Project>{DA7FA456-569A-647E-D9C1-FC3188002FC7}</Project>
       <Name>gameStateSpace</Name>
+    </ProjectReference>
+    <ProjectReference Include="Ink-Libraries.csproj">
+      <Project>{6697500A-2FFA-ECFC-745E-6F680DF368D5}</Project>
+      <Name>Ink-Libraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="InkEditor.csproj">
+      <Project>{7AFD585E-F675-EF42-8289-D276E5A656AF}</Project>
+      <Name>InkEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
