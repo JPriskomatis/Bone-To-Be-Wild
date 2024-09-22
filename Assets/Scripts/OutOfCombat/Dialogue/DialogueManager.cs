@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Dialoguespace
 {
@@ -12,8 +13,8 @@ namespace Dialoguespace
         [Header("Dialogue UI")]
          
         [SerializeField] private GameObject dialogueCanvas;
-        
         [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private Image npcPortrait;
 
         [Header("Choices UI")]
         [SerializeField] private GameObject[] choices;
@@ -88,8 +89,9 @@ namespace Dialoguespace
             return instance;
         }
 
-        public void EnterDialogueMode(TextAsset inkJSON, Dictionary<string, System.Action> externalFunctionsDictionary = null)
+        public void EnterDialogueMode(Sprite portrait, TextAsset inkJSON, Dictionary<string, System.Action> externalFunctionsDictionary = null)
         {
+            npcPortrait.sprite = portrait;
             Cursor.lockState = CursorLockMode.None;  // Unlock the cursor
             Cursor.visible = true;
 
@@ -103,6 +105,7 @@ namespace Dialoguespace
                     currentStory.BindExternalFunction(function.Key, function.Value);
                 }
             }
+
 
             dialogueIsPlaying = true;
             dialogueCanvas.SetActive(true);

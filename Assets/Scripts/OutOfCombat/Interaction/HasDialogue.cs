@@ -2,11 +2,14 @@ using Interaction;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Dialoguespace
 {
     public abstract class HasDialogue : MonoBehaviour, IInteractable
     {
+        [Header("Dialogue Elements")]
+        [SerializeField] private Sprite potrait;
         [SerializeField] protected TextAsset inkJSON;
 
         public virtual void Interact()
@@ -14,7 +17,7 @@ namespace Dialoguespace
             if (Input.GetKeyDown(KeyCode.E))
             {
                 var externalFunctionsDictionary = GetExternalFunctions();
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON, externalFunctionsDictionary);
+                DialogueManager.GetInstance().EnterDialogueMode(potrait, inkJSON, externalFunctionsDictionary);
             }
         }
 

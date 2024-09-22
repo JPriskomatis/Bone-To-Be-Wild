@@ -2,6 +2,7 @@ using Dialoguespace;
 using UI;
 using UnityEngine;
 using Interaction;
+using UnityEngine.UI;
 
 namespace NPCspace
 {
@@ -14,6 +15,7 @@ namespace NPCspace
     {
 
         public string npcName;
+        public Sprite portrait;
 
         [Header("Ink JSON")]
         [SerializeField] private TextAsset inkJSON;
@@ -31,7 +33,7 @@ namespace NPCspace
 
                 //Initiate Dialogue;
 
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+                DialogueManager.GetInstance().EnterDialogueMode(portrait,inkJSON);
             }
         }
 
