@@ -12,6 +12,14 @@ namespace NPCspace
             this.transform.LookAt(enemy.transform.position);
             this.GetComponent<Rigidbody>().AddForce(transform.forward * f_arrowSpeed);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("Hit!");
+            }
+        }
     }
 
 }
