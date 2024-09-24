@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4109512197357475297}
   - component: {fileID: 5567345517716510655}
   - component: {fileID: 2204516364334455242}
-  - component: {fileID: 1169086510079905683}
+  - component: {fileID: 5865240244851589518}
   m_Layer: 0
   m_Name: Arrow_01_R1
   m_TagString: Untagged
@@ -114,9 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1b8ce5b57599545a5035538830d2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f_arrowSpeed: 1500
---- !u!65 &1169086510079905683
-BoxCollider:
+  f_arrowSpeed: 2500
+  i_arrowDamage: 10
+--- !u!135 &5865240244851589518
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,5 +127,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.014562896, y: 0.030701088, z: 0.8357511}
-  m_Center: {x: 0, y: 0, z: -0.41787556}
+  m_Radius: 0.11814083
+  m_Center: {x: 0, y: -0.0003952235, z: -0.042809963}

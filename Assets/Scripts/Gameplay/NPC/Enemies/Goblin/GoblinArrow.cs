@@ -20,7 +20,7 @@ namespace NPCspace
             if (other.CompareTag("Player"))
             {
                 Debug.Log("Hit!");
-                other.GetComponentInParent<AbilityScores>().TakeDamage(5);
+                other.GetComponentInParent<AbilityScores>().TakeDamage(i_arrowDamage);
             }
         }
     }
