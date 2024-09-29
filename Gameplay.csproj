@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Icesword\IceSword.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Normal\NormalSword.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Goblin\Goblin_Combat.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\AbilityScores.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\Interpolate.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\IABility.cs" />

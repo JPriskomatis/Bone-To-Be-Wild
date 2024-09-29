@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NPCspace
+namespace NPCspace.goblin
 {
     public class GoblinArrow : MonoBehaviour
     {

@@ -1,5 +1,6 @@
 using Ink.Parsed;
 using NPCspace;
+using NPCspace.goblin;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,8 +44,7 @@ namespace PlayerSpace
                     case "Goblin":
                         if (distance <= goblinRadius)
                         {
-                            Debug.Log("Goblin!");
-                            Goblin goblin = hit.GetComponent<Goblin>();
+                            Goblin_Combat goblin = hit.GetComponent<Goblin_Combat>();
                             goblin?.StartShooting();
                         }
                         break;
@@ -58,7 +58,6 @@ namespace PlayerSpace
                         }
                         break;
 
-                    // Add more cases for other enemy types as needed
                     default:
                         break;
                 }
