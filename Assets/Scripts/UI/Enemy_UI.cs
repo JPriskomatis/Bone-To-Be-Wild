@@ -13,13 +13,12 @@ namespace UI
         public TextMeshProUGUI monsterLevel;
         public Image monsterIcon;
         [SerializeField] private Canvas monsterCanvas;
-        public void SetUI(string name, Sprite icon, string level)
-        {
-            monsterName.text = name;
-            monsterIcon.sprite = icon;
-            monsterLevel.text = level;
-        }
+        public Slider slider;
 
+        private void Start()
+        {
+            SetUI(monsterName.text, monsterIcon.sprite, monsterLevel.text);
+        }
         private void Update()
         {
             Vector3 directionToCamera = Camera.main.transform.position - monsterCanvas.transform.position;
@@ -27,6 +26,20 @@ namespace UI
 
             monsterCanvas.transform.rotation = Quaternion.LookRotation(directionToCamera);
         }
+
+        public void SetUI(string name, Sprite icon, string level)
+        {
+            monsterName.text = name;
+            monsterIcon.sprite = icon;
+            monsterLevel.text = level;
+        }
+
+        public void UpdateSlider(float currentHealth, int maxHealth)
+        {
+            slider.maxValue = maxHealth;
+            slider.value = currentHealth;
+        }
+
 
     }
 

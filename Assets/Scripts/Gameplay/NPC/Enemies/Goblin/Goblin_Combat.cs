@@ -1,16 +1,27 @@
 using Damageables;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UI;
+using PlayerSpace;
+
 
 namespace NPCspace.goblin
 {
     public class Goblin_Combat : Goblin, ISwordDamageable
     {
+        public static event Action OnDamaged;
+
         private bool isShooting;
 
-        
+        private void Start()
+        {
+            enemy_ui.SetUI(this.gameObject.name, icon, "(" + level.ToString() + ")");
+            enemy = Player_Manager.instance.gameObject;
+            Debug.Log(level);
+            enemy_ui.SetUI(this.gameObject.name, icon, "(" + level.ToString() + ")");
+        }
+
+
         public void StartShooting()
         {
             
@@ -38,14 +49,15 @@ namespace NPCspace.goblin
 
         public void SwordDamageable()
         {
+            
             isShooting = false;
             Debug.Log("Hit");
 
             anim.SetTrigger("takeDamage");
             LookAtPlayerAgain();
-            
 
-            
+            currentHealth -= 5;
+            enemy_ui.UpdateSlider(currentHealth, maxHealth);
         }
 
         public override void PerformAction()

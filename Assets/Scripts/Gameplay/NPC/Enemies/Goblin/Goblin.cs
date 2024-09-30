@@ -1,3 +1,4 @@
+using PlayerSpace;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
@@ -5,11 +6,9 @@ using UnityEngine;
 
 namespace NPCspace.goblin
 {
-    public abstract class Goblin : MonoBehaviour
+    public abstract class Goblin : Enemy
     {
-        [Header("Goblin Stats")]
-        public int maxHealth;
-        public int currentHealth;
+        
 
         [Header("Goblin Settings")]
         public Sprite icon;
@@ -27,15 +26,14 @@ namespace NPCspace.goblin
 
         private bool hasDetectedPlayer;
 
-        [SerializeField] private Enemy_UI enemy_ui;
+        public Enemy_UI enemy_ui;
         
         private void Start()
         {
             //TODO:
             //Maybe try another way to get the player?;
-            enemy = GameObject.FindWithTag("Player");
-            Debug.Log(level);
-            enemy_ui.SetUI(this.gameObject.name, icon, "("+level.ToString()+")");
+            Debug.Log("asdfasfasdfdasf");
+
 
         }
 
