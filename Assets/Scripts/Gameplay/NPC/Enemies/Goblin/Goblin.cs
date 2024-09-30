@@ -1,29 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 namespace NPCspace.goblin
 {
     public abstract class Goblin : MonoBehaviour
     {
+        [Header("Goblin Stats")]
+        public int maxHealth;
+        public int currentHealth;
+
         [Header("Goblin Settings")]
+        public Sprite icon;
+        public Enemy_Level.Level level = Enemy_Level.Level.Grunts;
         protected GameObject enemy;
         [SerializeField] private Transform head;
         public Animator anim;
         protected bool lookAtPlayer;
+
 
         [Header("Arrow Settings")]
         public GameObject p_arrow;
         public Transform bow;
         [SerializeField] private float maxDistance;
 
-  
+        private bool hasDetectedPlayer;
 
+        [SerializeField] private Enemy_UI enemy_ui;
+        
         private void Start()
         {
             //TODO:
             //Maybe try another way to get the player?;
             enemy = GameObject.FindWithTag("Player");
+            Debug.Log(level);
+            enemy_ui.SetUI(this.gameObject.name, icon, "("+level.ToString()+")");
+
         }
 
         private void Update()
@@ -35,7 +48,8 @@ namespace NPCspace.goblin
             }
         }
 
-        private void LookAtPlayer()
+        public abstract void PerformAction();
+        public void LookAtPlayer()
         {
             lookAtPlayer = true;
             if (head != null && enemy != null)
@@ -53,7 +67,17 @@ namespace NPCspace.goblin
         }
 
 
+        public void DetectPlayer()
+        {
+            if (!hasDetectedPlayer)
+            {
+                hasDetectedPlayer = true;
+                LookAtPlayer();
+                
+            }
+            PerformAction();
 
+        }
         protected IEnumerator RotateGoblin()
         {
             yield return new WaitForSeconds(1.3f);
@@ -71,6 +95,8 @@ namespace NPCspace.goblin
             // Ensure final rotation is exactly 90 degrees added
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, endZRot, transform.eulerAngles.z);
         }
+
+
 
     }
 }

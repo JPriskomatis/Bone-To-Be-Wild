@@ -45,7 +45,7 @@ namespace PlayerSpace
                         if (distance <= goblinRadius)
                         {
                             Goblin_Combat goblin = hit.GetComponent<Goblin_Combat>();
-                            goblin?.StartShooting();
+                            goblin?.DetectPlayer();
                         }
                         break;
 

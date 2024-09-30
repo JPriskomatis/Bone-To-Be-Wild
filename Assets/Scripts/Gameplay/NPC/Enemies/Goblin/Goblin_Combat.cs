@@ -10,8 +10,10 @@ namespace NPCspace.goblin
     {
         private bool isShooting;
 
+        
         public void StartShooting()
         {
+            
             if (!isShooting)
             {
                 isShooting = true;
@@ -45,6 +47,12 @@ namespace NPCspace.goblin
 
             
         }
+
+        public override void PerformAction()
+        {
+            StartShooting();
+        }
+
     }
 
 }
