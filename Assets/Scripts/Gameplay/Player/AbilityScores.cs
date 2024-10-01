@@ -2,6 +2,7 @@ using log4net.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 namespace PlayerSpace
@@ -167,6 +168,17 @@ namespace PlayerSpace
         {
             level++;
             OnLevelUp?.Invoke();
+        }
+
+        public void TakeDamage(int damageTaken)
+        {
+            DecreaseStat(StatType.CurrentHP, damageTaken);
+            UpdateBloodScreen(mainStats.currentHP, mainStats.maxHP);
+        }
+        public void UpdateBloodScreen(float currentHealth, float maxHealth)
+        {
+            float healthPercentage = (currentHealth / maxHealth) * 100f;
+            BloodSplash.instance.SetBloodScreen(healthPercentage);
         }
     }
 

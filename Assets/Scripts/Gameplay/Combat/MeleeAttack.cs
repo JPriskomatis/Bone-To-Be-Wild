@@ -177,7 +177,7 @@ namespace combat
             {
                 Debug.Log(other.transform.root.name);
 
-                ISwordDamageable swordDamageable = other.GetComponent<ISwordDamageable>();
+                ISwordDamageable swordDamageable = other.GetComponentInParent<ISwordDamageable>();
                 if (swordDamageable != null)
                 {
                     swordDamageable.SwordDamageable();

@@ -8,3 +8,4 @@ UserSettings/
 .vs/
 Assembly-CSharp.csproj
 obj/
+*.csproj
