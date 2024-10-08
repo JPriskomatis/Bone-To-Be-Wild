@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UI;
 using PlayerSpace;
+using stateMachine;
 
 
 namespace NPCspace.goblin
@@ -13,12 +14,28 @@ namespace NPCspace.goblin
 
         private bool isShooting;
 
+        [HideInInspector] public StateMachine stateMachine;
         private void Start()
         {
             enemy_ui.SetUI(this.gameObject.name, icon, "(" + level.ToString() + ")");
             enemy = Player_Manager.instance.gameObject;
             Debug.Log(level);
             enemy_ui.SetUI(this.gameObject.name, icon, "(" + level.ToString() + ")");
+
+            stateMachine = GetComponent<StateMachine>();
+
+            stateMachine = new StateMachine();
+            stateMachine.ChangeState(new IdleState(stateMachine));
+        }
+
+        private void Update()
+        {
+            stateMachine.CurrentState.LogicUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            stateMachine.CurrentState.PhysicsUpdate();
         }
 
 

@@ -984,6 +984,10 @@
       <Project>{4F3FA09A-04CC-7FAA-3E78-F1B3389BB900}</Project>
       <Name>Gameplay</Name>
     </ProjectReference>
+    <ProjectReference Include="StateMachine.csproj">
+      <Project>{55438289-F313-D99D-97E4-651DC2EF4952}</Project>
+      <Name>StateMachine</Name>
+    </ProjectReference>
     <ProjectReference Include="OutOfCombat.csproj">
       <Project>{5A751762-F8A9-1245-136F-F61F81FD997F}</Project>
       <Name>OutOfCombat</Name>

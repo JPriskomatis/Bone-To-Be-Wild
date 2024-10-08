@@ -1,6 +1,5 @@
-using PlayerSpace;
+using stateMachine;
 using System.Collections;
-using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
@@ -27,15 +26,10 @@ namespace NPCspace.goblin
         private bool hasDetectedPlayer;
 
         public Enemy_UI enemy_ui;
-        
-        private void Start()
-        {
-            //TODO:
-            //Maybe try another way to get the player?;
-            Debug.Log("asdfasfasdfdasf");
 
 
-        }
+
+  
 
         private void Update()
         {
@@ -44,6 +38,7 @@ namespace NPCspace.goblin
                 LookAtPlayer();
 
             }
+
         }
 
         public abstract void PerformAction();

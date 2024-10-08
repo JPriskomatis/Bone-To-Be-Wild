@@ -1,6 +1,7 @@
 using Ink.Parsed;
 using NPCspace;
 using NPCspace.goblin;
+using stateMachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace PlayerSpace
                         if (distance <= goblinRadius)
                         {
                             Goblin_Combat goblin = hit.GetComponent<Goblin_Combat>();
-                            goblin?.DetectPlayer();
+                            goblin?.stateMachine.ChangeState(new AttackState(goblin.stateMachine));
                         }
                         break;
 
