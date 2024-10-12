@@ -52,7 +52,10 @@ namespace NPCspace
         #region PLAYER ENTER -> NPC TALK
         public virtual void OnPlayerEnterRange(Collider Player)
         {
-            greetingAudio.Play();
+            if (greetingAudio != null)
+            {
+                greetingAudio.Play();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
