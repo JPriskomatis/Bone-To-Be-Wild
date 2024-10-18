@@ -1,4 +1,5 @@
 using Ink.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -135,8 +136,17 @@ namespace Dialoguespace
             dialogueCanvas.SetActive(false);
             dialogueText.text = "";
 
-            currentStory.UnbindExternalFunction("OpenGate");
-            //Hide cursor again
+            try
+            {
+                // Attempt to unbind the function
+                currentStory.UnbindExternalFunction("OpenGate");
+            }
+            catch (Exception ex) // Catch specific exceptions if you know what to expect
+            {
+                Debug.LogWarning("Failed to unbind OpenGate function: " + ex.Message);
+            }
+
+            // Hide cursor again
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
