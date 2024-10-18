@@ -117,15 +117,25 @@ namespace Dialoguespace
         {
             if (currentStory.canContinue)
             {
+                string nextText = currentStory.Continue();
 
-                dialogueText.text = currentStory.Continue();
-                DisplayChoices();
+                // Check if the next text is empty or just whitespace
+                if (!string.IsNullOrWhiteSpace(nextText))
+                {
+                    dialogueText.text = nextText;
+                    DisplayChoices();
+                }
+                else
+                {
+                    StartCoroutine(ExitDialogueMode());
+                }
             }
             else
             {
                 StartCoroutine(ExitDialogueMode());
             }
         }
+
 
 
         private IEnumerator ExitDialogueMode()
@@ -157,36 +167,34 @@ namespace Dialoguespace
 
             Debug.Log($"Current choices count: {currentChoices.Count}");
 
-
             if (currentChoices.Count > choices.Length)
             {
                 Debug.LogWarning("Too many choices");
             }
 
             int index = 0;
-            bool hasActiveChoices = currentChoices.Count > 0;
             foreach (Choice choice in currentChoices)
             {
+                Debug.Log($"Displaying choice {index}: {choice.text}"); // Log choice info
                 choices[index].gameObject.SetActive(true);
                 choicesText[index].text = choice.text;
                 index++;
             }
 
-            for(int i = index; i < choices.Length; i++)
+            // Disable remaining unused choice objects
+            for (int i = index; i < choices.Length; i++)
             {
                 choices[i].gameObject.SetActive(false);
-
             }
-            choicesActive = hasActiveChoices;
 
-            //StartCoroutine(SelectFirstChoice());
-
+            choicesActive = currentChoices.Count > 0;
         }
+
         public void MakeChoice(int choiceIndex)
         {
             if (choiceIndex >= 0 && choiceIndex < currentStory.currentChoices.Count)
             {
-                Debug.Log("Choice Index: "+choiceIndex);
+                Debug.Log($"Making choice {choiceIndex}: {currentStory.currentChoices[choiceIndex].text}"); // Debug log
                 currentStory.ChooseChoiceIndex(choiceIndex);
                 choicesActive = false;
                 ContinueStory();
@@ -196,6 +204,7 @@ namespace Dialoguespace
                 Debug.LogError($"Choice index {choiceIndex} is out of range. Choices available: {currentStory.currentChoices.Count}");
             }
         }
+
 
         //private IEnumerator SelectFirstChoice()
         //{
