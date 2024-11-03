@@ -12,7 +12,8 @@ namespace NPCspace
         protected enum AnimationState
         {
             Idle,
-            Running
+            Running,
+            Hurt
         }
 
         protected AnimationState currentState;
@@ -68,9 +69,10 @@ namespace NPCspace
 
         }
 
-        public void SwordDamageable()
+        public virtual void SwordDamageable()
         {
             Debug.Log("SwordDamageable");
+            //PlayAnimation(AnimationState.Hurt);
             //Perform Hit or Death;
             //Death();
         }

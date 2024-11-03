@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using Cysharp.Threading.Tasks;
 
 namespace NPCspace
 {
@@ -11,7 +10,9 @@ namespace NPCspace
     /// 
     public class Bandit : Base_Enemy
     {
+        public enum BanditState  {Idle, Running, Combat, Hurt};
 
+        public BanditState state;
 
         //[SerializeField] private GameObject banditObject;
         private bool runningTowardsPlayer;
@@ -30,6 +31,30 @@ namespace NPCspace
             Base_Enemy.OnDeath -= DeathEvent;
         }
 
+        private void Update()
+        {
+            if(state == BanditState.Idle)
+            {
+                Debug.Log("Idle");
+                PlayAnimation(AnimationState.Idle);
+            }
+            else if(state == BanditState.Running)
+            {
+                Debug.Log("Running");
+                PlayAnimation(AnimationState.Running);
+            }
+            else if(state == BanditState.Hurt)
+            {
+                Debug.Log("Combat");
+                PlayAnimation(AnimationState.Hurt);
+
+            }
+        }
+
+        private void Start()
+        {
+            state = BanditState.Idle;
+        }
         private void DeathEvent()
         {
             //Stop movign the bandit;
@@ -42,30 +67,11 @@ namespace NPCspace
 
                 runningTowardsPlayer = true;
 
-                Debug.Log("Player is here");
                 //Start walking towards Player;
-                //anim.SetTrigger("startWalking");
-                CycleAnimation();
 
                 StartCoroutine(LookTowardsPlayer(player, 10f));
                 StartCoroutine(MoveTowardsPlayer(player));
             }
-        }
-
-        protected override void PlayAnimation(AnimationState state)
-        {
-            // Set the parameter for transitioning;
-            anim.SetInteger("AnimationState", (int)state);
-            currentState = state;
-            
-        }
-
-
-        protected override void InitializeAnimator()
-        {
-            currentState = startingState;
-
-            PlayAnimation(currentState);
         }
         
 
@@ -96,10 +102,9 @@ namespace NPCspace
 
         IEnumerator MoveTowardsPlayer(GameObject player)
         {
+            state = BanditState.Running;
             while (Vector3.Distance(banditGameobject.transform.position, player.transform.position) > 4f)
             {
-                Debug.Log(Vector3.Distance(banditGameobject.transform.position, player.transform.position));
-
                 // Calculate the step to move towards the target
                 float step = speed * Time.deltaTime;
 
@@ -110,12 +115,28 @@ namespace NPCspace
                 yield return null;
             }
             Debug.Log("Bandit reached the player.");
-
+            state = BanditState.Idle;
             //This transitions to Idle now;
             //Make this start Combat;
-            CycleAnimation();
+            //CycleAnimation();
         }
 
+        public override async void SwordDamageable()
+        {
+            base.SwordDamageable();
+            state = BanditState.Hurt;
+            await DelayState();
+        }
+
+        private async UniTask DelayState()
+        {
+            await UniTask.Delay(58);
+            state = BanditState.Idle;
+        }
+        protected override void InitializeAnimator()
+        {
+            Debug.Log("lol");
+        }
     }
 
 }
