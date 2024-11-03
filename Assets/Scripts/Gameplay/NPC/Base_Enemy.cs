@@ -71,7 +71,8 @@ namespace NPCspace
         public void SwordDamageable()
         {
             Debug.Log("SwordDamageable");
-            Death();
+            //Perform Hit or Death;
+            //Death();
         }
     }
 

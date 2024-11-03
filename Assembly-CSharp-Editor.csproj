@@ -62,9 +62,9 @@
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Medieval Environment Pack\Post Processing\Editor\SplatMapImporterEditor.cs" />
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Medieval Environment Pack\Post Processing\Editor\MedievalEnvironmentSceneManagerEditor.cs" />
     <Compile Include="Assets\FolderColor\Editor\ProjectAssetViewerCustomisation.cs" />
-    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\Editor\BasicInkExampleEditor.cs" />
     <Compile Include="Assets\Samples\Toolbar Extender\1.4.2\Scene switcher buttons\Editor\SceneSwitcher.cs" />
     <Compile Include="Assets\Samples\Toolbar Extender\1.4.2\Scene switcher buttons\Editor\SceneSelectionToolbar.cs" />
+    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\Editor\BasicInkExampleEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -790,6 +790,9 @@
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
     </Reference>
+    <Reference Include="ToolbarExtender.Editor">
+      <HintPath>Library\ScriptAssemblies\ToolbarExtender.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -963,9 +966,6 @@
     </Reference>
     <Reference Include="Unity.SysrootPackage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.SysrootPackage.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="ToolbarExtender.Editor">
-      <HintPath>Library\ScriptAssemblies\ToolbarExtender.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

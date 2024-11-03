@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using GameToUI;
+
 
 namespace UI
 {
@@ -15,9 +15,12 @@ namespace UI
         [SerializeField] private Canvas monsterCanvas;
         public Slider slider;
 
+        public Enemy_Level monsterLevelEnum;
+        
+
         private void Start()
         {
-            SetUI(monsterName.text, monsterIcon.sprite, monsterLevel.text);
+            SetUI(monsterName.text, monsterIcon.sprite, monsterLevelEnum.level.ToString());
         }
         private void Update()
         {
