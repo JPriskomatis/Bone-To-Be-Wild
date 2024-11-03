@@ -52,11 +52,8 @@ namespace PlayerSpace
                     case "Bandit":
                         if (distance <= banditRadius)
                         {
-                            Debug.Log("Detected bandit");
-
                             Bandit bandit = hit.GetComponentInParent<Bandit>();
                             bandit.GetComponent<Bandit>().CloseToPlayer(player.transform.gameObject);
-
                         }
                         break;
 

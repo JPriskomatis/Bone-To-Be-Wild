@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace NPCspace
 {
@@ -10,12 +11,14 @@ namespace NPCspace
     /// 
     public class Bandit : Base_Enemy
     {
-        public enum BanditState  {Idle, Running, Combat, Hurt};
+        public enum BanditState { Idle, Running, Combat, Hurt };
 
         public BanditState state;
 
         //[SerializeField] private GameObject banditObject;
         private bool runningTowardsPlayer;
+
+        private GameObject playerToFollow;
 
         [SerializeField]
         AnimationState startingState;
@@ -31,29 +34,67 @@ namespace NPCspace
             Base_Enemy.OnDeath -= DeathEvent;
         }
 
-        private void Update()
+        private async void Update()
         {
-            if(state == BanditState.Idle)
+            if (state == BanditState.Idle)
             {
-                Debug.Log("Idle");
-                PlayAnimation(AnimationState.Idle);
+                IdleState();
             }
-            else if(state == BanditState.Running)
+            else if (state == BanditState.Running)
             {
-                Debug.Log("Running");
-                PlayAnimation(AnimationState.Running);
+
+                RunningState();
             }
-            else if(state == BanditState.Hurt)
+            else if (state == BanditState.Hurt)
             {
-                Debug.Log("Combat");
-                PlayAnimation(AnimationState.Hurt);
+                HurtState();
+            }
+            else if (state == BanditState.Combat)
+            {
+                await CombatStateAsync();
+            }
+        }
+
+        private void IdleState()
+        {
+            PlayAnimation(AnimationState.Idle);
+        }
+
+        private void RunningState()
+        {
+            PlayAnimation(AnimationState.Running);
+
+        }
+        private async Task CombatStateAsync()
+        {
+            if (canAttack)
+            {
+                canAttack = false;
+                PlayAnimation(AnimationState.Combat);
+                await DelayState(144);
+                canAttack = true;
+                if (Vector3.Distance(playerToFollow.transform.position, transform.position) > 5f)
+                {
+                    Debug.Log("Distance greater that 5");
+                    StartCoroutine(MoveTowardsPlayer(playerToFollow));
+                }
+                else
+                {
+                    state = BanditState.Combat;
+                }
 
             }
+        }
+
+        private void HurtState()
+        {
+            PlayAnimation(AnimationState.Hurt);
         }
 
         private void Start()
         {
             state = BanditState.Idle;
+            canAttack = true;
         }
         private void DeathEvent()
         {
@@ -63,7 +104,8 @@ namespace NPCspace
         }
         public override void CloseToPlayer(GameObject player)
         {
-            if (!runningTowardsPlayer){
+            if (!runningTowardsPlayer)
+            {
 
                 runningTowardsPlayer = true;
 
@@ -73,10 +115,11 @@ namespace NPCspace
                 StartCoroutine(MoveTowardsPlayer(player));
             }
         }
-        
+
 
         IEnumerator LookTowardsPlayer(GameObject player, float rotationSpeed)
         {
+            playerToFollow = player;
             // Calculate the direction to the player
             Vector3 relativePos = player.transform.position - banditGameobject.transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(relativePos, Vector3.up);
@@ -115,7 +158,7 @@ namespace NPCspace
                 yield return null;
             }
             Debug.Log("Bandit reached the player.");
-            state = BanditState.Idle;
+            state = BanditState.Combat;
             //This transitions to Idle now;
             //Make this start Combat;
             //CycleAnimation();
@@ -125,12 +168,12 @@ namespace NPCspace
         {
             base.SwordDamageable();
             state = BanditState.Hurt;
-            await DelayState();
+            await DelayState(58);
         }
 
-        private async UniTask DelayState()
+        private async UniTask DelayState(int delay)
         {
-            await UniTask.Delay(58);
+            await UniTask.Delay(delay);
             state = BanditState.Idle;
         }
         protected override void InitializeAnimator()

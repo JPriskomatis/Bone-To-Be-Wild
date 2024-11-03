@@ -13,7 +13,8 @@ namespace NPCspace
         {
             Idle,
             Running,
-            Hurt
+            Hurt,
+            Combat
         }
 
         protected AnimationState currentState;
@@ -22,8 +23,11 @@ namespace NPCspace
         public int health;
         public Animator anim;
 
+        [Header("Enemy Stats")]
         public float speed;
+        public float attackSpeed;
 
+        public bool canAttack;
         public abstract void CloseToPlayer(GameObject player);
         protected abstract void InitializeAnimator();
 
