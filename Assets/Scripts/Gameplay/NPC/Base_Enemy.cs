@@ -12,17 +12,24 @@ namespace NPCspace
         protected enum AnimationState
         {
             Idle,
-            Running
+            Running,
+            Hurt,
+            Combat
         }
 
         protected AnimationState currentState;
 
         public string npcName;
-        public int health;
+        public int maxHealth;
+        public int currentHealth;
+
         public Animator anim;
 
+        [Header("Enemy Stats")]
         public float speed;
+        public float attackSpeed;
 
+        public bool canAttack;
         public abstract void CloseToPlayer(GameObject player);
         protected abstract void InitializeAnimator();
 
@@ -68,10 +75,13 @@ namespace NPCspace
 
         }
 
-        public void SwordDamageable()
+        public virtual void SwordDamageable(int damage)
         {
             Debug.Log("SwordDamageable");
-            Death();
+            currentHealth = currentHealth - damage;
+            //PlayAnimation(AnimationState.Hurt);
+            //Perform Hit or Death;
+            //Death();
         }
     }
 

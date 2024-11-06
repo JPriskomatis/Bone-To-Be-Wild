@@ -47,7 +47,7 @@ namespace NPCspace.goblin
             isShooting = false;
         }
 
-        public void SwordDamageable()
+        public void SwordDamageable(int damage)
         {
             
             isShooting = false;

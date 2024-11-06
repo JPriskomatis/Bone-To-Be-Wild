@@ -22,6 +22,7 @@ namespace WeaponSpace
                 iceDamage.swordTransform = transform;
 
             }
+
         }
 
     }

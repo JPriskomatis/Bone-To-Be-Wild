@@ -1,7 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
+using UI;
 
 namespace NPCspace
 {
@@ -11,10 +12,15 @@ namespace NPCspace
     /// 
     public class Bandit : Base_Enemy
     {
+        
+        public enum BanditState { Idle, Running, Combat, Hurt };
 
+        public BanditState state;
 
         //[SerializeField] private GameObject banditObject;
         private bool runningTowardsPlayer;
+
+        private GameObject playerToFollow;
 
         [SerializeField]
         AnimationState startingState;
@@ -30,6 +36,71 @@ namespace NPCspace
             Base_Enemy.OnDeath -= DeathEvent;
         }
 
+        private async void Update()
+        {
+            if (state == BanditState.Idle)
+            {
+                IdleState();
+            }
+            else if (state == BanditState.Running)
+            {
+
+                RunningState();
+            }
+            else if (state == BanditState.Hurt)
+            {
+                HurtState();
+            }
+            else if (state == BanditState.Combat)
+            {
+                await CombatStateAsync();
+            }
+        }
+
+        private void IdleState()
+        {
+            PlayAnimation(AnimationState.Idle);
+        }
+
+        private void RunningState()
+        {
+            PlayAnimation(AnimationState.Running);
+
+        }
+        private async Task CombatStateAsync()
+        {
+            if (canAttack)
+            {
+                canAttack = false;
+                PlayAnimation(AnimationState.Combat);
+                await DelayState(144);
+                canAttack = true;
+                if (Vector3.Distance(playerToFollow.transform.position, transform.position) > 5f)
+                {
+                    Debug.Log("Distance greater that 5");
+                    StartCoroutine(MoveTowardsPlayer(playerToFollow));
+                }
+                else
+                {
+                    state = BanditState.Combat;
+                }
+
+            }
+        }
+
+        private void HurtState()
+        {
+            PlayAnimation(AnimationState.Hurt);
+
+            //Update UI;
+            GetComponent<Enemy_UI>().UpdateSlider(currentHealth, maxHealth);
+        }
+
+        private void Start()
+        {
+            state = BanditState.Idle;
+            canAttack = true;
+        }
         private void DeathEvent()
         {
             //Stop movign the bandit;
@@ -38,39 +109,22 @@ namespace NPCspace
         }
         public override void CloseToPlayer(GameObject player)
         {
-            if (!runningTowardsPlayer){
+            if (!runningTowardsPlayer)
+            {
 
                 runningTowardsPlayer = true;
 
-                Debug.Log("Player is here");
                 //Start walking towards Player;
-                //anim.SetTrigger("startWalking");
-                CycleAnimation();
 
                 StartCoroutine(LookTowardsPlayer(player, 10f));
                 StartCoroutine(MoveTowardsPlayer(player));
             }
         }
 
-        protected override void PlayAnimation(AnimationState state)
-        {
-            // Set the parameter for transitioning;
-            anim.SetInteger("AnimationState", (int)state);
-            currentState = state;
-            
-        }
-
-
-        protected override void InitializeAnimator()
-        {
-            currentState = startingState;
-
-            PlayAnimation(currentState);
-        }
-        
 
         IEnumerator LookTowardsPlayer(GameObject player, float rotationSpeed)
         {
+            playerToFollow = player;
             // Calculate the direction to the player
             Vector3 relativePos = player.transform.position - banditGameobject.transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(relativePos, Vector3.up);
@@ -96,10 +150,9 @@ namespace NPCspace
 
         IEnumerator MoveTowardsPlayer(GameObject player)
         {
+            state = BanditState.Running;
             while (Vector3.Distance(banditGameobject.transform.position, player.transform.position) > 4f)
             {
-                Debug.Log(Vector3.Distance(banditGameobject.transform.position, player.transform.position));
-
                 // Calculate the step to move towards the target
                 float step = speed * Time.deltaTime;
 
@@ -110,12 +163,28 @@ namespace NPCspace
                 yield return null;
             }
             Debug.Log("Bandit reached the player.");
-
+            state = BanditState.Combat;
             //This transitions to Idle now;
             //Make this start Combat;
-            CycleAnimation();
+            //CycleAnimation();
         }
 
+        public override async void SwordDamageable(int damage)
+        {
+            base.SwordDamageable(damage);
+            state = BanditState.Hurt;
+            await DelayState(58);
+        }
+
+        private async UniTask DelayState(int delay)
+        {
+            await UniTask.Delay(delay);
+            state = BanditState.Idle;
+        }
+        protected override void InitializeAnimator()
+        {
+            Debug.Log("lol");
+        }
     }
 
 }

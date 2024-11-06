@@ -52,9 +52,8 @@ namespace PlayerSpace
                     case "Bandit":
                         if (distance <= banditRadius)
                         {
-                            Bandit bandit = hit.GetComponent<Bandit>();
-                            bandit.GetComponentInChildren<Bandit>().CloseToPlayer(player.transform.gameObject);
-
+                            Bandit bandit = hit.GetComponentInParent<Bandit>();
+                            bandit.GetComponent<Bandit>().CloseToPlayer(player.transform.gameObject);
                         }
                         break;
 

@@ -7,7 +7,7 @@ namespace Damageables
 
     public interface ISwordDamageable
     {
-        void SwordDamageable();
+        void SwordDamageable(int damage);
 
     }
     //TODO:

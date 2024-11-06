@@ -25,7 +25,7 @@ public class TEST_NPC : MonoBehaviour, ISpellDamageable, ISwordDamageable
         anim.SetTrigger("death");
     }
 
-    public void SwordDamageable()
+    public void SwordDamageable(int damage)
     {
         Debug.Log("SwordDamageable");
         Death();

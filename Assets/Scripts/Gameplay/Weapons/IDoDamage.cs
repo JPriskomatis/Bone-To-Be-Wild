@@ -7,7 +7,7 @@ namespace WeaponSpace
     public interface IDoDamage
 
     {
-        void DoDamage(int damage);
+        int DoDamage(int damage);
     }
 
 }

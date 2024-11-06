@@ -6,9 +6,9 @@ namespace WeaponSpace
 {
     public class NormalDamage : IDoDamage
     {
-        public void DoDamage(int damage)
+        public int DoDamage(int damage)
         {
-            Debug.Log("Deal: " + damage);
+            return damage;
         }
     }
 
