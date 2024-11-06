@@ -65,6 +65,26 @@
     <Compile Include="Assets\Samples\Toolbar Extender\1.4.2\Scene switcher buttons\Editor\SceneSwitcher.cs" />
     <Compile Include="Assets\Samples\Toolbar Extender\1.4.2\Scene switcher buttons\Editor\SceneSelectionToolbar.cs" />
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\Editor\BasicInkExampleEditor.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\InfinitySoEditor.cs" />
+    <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\EquipObjectMenu.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\AnimationEventCopier.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\ObjExporterScript.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\InfinityEditorScriptableObject.cs" />
+    <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\PrefabAndObjectManagerEditor.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\SFB_SaveObjectAsMesh.cs" />
+    <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\EquipmentObjectEditor.cs" />
+    <Compile Include="Assets\InfinityPBR\---Game Modules\Audio Clip Combiner\Editor\AudioClipCombiner.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\SFB_LoadWelcome.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\SFB_BlendShapesManagerEditor.cs" />
+    <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\EquipmentSystemStatic.cs" />
+    <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\BlendShapesPresetManagerEditor.cs" />
+    <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\WardrobePrefabManagerEditor.cs" />
+    <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\BlendShapesManagerEditor.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\SFB_AudioSnapshotExporterEditor.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\InfinityPBRManager.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\SFB_DisplayPolycount.cs" />
+    <Compile Include="Assets\InfinityPBR\Editor\InfinityEditor.cs" />
+    <Compile Include="Assets\InfinityPBR\---Game Modules\Audio Clip Combiner\Editor\AudioClipCombinerEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
