@@ -6271,6 +6271,8 @@ MonoBehaviour:
   health: 10
   anim: {fileID: 4205464007683414523}
   speed: 7
+  attackSpeed: 0
+  canAttack: 0
   state: 0
   startingState: 0
   banditGameobject: {fileID: 6982447631451109532}
@@ -9715,6 +9717,11 @@ MonoBehaviour:
   questIcon: {fileID: 0}
   questDescription: {fileID: 0}
   questCurrencyReward: {fileID: 0}
+--- !u!95 &885749326 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5247728385382709690, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
+  m_PrefabInstance: {fileID: 1045128794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &887275424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11354,6 +11361,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5247728385382709690, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247728385382709690, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5247728385390450266, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.012319526
@@ -11361,6 +11376,10 @@ PrefabInstance:
     - target: {fileID: 5247728385390450266, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.004680904
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247728385390450652, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5247728385595999325, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
       propertyPath: m_Cameras.Array.size
@@ -11606,6 +11625,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 092219fc9014cd64286e3d02c1002d31, type: 3}
   m_PrefabInstance: {fileID: 1051968888}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1056659492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5247728386468380037, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
+  m_PrefabInstance: {fileID: 1045128794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1056659499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056659492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08acf00f6cb40614087df668b9c9a2c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 885749326}
 --- !u!1001 &1060040509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25294,6 +25331,8 @@ GameObject:
   - component: {fileID: 6621798409359026018}
   - component: {fileID: 1207678160541819351}
   - component: {fileID: 1749597979777332366}
+  - component: {fileID: 8344807869499387525}
+  - component: {fileID: 8344807869499387526}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -25301,6 +25340,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!135 &8344807869499387525
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344807869499387524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5191686
+  m_Center: {x: 0.13411613, y: 6.285272, z: -0.6473225}
+--- !u!114 &8344807869499387526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344807869499387524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18096864b93e64943a6cadbc25840249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon_damage: 5
 --- !u!1 &8520148914766135515
 GameObject:
   m_ObjectHideFlags: 0

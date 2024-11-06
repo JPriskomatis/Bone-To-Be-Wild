@@ -62,8 +62,8 @@
     <Compile Include="Assets\Scripts\UI\Enemy_UI.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\ItemController.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\BloodSplash.cs" />
-    <Compile Include="Assets\Scripts\UI\Cursor\CursorController.cs" />
     <Compile Include="Assets\Scripts\UI\Enemy_Level.cs" />
+    <Compile Include="Assets\Scripts\UI\Cursor\CursorController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\UI\UI.asmdef" />
