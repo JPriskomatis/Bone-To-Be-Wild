@@ -126,7 +126,7 @@ namespace combat
 
             AudioManager.instance.PlaySFX("SwordSwing", 0.3f);
             lastAttackTime = Time.time; // Update last attack time
-            EnableWeaponAttack();
+            StartCoroutine(EnableWeaponAttack());
         }
 
         private void CheckForNearbyPeasants()
@@ -142,8 +142,9 @@ namespace combat
 
         }
 
-        private void EnableWeaponAttack()
+        private IEnumerator EnableWeaponAttack()
         {
+            yield return new WaitForSeconds(0.2f);
             if (boxCollider != null)
             {
                 boxCollider.enabled = true;
