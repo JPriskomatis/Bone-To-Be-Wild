@@ -6268,7 +6268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: Grug
-  health: 10
+  maxHealth: 30
+  currentHealth: 30
   anim: {fileID: 4205464007683414523}
   speed: 7
   attackSpeed: 0
@@ -11360,6 +11361,10 @@ PrefabInstance:
     - target: {fileID: 5247728385349441002, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247728385359026692, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
+      propertyPath: damage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5247728385382709690, guid: 0ad3e4f76c4f49144a2b803e581efb1c, type: 3}
       propertyPath: m_WarningMessage
@@ -24940,7 +24945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2dd40cb609e104ebd9d433686b8e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  level: 0
 --- !u!4 &6982447632182319220
 Transform:
   m_ObjectHideFlags: 0

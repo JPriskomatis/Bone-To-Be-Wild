@@ -20,15 +20,15 @@ namespace WeaponSpace
             playerLuck = GetComponentInParent<AbilityScores>().mainStats.fate;
         }
 
-        public void TryDoAttack()
+        public int TryDoAttack()
         {
             if (CriticalStrike())
             {
-                damageType?.DoDamage(damage*2 + playerStrength);
+                return (int)(damageType?.DoDamage(damage*2 + playerStrength));
             }
             else
             {
-                damageType?.DoDamage(damage + playerStrength);
+                return (int) damageType?.DoDamage(damage + playerStrength);
 
             }
         }

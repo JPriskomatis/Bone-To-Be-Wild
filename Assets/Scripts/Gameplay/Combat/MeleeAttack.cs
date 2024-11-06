@@ -39,6 +39,8 @@ namespace combat
 
         [SerializeField] private float detectionRadius;
         [SerializeField] LayerMask civilianLayerMask;
+
+        int currentDamage;
         private void Start()
         {
             boxCollider = GetComponent<BoxCollider>();
@@ -48,21 +50,6 @@ namespace combat
             initialSwordPosition = swordTransform.localPosition;
             initialSwordRotation = swordTransform.localRotation;
         }
-
-        //private void OnEnable()
-        //{
-        //    GameStatController.OnPause += PauseGame;
-        //}
-
-        //private void OnDisable()
-        //{
-        //    GameStatController.OnPause -= PauseGame;
-        //}
-
-        //public void PauseGame(bool isPaused)
-        //{
-        //    paused = isPaused;
-        //}
         private void Update()
         {
             if(!(GameStatController.Instance.currentState == GameStatController.CurrentGameState.Paused))
@@ -135,7 +122,7 @@ namespace combat
             
 
             anim.SetTrigger("attack");
-            weapon_base.TryDoAttack();
+            currentDamage = weapon_base.TryDoAttack();
 
             AudioManager.instance.PlaySFX("SwordSwing", 0.3f);
             lastAttackTime = Time.time; // Update last attack time
@@ -180,7 +167,8 @@ namespace combat
                 ISwordDamageable swordDamageable = other.GetComponentInParent<ISwordDamageable>();
                 if (swordDamageable != null)
                 {
-                    swordDamageable.SwordDamageable();
+                    Debug.Log(currentDamage);
+                    swordDamageable.SwordDamageable(currentDamage);
                 }
             }
         }

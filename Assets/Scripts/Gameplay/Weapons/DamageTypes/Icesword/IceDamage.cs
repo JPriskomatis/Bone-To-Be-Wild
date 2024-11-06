@@ -10,9 +10,11 @@ namespace WeaponSpace
     {
         public GameObject particlePrefab;
         public Transform swordTransform;
-        public void DoDamage(int damage)
+        public int DoDamage(int damage)
         {
             IceParticle();
+
+            return damage;
         }
         public async void IceParticle()
         {

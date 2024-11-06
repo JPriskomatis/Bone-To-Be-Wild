@@ -1,4 +1,4 @@
-using TMPro;
+ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using GameToUI;
@@ -42,6 +42,7 @@ namespace UI
             slider.maxValue = maxHealth;
             slider.value = currentHealth;
         }
+
 
 
     }

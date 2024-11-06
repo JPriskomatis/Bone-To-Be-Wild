@@ -20,7 +20,9 @@ namespace NPCspace
         protected AnimationState currentState;
 
         public string npcName;
-        public int health;
+        public int maxHealth;
+        public int currentHealth;
+
         public Animator anim;
 
         [Header("Enemy Stats")]
@@ -73,9 +75,10 @@ namespace NPCspace
 
         }
 
-        public virtual void SwordDamageable()
+        public virtual void SwordDamageable(int damage)
         {
             Debug.Log("SwordDamageable");
+            currentHealth = currentHealth - damage;
             //PlayAnimation(AnimationState.Hurt);
             //Perform Hit or Death;
             //Death();

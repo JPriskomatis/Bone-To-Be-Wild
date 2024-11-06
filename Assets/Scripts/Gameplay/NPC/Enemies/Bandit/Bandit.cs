@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
+using UI;
 
 namespace NPCspace
 {
@@ -11,6 +12,7 @@ namespace NPCspace
     /// 
     public class Bandit : Base_Enemy
     {
+        
         public enum BanditState { Idle, Running, Combat, Hurt };
 
         public BanditState state;
@@ -89,6 +91,9 @@ namespace NPCspace
         private void HurtState()
         {
             PlayAnimation(AnimationState.Hurt);
+
+            //Update UI;
+            GetComponent<Enemy_UI>().UpdateSlider(currentHealth, maxHealth);
         }
 
         private void Start()
@@ -164,9 +169,9 @@ namespace NPCspace
             //CycleAnimation();
         }
 
-        public override async void SwordDamageable()
+        public override async void SwordDamageable(int damage)
         {
-            base.SwordDamageable();
+            base.SwordDamageable(damage);
             state = BanditState.Hurt;
             await DelayState(58);
         }
