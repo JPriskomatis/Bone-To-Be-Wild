@@ -171,6 +171,7 @@ namespace combat
                     Debug.Log(currentDamage);
                     swordDamageable.SwordDamageable(currentDamage);
                 }
+                DisableWeaponAttack();
             }
         }
     }

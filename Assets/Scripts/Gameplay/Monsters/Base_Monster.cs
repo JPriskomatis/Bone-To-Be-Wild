@@ -1,9 +1,12 @@
+using combat;
+using Damageables;
 using System.Collections;
+using UI;
 using UnityEngine;
 
 namespace monster
 {
-    public class Base_Monster : MonoBehaviour
+    public class Base_Monster : MonoBehaviour, ISwordDamageable, ISpellDamageable, ICombat
     {
         [Header("Monster Stats")]
         public int maxHealth;
@@ -18,7 +21,6 @@ namespace monster
         private bool combatRange;
         protected bool inAttack;
 
-
         //States;
         public enum MonsterState { Idle, Combat, Running, Hurt, Death};
         [Header("State")]
@@ -29,6 +31,7 @@ namespace monster
         private void Start()
         {
             currentState = startingState;
+            currentHealth = maxHealth;
         }
 
         // TESTING PURPOSES ONLY
@@ -82,6 +85,12 @@ namespace monster
         {
             //PerformAttack
             Debug.Log("Hurt");
+            //Update the health slider;
+            GetComponent<Enemy_UI>().UpdateSlider(currentHealth, maxHealth);
+            if(currentHealth <= 0)
+            {
+                TransitionToState(MonsterState.Death);
+            }
         }
         protected virtual void IdleState()
         {
@@ -108,22 +117,46 @@ namespace monster
             //PerformAttack
             Debug.Log("Death");
         }
+
+        public void SpellDamageable()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SwordDamageable(int damage)
+        {
+            Debug.Log("Got Hit");
+            //Enter Hurt state;
+            TakeDamage(damage);
+            TransitionToState(MonsterState.Hurt);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            currentHealth -= damage;
+        }
+
         #endregion
 
         #region Environement Associated Functinos
         public void CloseToPlayer(GameObject player)
         {
-            Debug.Log("Player is within range");
+            if(currentState!= MonsterState.Death){
+                Debug.Log("Player is within range");
 
-            StartCoroutine(LookTowardsPlayer(player, 10f));
-            if (!inAttack)
-            {
-                StartCoroutine(MoveTowardsPlayer(player));
+                StartCoroutine(LookTowardsPlayer(player, 10f));
+                if (!inAttack)
+                {
+                    StartCoroutine(MoveTowardsPlayer(player));
+                }
             }
+            
+
         }
 
         IEnumerator LookTowardsPlayer(GameObject player, float rotationSpeed)
         {
+            
             playerToFollow = player;
             // Calculate the direction to the player
             Vector3 relativePos = player.transform.position - transform.position;
@@ -174,6 +207,8 @@ namespace monster
             
 
         }
+
+
         #endregion
 
         #region Helper Functions
@@ -192,6 +227,23 @@ namespace monster
 
         //    anim.SetFloat("Locomotion", 0f);
         //}
+        protected void DisableAllComponents()
+        {
+            Component[] components = this.GetComponents<Component>();
+
+            foreach (Component component in components)
+            {
+                // Check if the component is not an Animator or Transform
+                if (!(component is Animator) && !(component is Transform))
+                {
+                    // Disable the component if it has an 'enabled' property
+                    if (component is Behaviour behaviourComponent)
+                    {
+                        behaviourComponent.enabled = false;
+                    }
+                }
+            }
+        }
         #endregion
     }
 

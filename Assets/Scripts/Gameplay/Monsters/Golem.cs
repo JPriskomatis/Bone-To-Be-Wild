@@ -1,3 +1,4 @@
+using combat;
 using Damageables;
 using System.Collections;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace monster
 {
-    public class Golem : Base_Monster, ISwordDamageable, ISpellDamageable
+    public class Golem : Base_Monster
     {
 
         protected override void ExitState(MonsterState newState)
@@ -18,24 +19,26 @@ namespace monster
                 StartCoroutine(SmoothlyTransitionLocomotionToZero(0.3f));
             }
         }
-        public void SpellDamageable()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void SwordDamageable(int damage)
-        {
-            Debug.Log("Got Hit");
-            //Enter Hurt state;
-            TransitionToState(MonsterState.Hurt);
-        }
+       
 
         protected override void HurtState()
         {
             base.HurtState();
-            anim.SetTrigger("GotHit");
-        }
+            if (currentHealth > 1)
+            {
+                anim.SetTrigger("GotHit");
 
+            }
+
+
+        }
+        protected override void DeathState()
+        {
+            base.DeathState();
+            Debug.Log("Second death");
+            anim.SetTrigger("Death2");
+            DisableAllComponents();
+        }
         protected override void CombatState()
         {
             base.CombatState();
@@ -66,6 +69,8 @@ namespace monster
 
             anim.SetFloat("Locomotion", 0f);
         }
+
+
         #endregion
     }
 
