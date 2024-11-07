@@ -16,6 +16,7 @@ namespace monster
 
         private GameObject playerToFollow;
         private bool combatRange;
+        protected bool inAttack;
 
 
         //States;
@@ -97,6 +98,7 @@ namespace monster
         {
             //PerformAttack
             Debug.Log("Combat");
+            
         }
         #endregion
 
@@ -114,7 +116,10 @@ namespace monster
             Debug.Log("Player is within range");
 
             StartCoroutine(LookTowardsPlayer(player, 10f));
-            StartCoroutine(MoveTowardsPlayer(player));
+            if (!inAttack)
+            {
+                StartCoroutine(MoveTowardsPlayer(player));
+            }
         }
 
         IEnumerator LookTowardsPlayer(GameObject player, float rotationSpeed)
@@ -147,8 +152,9 @@ namespace monster
         {
             
             
-            while (Vector3.Distance(transform.position, player.transform.position) > 4f)
+            while (Vector3.Distance(transform.position, player.transform.position) > 3f && !inAttack)
             {
+                
                 TransitionToState(MonsterState.Running);
                 // Calculate the step to move towards the target
                 float step = moveSpeed * Time.deltaTime;
@@ -159,7 +165,10 @@ namespace monster
                 // Wait until the next frame before continuing the loop
                 yield return null;
             }
+            
             Debug.Log("Monster reached the player.");
+
+            
             TransitionToState(MonsterState.Combat);
 
             

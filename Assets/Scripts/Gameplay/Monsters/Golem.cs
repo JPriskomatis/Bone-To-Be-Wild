@@ -1,12 +1,14 @@
+using Damageables;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 
 namespace monster
 {
-    public class Golem : Base_Monster
+    public class Golem : Base_Monster, ISwordDamageable, ISpellDamageable
     {
+
         protected override void ExitState(MonsterState newState)
         {
             base.ExitState(newState);
@@ -16,7 +18,39 @@ namespace monster
                 StartCoroutine(SmoothlyTransitionLocomotionToZero(0.3f));
             }
         }
+        public void SpellDamageable()
+        {
+            throw new System.NotImplementedException();
+        }
 
+        public void SwordDamageable(int damage)
+        {
+            Debug.Log("Got Hit");
+            //Enter Hurt state;
+            TransitionToState(MonsterState.Hurt);
+        }
+
+        protected override void HurtState()
+        {
+            base.HurtState();
+            anim.SetTrigger("GotHit");
+        }
+
+        protected override void CombatState()
+        {
+            base.CombatState();
+            anim.SetTrigger("Attack4");
+            inAttack = true;
+            StartCoroutine(AttackCoolDown());
+        }
+
+        #region Helper Class
+
+        private IEnumerator AttackCoolDown()
+        {
+            yield return new WaitForSeconds(3.0f);
+            inAttack = false;
+        }
         private IEnumerator SmoothlyTransitionLocomotionToZero(float duration)
         {
             float elapsed = 0f;
@@ -32,6 +66,7 @@ namespace monster
 
             anim.SetFloat("Locomotion", 0f);
         }
+        #endregion
     }
 
 }
