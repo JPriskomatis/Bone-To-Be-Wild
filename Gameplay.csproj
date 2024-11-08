@@ -68,12 +68,14 @@
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\Bandit.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_TavernCivilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Icesword\IceDamage.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Monsters\Golem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Barman.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\Player_Combat.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\Player_Manager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Guard.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Monsters\Base_Monster.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\ICombat.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\Base_Ability.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\DetectEnemies.cs" />
@@ -97,8 +99,6 @@
     <Compile Include="Assets\Scripts\Gameplay\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Town_Civilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\TransitionToChase.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Monsters\Golem.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Monsters\Base_Monster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />

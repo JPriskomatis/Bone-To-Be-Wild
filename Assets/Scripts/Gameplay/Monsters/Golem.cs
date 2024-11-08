@@ -37,6 +37,7 @@ namespace monster
             base.DeathState();
             Debug.Log("Second death");
             anim.SetTrigger("Death2");
+            anim.SetFloat("Locomotion", 0f);
             DisableAllComponents();
         }
         protected override void CombatState()
@@ -44,6 +45,7 @@ namespace monster
             base.CombatState();
             anim.SetTrigger("Attack4");
             inAttack = true;
+            SetAttackCollider();
             StartCoroutine(AttackCoolDown());
         }
 
@@ -53,6 +55,10 @@ namespace monster
         {
             yield return new WaitForSeconds(3.0f);
             inAttack = false;
+            if (attackCollider.enabled == true)
+            {
+                SetAttackCollider();
+            }
         }
         private IEnumerator SmoothlyTransitionLocomotionToZero(float duration)
         {

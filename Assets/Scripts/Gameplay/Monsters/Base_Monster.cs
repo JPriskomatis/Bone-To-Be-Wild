@@ -16,6 +16,7 @@ namespace monster
 
         [Header("Components")]
         public Animator anim;
+        public SphereCollider attackCollider;
 
         private GameObject playerToFollow;
         private bool combatRange;
@@ -185,7 +186,7 @@ namespace monster
         {
             
             
-            while (Vector3.Distance(transform.position, player.transform.position) > 3f && !inAttack)
+            while (Vector3.Distance(transform.position, player.transform.position) > 5f && !inAttack)
             {
                 
                 TransitionToState(MonsterState.Running);
@@ -212,21 +213,21 @@ namespace monster
         #endregion
 
         #region Helper Functions
-        //private IEnumerator SmoothlyTransitionLocomotionToZero(float duration)
-        //{
-        //    float elapsed = 0f;
-        //    float initialLocomotion = anim.GetFloat("Locomotion");
+        //We call this function when the monster attacks;
+        protected void SetAttackCollider()
+        {
+            attackCollider.enabled = !attackCollider.enabled;
+        }
 
-        //    while (elapsed < duration)
-        //    {
-        //        elapsed += Time.deltaTime;
-        //        float newLocomotionValue = Mathf.Lerp(initialLocomotion, 0f, elapsed / duration);
-        //        anim.SetFloat("Locomotion", newLocomotionValue);
-        //        yield return null;
-        //    }
-
-        //    anim.SetFloat("Locomotion", 0f);
-        //}
+        protected void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("Player got damaged");
+                other.GetComponent<ICombat>().TakeDamage(damage);
+                SetAttackCollider();
+            }
+        }
         protected void DisableAllComponents()
         {
             Component[] components = this.GetComponents<Component>();
@@ -239,7 +240,8 @@ namespace monster
                     // Disable the component if it has an 'enabled' property
                     if (component is Behaviour behaviourComponent)
                     {
-                        behaviourComponent.enabled = false;
+                        //behaviourComponent.enabled = false;
+                        Destroy(behaviourComponent);
                     }
                 }
             }
