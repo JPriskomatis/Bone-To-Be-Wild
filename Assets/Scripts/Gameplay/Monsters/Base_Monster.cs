@@ -1,9 +1,12 @@
+using combat;
+using Damageables;
 using System.Collections;
+using UI;
 using UnityEngine;
 
 namespace monster
 {
-    public class Base_Monster : MonoBehaviour
+    public class Base_Monster : MonoBehaviour, ISwordDamageable, ISpellDamageable, ICombat
     {
         [Header("Monster Stats")]
         public int maxHealth;
@@ -13,10 +16,11 @@ namespace monster
 
         [Header("Components")]
         public Animator anim;
+        public SphereCollider attackCollider;
 
         private GameObject playerToFollow;
         private bool combatRange;
-
+        protected bool inAttack;
 
         //States;
         public enum MonsterState { Idle, Combat, Running, Hurt, Death};
@@ -28,6 +32,7 @@ namespace monster
         private void Start()
         {
             currentState = startingState;
+            currentHealth = maxHealth;
         }
 
         // TESTING PURPOSES ONLY
@@ -81,6 +86,12 @@ namespace monster
         {
             //PerformAttack
             Debug.Log("Hurt");
+            //Update the health slider;
+            GetComponent<Enemy_UI>().UpdateSlider(currentHealth, maxHealth);
+            if(currentHealth <= 0)
+            {
+                TransitionToState(MonsterState.Death);
+            }
         }
         protected virtual void IdleState()
         {
@@ -97,6 +108,7 @@ namespace monster
         {
             //PerformAttack
             Debug.Log("Combat");
+            
         }
         #endregion
 
@@ -106,19 +118,46 @@ namespace monster
             //PerformAttack
             Debug.Log("Death");
         }
+
+        public void SpellDamageable()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SwordDamageable(int damage)
+        {
+            Debug.Log("Got Hit");
+            //Enter Hurt state;
+            TakeDamage(damage);
+            TransitionToState(MonsterState.Hurt);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            currentHealth -= damage;
+        }
+
         #endregion
 
         #region Environement Associated Functinos
         public void CloseToPlayer(GameObject player)
         {
-            Debug.Log("Player is within range");
+            if(currentState!= MonsterState.Death){
+                Debug.Log("Player is within range");
 
-            StartCoroutine(LookTowardsPlayer(player, 10f));
-            StartCoroutine(MoveTowardsPlayer(player));
+                StartCoroutine(LookTowardsPlayer(player, 10f));
+                if (!inAttack)
+                {
+                    StartCoroutine(MoveTowardsPlayer(player));
+                }
+            }
+            
+
         }
 
         IEnumerator LookTowardsPlayer(GameObject player, float rotationSpeed)
         {
+            
             playerToFollow = player;
             // Calculate the direction to the player
             Vector3 relativePos = player.transform.position - transform.position;
@@ -147,8 +186,9 @@ namespace monster
         {
             
             
-            while (Vector3.Distance(transform.position, player.transform.position) > 4f)
+            while (Vector3.Distance(transform.position, player.transform.position) > 5f && !inAttack)
             {
+                
                 TransitionToState(MonsterState.Running);
                 // Calculate the step to move towards the target
                 float step = moveSpeed * Time.deltaTime;
@@ -159,30 +199,53 @@ namespace monster
                 // Wait until the next frame before continuing the loop
                 yield return null;
             }
+            
             Debug.Log("Monster reached the player.");
+
+            
             TransitionToState(MonsterState.Combat);
 
             
 
         }
+
+
         #endregion
 
         #region Helper Functions
-        //private IEnumerator SmoothlyTransitionLocomotionToZero(float duration)
-        //{
-        //    float elapsed = 0f;
-        //    float initialLocomotion = anim.GetFloat("Locomotion");
+        //We call this function when the monster attacks;
+        protected void SetAttackCollider()
+        {
+            attackCollider.enabled = !attackCollider.enabled;
+        }
 
-        //    while (elapsed < duration)
-        //    {
-        //        elapsed += Time.deltaTime;
-        //        float newLocomotionValue = Mathf.Lerp(initialLocomotion, 0f, elapsed / duration);
-        //        anim.SetFloat("Locomotion", newLocomotionValue);
-        //        yield return null;
-        //    }
+        protected void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("Player got damaged");
+                other.GetComponent<ICombat>().TakeDamage(damage);
+                SetAttackCollider();
+            }
+        }
+        protected void DisableAllComponents()
+        {
+            Component[] components = this.GetComponents<Component>();
 
-        //    anim.SetFloat("Locomotion", 0f);
-        //}
+            foreach (Component component in components)
+            {
+                // Check if the component is not an Animator or Transform
+                if (!(component is Animator) && !(component is Transform))
+                {
+                    // Disable the component if it has an 'enabled' property
+                    if (component is Behaviour behaviourComponent)
+                    {
+                        //behaviourComponent.enabled = false;
+                        Destroy(behaviourComponent);
+                    }
+                }
+            }
+        }
         #endregion
     }
 

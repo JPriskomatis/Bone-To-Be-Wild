@@ -1,12 +1,15 @@
+using combat;
+using Damageables;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 
 namespace monster
 {
     public class Golem : Base_Monster
     {
+
         protected override void ExitState(MonsterState newState)
         {
             base.ExitState(newState);
@@ -16,7 +19,47 @@ namespace monster
                 StartCoroutine(SmoothlyTransitionLocomotionToZero(0.3f));
             }
         }
+       
 
+        protected override void HurtState()
+        {
+            base.HurtState();
+            if (currentHealth > 1)
+            {
+                anim.SetTrigger("GotHit");
+
+            }
+
+
+        }
+        protected override void DeathState()
+        {
+            base.DeathState();
+            Debug.Log("Second death");
+            anim.SetTrigger("Death2");
+            anim.SetFloat("Locomotion", 0f);
+            DisableAllComponents();
+        }
+        protected override void CombatState()
+        {
+            base.CombatState();
+            anim.SetTrigger("Attack4");
+            inAttack = true;
+            SetAttackCollider();
+            StartCoroutine(AttackCoolDown());
+        }
+
+        #region Helper Class
+
+        private IEnumerator AttackCoolDown()
+        {
+            yield return new WaitForSeconds(3.0f);
+            inAttack = false;
+            if (attackCollider.enabled == true)
+            {
+                SetAttackCollider();
+            }
+        }
         private IEnumerator SmoothlyTransitionLocomotionToZero(float duration)
         {
             float elapsed = 0f;
@@ -32,6 +75,9 @@ namespace monster
 
             anim.SetFloat("Locomotion", 0f);
         }
+
+
+        #endregion
     }
 
 }
