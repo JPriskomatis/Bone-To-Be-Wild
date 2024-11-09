@@ -25,6 +25,7 @@ namespace Buildings
         public Vector3 offset = Vector3.zero; // Optional offset to adjust the final position
 
         private bool isReading;
+        [SerializeField] private GameObject spotLight;
 
         void Start()
         {
@@ -63,6 +64,9 @@ namespace Buildings
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
             playerMovement.enabled = false;
 
+            //Enable Light;
+            spotLight.SetActive(true);
+
             float elapsedTime = 0f;
             Vector3 initialPosition = Camera.main.transform.position;
             Quaternion initialRotation = Camera.main.transform.rotation;
@@ -96,6 +100,9 @@ namespace Buildings
 
         private IEnumerator MoveCameraBack(Vector3 originalLocalPosition, float originalFOV, float duration)
         {
+            //Disable Light;
+            spotLight.SetActive(false);
+
             float elapsedTime = 0f;
 
             // Get the current world position, rotation, and FOV of the camera
