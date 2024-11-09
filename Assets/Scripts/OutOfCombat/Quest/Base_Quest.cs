@@ -17,6 +17,12 @@ namespace questSpace
         public void SetUI()
         {
             QuestManager.Instance.SetUIQuest(this);
+            SetCurrentQuest();
+        }
+
+        public void SetCurrentQuest()
+        {
+            QuestManager.Instance.SetCurrentQuest(this);
         }
 
     }

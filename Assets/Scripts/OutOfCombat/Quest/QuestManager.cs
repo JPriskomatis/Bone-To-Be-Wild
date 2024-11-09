@@ -15,16 +15,25 @@ namespace questSpace
         public static event Action<bool> OnQuestOpen;
 
         public static QuestManager Instance;
-        public Base_Quest currentQuest;
+        
+        public List<Base_Quest> activeQuests = new List<Base_Quest>();
 
 
-        //UI Elements;
+        [Header("UI Elements")]
         [SerializeField] private GameObject questPanel;
         [SerializeField] private TextMeshProUGUI questTitle;
         [SerializeField] private Image questIcon;
         [SerializeField] private TextMeshProUGUI questDescription;
         [SerializeField] private TextMeshProUGUI questCurrencyReward;
         //[SerializeField] private TextMeshProUGUI questReward;
+
+        [Header("Quest Log UI")]
+        [SerializeField] private TextMeshProUGUI questNameLog;
+        [SerializeField] private TextMeshProUGUI questDescriptionLog;
+        [SerializeField] private GameObject questNamePrefab;
+        [SerializeField] private GameObject questNameParent;
+
+
 
 
         private void Awake()
@@ -41,17 +50,21 @@ namespace questSpace
 
         public void SetCurrentQuest(Base_Quest quest)
         {
-            currentQuest = quest;
+            Debug.Log(quest.questName);
+            activeQuests.Add(quest);
+            
         }
 
-        public Base_Quest GetCurrentQuest()
+        public void SetQuestToQuestLog()
         {
-            return currentQuest;
+            questNameLog.text = activeQuests[0].questName;
+            questDescriptionLog.text = activeQuests[0].questDescription;
         }
+
 
         public void RemoveCurrentQuest()
         {
-            currentQuest = null;
+            activeQuests.RemoveAt(activeQuests.Count-1);
         }
 
         public void SetUIQuest(Base_Quest quest)
@@ -89,6 +102,19 @@ namespace questSpace
             Cursor.lockState = CursorLockMode.Locked;
 
             GameStatController.Instance.SetState(GameStatController.CurrentGameState.Resume);
+        }
+
+        public void TEST_SpawnQuestName()
+        {
+            var questNameUI = Instantiate(questNamePrefab);
+            questNameUI.transform.parent = questNameParent.transform;
+        }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                TEST_SpawnQuestName();
+            }
         }
     }
 
