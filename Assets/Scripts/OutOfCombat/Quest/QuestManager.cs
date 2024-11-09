@@ -49,13 +49,41 @@ namespace questSpace
             }
         }
 
+        //Reset Mouse visibility;
+        public void ResetMouse()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
+            GameStatController.Instance.SetState(GameStatController.CurrentGameState.Resume);
+        }
+
         //Open and Close Quest Tab;
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
-                questLog.SetActive(!questLog.activeInHierarchy);
+                if(questLog.activeInHierarchy)
+                {
+                    DisableQuestLogPanel();
+                }
+                else
+                {
+                    ActivateQuestLogPanel();
+                }
             }
+        }
+        public void ActivateQuestLogPanel()
+        {
+            questLog.SetActive(true);
+            Cursor.visible = true;
+            GameStatController.Instance.SetState(GameStatController.CurrentGameState.Paused);
+
+        }
+        public void DisableQuestLogPanel()
+        {
+            questLog.SetActive(false);
+            Cursor.visible = false;
+            GameStatController.Instance.SetState(GameStatController.CurrentGameState.Resume);
         }
         public void SetCurrentQuest(Base_Quest quest)
         {
