@@ -14,7 +14,7 @@ namespace Dialoguespace
         protected override Dictionary<string, System.Action> GetExternalFunctions()
         {
             // Initialize the delegate with the OpenGate method
-            openGateDelegate = OpenGate;
+                 = OpenGate;
 
             var externalFunctions = new Dictionary<string, System.Action>();
 
