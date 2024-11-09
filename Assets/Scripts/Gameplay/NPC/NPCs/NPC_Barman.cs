@@ -30,12 +30,6 @@ public class NPC_Barman : HasDialogue
 
         return externalFunctions;
     }
-    void Update()
-    {
-        Debug.Log("Mouse Visible: " + Cursor.visible);
-        Debug.Log("Mouse Lock State: " + Cursor.lockState);
-    }
-
     private void ActivateQuestPanel()
     {
         GetComponent<Quest_Sample>().SetUI();

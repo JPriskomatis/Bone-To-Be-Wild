@@ -94,7 +94,15 @@ namespace questSpace
 
         public void SetQuestToQuestLog()
         {
-            questNameLog.text = activeQuests[0].questName;
+            
+            InstantiateQuestName();
+
+            //Find the last questName Prefab;
+            Transform lastQuestNamePrefab = questNameParent.transform.GetChild(questNameParent.transform.childCount - 1);
+
+            TextMeshProUGUI lastQuestName =  lastQuestNamePrefab.Find("NameOfQuest").GetComponent<TextMeshProUGUI>();
+            lastQuestName.text = activeQuests[activeQuests.Count-1].questName;
+            //questNameLog.text = activeQuests[0].questName;
             //questDescriptionLog.text = activeQuests[0].questDescription;
         }
 
@@ -158,8 +166,9 @@ namespace questSpace
             GameStatController.Instance.SetState(GameStatController.CurrentGameState.Resume);
         }
 
-        public void TEST_SpawnQuestName()
+        public void InstantiateQuestName()
         {
+            //This creates a new questName placeholder;
             var questNameUI = Instantiate(questNamePrefab);
             questNameUI.transform.parent = questNameParent.transform;
         }
