@@ -28,6 +28,7 @@ namespace questSpace
         //[SerializeField] private TextMeshProUGUI questReward;
 
         [Header("Quest Log UI")]
+        [SerializeField] private GameObject questLog;
         [SerializeField] private TextMeshProUGUI questNameLog;
         [SerializeField] private TextMeshProUGUI questDescriptionLog;
         [SerializeField] private GameObject questNamePrefab;
@@ -48,6 +49,14 @@ namespace questSpace
             }
         }
 
+        //Open and Close Quest Tab;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                questLog.SetActive(!questLog.activeInHierarchy);
+            }
+        }
         public void SetCurrentQuest(Base_Quest quest)
         {
             Debug.Log(quest.questName);
@@ -58,7 +67,24 @@ namespace questSpace
         public void SetQuestToQuestLog()
         {
             questNameLog.text = activeQuests[0].questName;
-            questDescriptionLog.text = activeQuests[0].questDescription;
+            //questDescriptionLog.text = activeQuests[0].questDescription;
+        }
+
+        public void RevealQuestDescription(string nameOfQuest)
+        {
+            //Find the Correct quest;
+            for(int i=0; i<activeQuests.Count; i++)
+            {
+                Debug.Log("Active Quest Name: " + activeQuests[i].questName);
+                Debug.Log("Name Of Quest " + nameOfQuest);
+                if (nameOfQuest.Equals(activeQuests[i].questName)){
+                    //Reveal the quest description;
+                    questDescriptionLog.text = activeQuests[i].questDescription;
+                    Debug.Log("Yes");
+                }
+            }
+
+
         }
 
 
@@ -108,13 +134,6 @@ namespace questSpace
         {
             var questNameUI = Instantiate(questNamePrefab);
             questNameUI.transform.parent = questNameParent.transform;
-        }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                TEST_SpawnQuestName();
-            }
         }
     }
 
