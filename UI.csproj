@@ -60,12 +60,12 @@
     <Compile Include="Assets\Scripts\UI\Inventory\ItemSO.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\UI\Enemy_UI.cs" />
+    <Compile Include="Assets\Scripts\UI\GameMenu\HoverColorText.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\ItemController.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\BloodSplash.cs" />
+    <Compile Include="Assets\Scripts\UI\GameMenu\GameMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Enemy_Level.cs" />
     <Compile Include="Assets\Scripts\UI\Cursor\CursorController.cs" />
-    <Compile Include="Assets\Scripts\UI\GameMenu\GameMenu.cs" />
-    <Compile Include="Assets\Scripts\UI\GameMenu\HoverColorText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\UI\UI.asmdef" />
@@ -791,6 +791,10 @@
     <ProjectReference Include="DOTween.Modules.csproj">
       <Project>{BD6344A2-F4BD-5490-1A5C-CCF1422722EC}</Project>
       <Name>DOTween.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="UtilsAssembly.csproj">
+      <Project>{762C5A3F-C07F-9533-DDEF-79DF44099B0B}</Project>
+      <Name>UtilsAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

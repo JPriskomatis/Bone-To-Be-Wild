@@ -28,6 +28,11 @@ namespace GameMnu
             logo.GetComponent<CanvasGroup>().DOFade(0, 2f);
         }
 
+        public void EnterGame()
+        {
+            SceneTransition.Instance.GoToScene(ConstantValues.GAME_SCENE);
+        }
+
         
     }
 

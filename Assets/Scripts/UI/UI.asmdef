@@ -5,7 +5,7 @@
         "Unity.TextMeshPro",
         "gameStateSpace",
         "DOTween.Modules",
-        "GameToUI"
+        "UtilsAssembly"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
