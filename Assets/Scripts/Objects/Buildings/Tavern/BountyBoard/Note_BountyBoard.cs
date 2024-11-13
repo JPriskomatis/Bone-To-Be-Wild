@@ -36,7 +36,7 @@ namespace Buildings
 
         public void Interact()
         {
-            if (Input.GetKeyDown(KeyCode.E) && !isReading)
+            if (Input.GetKeyDown(KeyCode.F) && !isReading)
             {
                
                 Vector3 targetPosition = transform.position + transform.forward * distance + offset;
@@ -44,7 +44,7 @@ namespace Buildings
                 
 
             }
-            if (Input.GetKeyDown(KeyCode.E) && isReading)
+            if (Input.GetKeyDown(KeyCode.F) && isReading)
             {
                 
                 Vector3 originalLocalPosition = new Vector3(0f, 0f, 0f);
@@ -57,8 +57,23 @@ namespace Buildings
             } 
         }
 
+        private void RemovePlayerFromCamera()
+        {
+            int layerToRemove = LayerMask.NameToLayer(ConstantValues.PLAYER_MASK);
+            int currentCullingMask = mainCamera.cullingMask;
+            mainCamera.cullingMask = currentCullingMask & ~(1 << layerToRemove);
+        }
+
+        private void AddPlayerFromCamera()
+        {
+            int layerToRemove = LayerMask.NameToLayer(ConstantValues.PLAYER_MASK);
+            int currentCullingMask = mainCamera.cullingMask;
+            mainCamera.cullingMask = currentCullingMask | (1 << layerToRemove);
+        }
         private IEnumerator MoveCamera(Vector3 targetPosition, float duration)
         {
+            //Make player invisible;
+            RemovePlayerFromCamera();
             TextAppear.RemoveText();
             // Lock player movement
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
@@ -100,6 +115,7 @@ namespace Buildings
 
         private IEnumerator MoveCameraBack(Vector3 originalLocalPosition, float originalFOV, float duration)
         {
+            AddPlayerFromCamera();
             //Disable Light;
             spotLight.SetActive(false);
 

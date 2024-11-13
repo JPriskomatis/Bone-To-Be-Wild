@@ -8,6 +8,7 @@
         "InkEditor",
         "UI",
         "gameStateSpace",
+        "UtilsAssembly",
         "UniTask"
     ],
     "includePlatforms": [],
