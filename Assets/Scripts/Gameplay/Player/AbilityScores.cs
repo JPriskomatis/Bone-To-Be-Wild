@@ -30,9 +30,14 @@ namespace PlayerSpace
         }
         public int level;
 
-
+        public class SecondaryStats
+        {
+            public int currentXP;
+            public int LevelUpXP;
+        }
 
         public MainStats mainStats;    //We create an instance of the stats so we can view them on the inspector;
+        public SecondaryStats secondaryStats;
 
         //We use an enum so we can "select" which mainStat to modify;
         public enum StatType
@@ -43,7 +48,9 @@ namespace PlayerSpace
             Fate,
             Charisma,
             CurrentHP,
-            MaxHP
+            MaxHP,
+            currentXP,
+            LevelUpXP,
         }
 
         private void Awake()
@@ -69,24 +76,12 @@ namespace PlayerSpace
             //Set our Health;
             mainStats.currentHP = mainStats.maxHP;
             level = 1;
+
+            //XP:
+            secondaryStats.currentXP = 0;
+            secondaryStats.LevelUpXP = 100;
         }
 
-        //ONLY FOR TESTING PURPOSES;
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                //IncreaseLevel();
-                DecreaseStat(AbilityScores.StatType.CurrentHP, 5);
-
-            }
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                IncreaseStat(AbilityScores.StatType.CurrentHP, 5);
-
-            }
-        }
 
         //If we want to increase a player's stat
         //In order to use it, we call it as:
@@ -120,6 +115,18 @@ namespace PlayerSpace
                     break;
                 case StatType.MaxHP:
                     mainStats.maxHP += increaseAmount;
+                    break;
+
+                case StatType.currentXP:
+                    if (secondaryStats.currentXP + increaseAmount > secondaryStats.LevelUpXP)
+                    {
+                        //Invoke the level up event;
+                        increaseAmount = secondaryStats.LevelUpXP- secondaryStats.currentXP;
+                        secondaryStats.currentXP = increaseAmount;
+                        secondaryStats.LevelUpXP = secondaryStats.LevelUpXP * 2;
+                    }
+                    //Here invoke the Level up event
+                    secondaryStats.currentXP+= increaseAmount;
                     break;
                 default:
                     Debug.LogError("Unknown stat type.");
