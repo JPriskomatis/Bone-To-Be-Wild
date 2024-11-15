@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\UI\GameMenu\GameMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Enemy_Level.cs" />
     <Compile Include="Assets\Scripts\UI\Cursor\CursorController.cs" />
+    <Compile Include="Assets\Scripts\UI\DraggableWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\UI\UI.asmdef" />
