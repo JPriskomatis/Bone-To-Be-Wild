@@ -10,14 +10,19 @@ namespace Dialoguespace
     {
         [Header("Dialogue Elements")]
         [SerializeField] private Sprite potrait;
-        [SerializeField] protected TextAsset inkJSON;
+        [SerializeField] protected TextAsset[] inkJSON;
+        protected int selectedInkJSON;
 
+        private void Start()
+        {
+            selectedInkJSON = 0;
+        }
         public virtual void Interact()
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 var externalFunctionsDictionary = GetExternalFunctions();
-                DialogueManager.GetInstance().EnterDialogueMode(potrait, inkJSON, externalFunctionsDictionary);
+                DialogueManager.GetInstance().EnterDialogueMode(potrait, inkJSON[selectedInkJSON], externalFunctionsDictionary);
             }
         }
 

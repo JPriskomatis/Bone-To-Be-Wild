@@ -7,12 +7,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC_Barman : HasDialogue
 {
     public static event Action OnGazeQuestActivation;
     private Action GazeQuestDelegate;
 
+    [SerializeField] private Button acceptButton;
+
+    private void Start()
+    {
+        acceptButton.onClick.AddListener(delegate() { NextDialogue(); });
+    }
+    public void NextDialogue()
+    {
+        Debug.Log("Clicked accept!");
+        selectedInkJSON++;
+    }
     protected override Dictionary<string, Action> GetExternalFunctions()
     {
         GazeQuestDelegate = ActivateQuestPanel;
@@ -34,7 +46,9 @@ public class NPC_Barman : HasDialogue
     {
         GetComponent<Quest_Sample>().SetUI();
         StartCoroutine(ShowMouse());
+
     }
+
     IEnumerator ShowMouse()
     {
         yield return new WaitForSeconds(1f);

@@ -33,6 +33,8 @@ namespace PlayerSpace
 
         }
 
+        //TODO:
+        //Is there better than having an OnTriggerEnter?
         private void DetectNearbyEnemies()
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, Mathf.Max(goblinRadius, banditRadius), enemyLayer);
