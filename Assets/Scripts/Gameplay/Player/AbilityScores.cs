@@ -2,6 +2,7 @@ using log4net.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UI;
 using UnityEngine;
 
@@ -15,6 +16,13 @@ namespace PlayerSpace
         public static event Action<int> OnCurrentHealthIncrease;
         public static event Action<int> OnCurrentHealthDecrease;
         public static event Action OnLevelUp;
+
+        [Header("Stats UI")]
+        [SerializeField] private TextMeshProUGUI powerTxt;
+        [SerializeField] private TextMeshProUGUI vigorTxt;
+        [SerializeField] private TextMeshProUGUI knowledgeTxt;
+        [SerializeField] private TextMeshProUGUI fateTxt;
+        [SerializeField] private TextMeshProUGUI charismaTxt;
 
         [System.Serializable]   //We make them serializable so that we can modify them through inspector;
         public class MainStats
@@ -64,6 +72,9 @@ namespace PlayerSpace
                 Instance = this;
             }
 
+            mainStats = new MainStats();
+            secondaryStats = new SecondaryStats();
+
             //Initialize all ability scores to 10;
             mainStats.power = 10;
             mainStats.vigor = 10;
@@ -80,6 +91,10 @@ namespace PlayerSpace
             //XP:
             secondaryStats.currentXP = 0;
             secondaryStats.LevelUpXP = 100;
+        }
+        private void Start()
+        {
+            SetUI();
         }
 
 
@@ -132,6 +147,7 @@ namespace PlayerSpace
                     Debug.LogError("Unknown stat type.");
                     break;
             }
+            SetUI();
         }
 
         public void DecreaseStat(StatType statType, int decreaseAmount)
@@ -169,6 +185,7 @@ namespace PlayerSpace
                     Debug.LogError("Unknown stat type.");
                     break;
             }
+            SetUI();
         }
 
         public void IncreaseLevel()
@@ -186,6 +203,15 @@ namespace PlayerSpace
         {
             float healthPercentage = (currentHealth / maxHealth) * 100f;
             BloodSplash.instance.SetBloodScreen(healthPercentage);
+        }
+
+        public void SetUI()
+        {
+            powerTxt.text = mainStats.power.ToString();
+            vigorTxt.text = mainStats.vigor.ToString();
+            knowledgeTxt.text = mainStats.knowledge.ToString();
+            fateTxt.text = mainStats.fate.ToString();
+            charismaTxt.text = mainStats.charisma.ToString();
         }
     }
 
