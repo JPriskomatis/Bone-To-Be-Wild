@@ -10,6 +10,7 @@ namespace GameMnu
     public class GameMenu : MonoBehaviour
     {
         [SerializeField] private GameObject ejetaLogo;
+        [SerializeField] private GameObject intro;
 
 
         public void Start()
@@ -25,7 +26,8 @@ namespace GameMnu
 
             yield return new WaitForSeconds(3f);
 
-            logo.GetComponent<CanvasGroup>().DOFade(0, 2f);
+            logo.GetComponent<CanvasGroup>().DOFade(0, 2f).OnComplete(() => intro.GetComponent<CanvasGroup>().DOFade(0, 2f)
+            .OnComplete(() => intro.SetActive(false)));
         }
 
         public void EnterGame()

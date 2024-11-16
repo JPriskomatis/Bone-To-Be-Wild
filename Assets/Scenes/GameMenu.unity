@@ -2561,6 +2561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ejetaLogo: {fileID: 1540511367}
+  intro: {fileID: 504778065}
 --- !u!4 &425527320
 Transform:
   m_ObjectHideFlags: 0
@@ -3024,13 +3025,14 @@ GameObject:
   - component: {fileID: 504778066}
   - component: {fileID: 504778068}
   - component: {fileID: 504778067}
+  - component: {fileID: 504778069}
   m_Layer: 5
   m_Name: IntroText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &504778066
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3045,7 +3047,7 @@ RectTransform:
   m_Children:
   - {fileID: 1540511368}
   m_Father: {fileID: 806245641}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3090,6 +3092,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504778065}
   m_CullTransparentMesh: 1
+--- !u!225 &504778069
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504778065}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &513169651
 GameObject:
   m_ObjectHideFlags: 0
@@ -4146,9 +4160,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 504778066}
   - {fileID: 1711265471}
   - {fileID: 1193875681}
+  - {fileID: 504778066}
   - {fileID: 1872338150}
   - {fileID: 973392201}
   m_Father: {fileID: 0}
@@ -6086,7 +6100,7 @@ RectTransform:
   - {fileID: 473067576}
   - {fileID: 1482919017}
   m_Father: {fileID: 806245641}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8365,7 +8379,7 @@ RectTransform:
   m_Children:
   - {fileID: 1789982942}
   m_Father: {fileID: 806245641}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
