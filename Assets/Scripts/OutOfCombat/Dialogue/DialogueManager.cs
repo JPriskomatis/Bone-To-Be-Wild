@@ -38,7 +38,7 @@ namespace Dialoguespace
                 // Set the current instance if none exists
                 instance = this;
                 // Optionally, set this instance to not be destroyed on load
-                // DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(gameObject);
             }
             else if (instance != this)
             {

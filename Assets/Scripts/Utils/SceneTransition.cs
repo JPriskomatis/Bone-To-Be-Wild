@@ -10,7 +10,10 @@ public class SceneTransition : Singleton<SceneTransition>
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private Slider loadingBarFill;
 
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     public void GoToScene(string sceneName)
     {
         StartCoroutine(LoadScene(sceneName));
@@ -18,14 +21,14 @@ public class SceneTransition : Singleton<SceneTransition>
 
     IEnumerator LoadScene(string sceneName)
     {
-        loadingScreen.SetActive(true);
+        //loadingScreen.SetActive(true);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         
         while (!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress/0.9f);
-            loadingBarFill.value = progressValue;
+            //loadingBarFill.value = progressValue;
             yield return null;
         }
     }

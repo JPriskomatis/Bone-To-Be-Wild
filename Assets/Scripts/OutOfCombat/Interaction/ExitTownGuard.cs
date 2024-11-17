@@ -6,7 +6,6 @@ namespace Dialoguespace
 {
     public class ExitTownGuard : HasDialogue
     {
-        public static event Action OnLeaveTown;
 
         // Declare a delegate for OpenGate
         private Action leaveTownDelegate;
@@ -34,7 +33,7 @@ namespace Dialoguespace
         private void LeaveTown()
         {
             Debug.Log("ExitTownGuard function called.");
-            OnLeaveTown?.Invoke();
+            SceneTransition.Instance.GoToScene(ConstantValues.CAVE_SCENE);
         }
     }
 }
