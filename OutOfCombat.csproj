@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\OutOfCombat\Dialogue\DialogueManager.cs" />
+    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\ExitTownGuard.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Enemies\ISpellDamageable.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\Quests\Quest_Sample.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\PickUpWeapon.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Gate_Guard_Dialogue.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Interaction\Interactor.cs" />
     <Compile Include="Assets\Scripts\OutOfCombat\Quest\Base_Quest.cs" />
-    <Compile Include="Assets\Scripts\OutOfCombat\Interaction\ExitTownGuard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\OutOfCombat\OutOfCombat.asmdef" />

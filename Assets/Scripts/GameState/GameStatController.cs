@@ -13,9 +13,13 @@ namespace gameStateSpace
 
         public static event Action<bool> OnPause;
 
+        [Header("Menu Settings")]
+        [SerializeField] private GameObject menuPanel;
+
         public enum CurrentGameState
         {
             Paused,
+            CompletePause,
             Resume
         }
         private void Start()
@@ -35,7 +39,22 @@ namespace gameStateSpace
                 DontDestroyOnLoad(this.gameObject);  // Ensures the GameStatController persists across scenes
             }
         }
-
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (menuPanel.activeInHierarchy)
+                {
+                    SetState(CurrentGameState.Resume);
+                    menuPanel.SetActive(false);
+                }
+                else
+                {
+                    SetState(CurrentGameState.CompletePause);
+                    menuPanel.SetActive(true);
+                }
+            }
+        }
         //Helper method
         public void SetToResumeState()
         {
@@ -48,9 +67,14 @@ namespace gameStateSpace
             {
                 //OnPause?.Invoke(true);
                 PauseGame();
-            } else
+            }
+            else if (state == CurrentGameState.CompletePause)
             {
                 //OnPause?.Invoke(false);
+                PauseGame(true);
+            }
+            else
+            {
                 ResumeGame();
             }
                 
@@ -61,16 +85,22 @@ namespace gameStateSpace
             return currentState;
         }
 
-        public void PauseGame()
+        public void PauseGame(bool completePause=false)
         {
             OnPause?.Invoke(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             //SetState(CurrentGameState.Paused);
+            if (completePause)
+            {
+                Time.timeScale = 0;
+            }
+            
         }
 
         public void ResumeGame()
         {
+            Time.timeScale = 1;
             OnPause?.Invoke(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

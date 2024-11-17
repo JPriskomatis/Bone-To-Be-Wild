@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\UI\TextAppear.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\ItemSO.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\UI\StatInfoPoint.cs" />
     <Compile Include="Assets\Scripts\UI\Enemy_UI.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableWindow.cs" />
     <Compile Include="Assets\Scripts\UI\GameMenu\HoverColorText.cs" />
@@ -67,7 +68,6 @@
     <Compile Include="Assets\Scripts\UI\GameMenu\GameMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Enemy_Level.cs" />
     <Compile Include="Assets\Scripts\UI\Cursor\CursorController.cs" />
-    <Compile Include="Assets\Scripts\UI\StatInfoPoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\UI\UI.asmdef" />
