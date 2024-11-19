@@ -171,6 +171,7 @@ namespace questSpace
             //This creates a new questName placeholder;
             var questNameUI = Instantiate(questNamePrefab);
             questNameUI.transform.parent = questNameParent.transform;
+            questNameUI.transform.localScale = Vector3.one;
         }
     }
 

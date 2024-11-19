@@ -13,13 +13,16 @@ namespace Dialoguespace
         [SerializeField] protected TextAsset[] inkJSON;
         protected int selectedInkJSON;
 
+        //Activate when we want the NPC to be able to interact with the player;
+        public bool canTalk;
+
         private void Start()
         {
             selectedInkJSON = 0;
         }
         public virtual void Interact()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && canTalk)
             {
                 var externalFunctionsDictionary = GetExternalFunctions();
                 DialogueManager.GetInstance().EnterDialogueMode(potrait, inkJSON[selectedInkJSON], externalFunctionsDictionary);
@@ -33,7 +36,10 @@ namespace Dialoguespace
 
         public void OnInteractEnter()
         {
-            TextAppear.SetText("Talk");
+            if (canTalk)
+            {
+                TextAppear.SetText("Talk");
+            }
         }
 
         public void OnInteractExit()

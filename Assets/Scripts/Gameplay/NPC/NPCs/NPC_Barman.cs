@@ -12,18 +12,27 @@ using UnityEngine.UI;
 public class NPC_Barman : HasDialogue
 {
     public static event Action OnGazeQuestActivation;
+    public static event Action OnEnableBenjamin;
     private Action GazeQuestDelegate;
+    
 
     [SerializeField] private Button acceptButton;
 
     private void Start()
     {
         acceptButton.onClick.AddListener(delegate() { NextDialogue(); });
+        acceptButton.onClick.AddListener(delegate() {  EnableBenjaminDialogue(); });
     }
     public void NextDialogue()
     {
         Debug.Log("Clicked accept!");
         selectedInkJSON++;
+    }
+
+    public void EnableBenjaminDialogue()
+    {
+        Debug.Log("Invoked benjamin");
+        OnEnableBenjamin?.Invoke();
     }
     protected override Dictionary<string, Action> GetExternalFunctions()
     {
