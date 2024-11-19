@@ -20,11 +20,20 @@ namespace UI
         public GameObject InventoryItem;
 
         [SerializeField] private GameObject renderTextureCam;
+        [Header("Relics UI")]
+        [SerializeField] private TextMeshProUGUI relicsUI;
+        private int relics;
 
         private void Awake()
         {
             Instance = this;
         }
+        private void Start()
+        {
+            relics = 10;
+            SetUI();
+        }
+        
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.I))
@@ -35,8 +44,33 @@ namespace UI
                 inventory.SetActive(true);
 
             }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                IncreaseRelics(5);
+            }
         }
 
+        public void SetUI()
+        {
+            relicsUI.text = relics.ToString();
+        }
+
+        public void IncreaseRelics(int amount)
+        {
+            relics += amount;
+            SetUI();
+        }
+
+        public void DecreaseRelics(int amount)
+        {
+            
+            relics -= amount;
+            if(relics < 0)
+            {
+                relics = 0;
+            }
+            SetUI();
+        }
         //Adds an Item to our list of items;
         public void Add(ItemSO item)
         {
