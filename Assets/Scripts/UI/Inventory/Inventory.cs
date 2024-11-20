@@ -44,10 +44,7 @@ namespace UI
                 inventory.SetActive(true);
 
             }
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                IncreaseRelics(5);
-            }
+
         }
 
         public void SetUI()

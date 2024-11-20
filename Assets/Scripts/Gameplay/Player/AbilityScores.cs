@@ -23,6 +23,8 @@ namespace PlayerSpace
         [SerializeField] private TextMeshProUGUI knowledgeTxt;
         [SerializeField] private TextMeshProUGUI fateTxt;
         [SerializeField] private TextMeshProUGUI charismaTxt;
+        [SerializeField] private TextMeshProUGUI currentXPTxt;
+        [SerializeField] private TextMeshProUGUI levelXPTxt;
 
         [System.Serializable]   //We make them serializable so that we can modify them through inspector;
         public class MainStats
@@ -37,7 +39,7 @@ namespace PlayerSpace
             public int charisma;
         }
         public int level;
-
+        [System.Serializable]
         public class SecondaryStats
         {
             public int currentXP;
@@ -188,10 +190,34 @@ namespace PlayerSpace
             SetUI();
         }
 
+
         public void IncreaseLevel()
         {
             level++;
+            secondaryStats.currentXP = secondaryStats.currentXP - secondaryStats.LevelUpXP;
+            secondaryStats.LevelUpXP = secondaryStats.LevelUpXP * 2;
+
+            mainStats.maxHP += 5;
+            mainStats.currentHP += 5;
             OnLevelUp?.Invoke();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                GainXP(25);
+            }
+        }
+        public void GainXP(int amount)
+        {
+            secondaryStats.currentXP += amount;
+            if(secondaryStats.currentXP >= secondaryStats.LevelUpXP)
+            {
+                //Level up;
+                IncreaseLevel();
+            }
+            SetUI();
         }
 
         public void TakeDamage(int damageTaken)
@@ -212,7 +238,10 @@ namespace PlayerSpace
             knowledgeTxt.text = mainStats.knowledge.ToString();
             fateTxt.text = mainStats.fate.ToString();
             charismaTxt.text = mainStats.charisma.ToString();
+            currentXPTxt.text = secondaryStats.currentXP.ToString()+"/ ";
+            levelXPTxt.text = secondaryStats.LevelUpXP.ToString();
         }
     }
+
 
 }
