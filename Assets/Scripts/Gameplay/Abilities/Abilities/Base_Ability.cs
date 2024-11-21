@@ -8,6 +8,9 @@ namespace AbilitySpace
 {
     public abstract class Base_Ability : MonoBehaviour
     {
+        
+        [SerializeField] protected Sprite abilityIcon;
+        public Image currentAbilityIcon;
         protected void UpdateAbilityUI(Image abilityIcon, bool isAvailable, float alphaValue, GameObject cooldownTimer, float cooldownValue)
         {
             cooldownTimer.SetActive(true);

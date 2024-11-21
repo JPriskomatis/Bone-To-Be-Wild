@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace AbilitySpace
@@ -14,6 +15,9 @@ namespace AbilitySpace
         void Deactivate();
         float Cooldown { get; }
         bool IsAvailable();
+
+        Sprite GetImage();
+        void SetAbilityIcon(Image icon);
     }
 
 }

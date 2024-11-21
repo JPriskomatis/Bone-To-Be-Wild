@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UI;
+using UnityEngine.UI;
 
 namespace AbilitySpace
 {
@@ -19,7 +21,17 @@ namespace AbilitySpace
         //List of our keycodes for abilities;
         [SerializeField] private List<KeyCode> abilityKeys = new List<KeyCode> { KeyCode.Q, KeyCode.E };
 
+        [SerializeField] private List<GameObject> go_abilityIcons = new List<GameObject>();
 
+        private Dictionary<KeyCode, GameObject> abilityIcons = new Dictionary<KeyCode, GameObject>();
+
+        private void Start()
+        {
+            for (int i = 0; i < abilityKeys.Count; i++)
+            {
+                abilityIcons[abilityKeys[i]] = go_abilityIcons[i];
+            }
+        }
 
         private void Update()
         {
@@ -43,10 +55,29 @@ namespace AbilitySpace
                     
                     abilities.Add(ability);
                     Debug.Log($"Ability added: {ability.GetType().Name} assigned to key {abilityKeys[abilities.Count - 1]}");
+
+                    //We want to add the ability to the correct UI gameobject now;
+
+                    KeyCode assignedKey = abilityKeys[abilities.Count - 1];
+
+                    if (abilityIcons.TryGetValue(assignedKey, out GameObject abilityUIObject))
+                    {
+                        //Activate the corresponding GameObject;
+                        abilityUIObject.SetActive(true);
+                        Image icon = abilityUIObject.GetComponent<Image>();
+
+                        icon.sprite = ability.GetImage();
+                        ability.SetAbilityIcon(icon);
+
+                        Debug.Log($"Activated UI GameObject for {assignedKey}: {abilityUIObject.name}");
+                    }
+
                 }
 
             }
         }
+
+
 
         public void RemoveAbility(IABility ability)
         {

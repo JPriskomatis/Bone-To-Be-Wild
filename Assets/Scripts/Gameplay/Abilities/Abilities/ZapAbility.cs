@@ -29,8 +29,7 @@ namespace AbilitySpace
 
         private GameObject enemyToTrack;
 
-        //UI
-        [SerializeField] private Image abilityIcon;
+        
         [SerializeField] private GameObject cooldownTimer;
 
 
@@ -41,12 +40,12 @@ namespace AbilitySpace
         private void Start()
         {
             playerCamera = Camera.main;
-            abilityIcon.gameObject.SetActive(true);
+            
         }
 
         public void ActivateIcon()
         {
-            abilityIcon.gameObject.SetActive(true);
+            //abilityIcon.gameObject.SetActive(true);
         }
 
         public void Activate()
@@ -92,7 +91,7 @@ namespace AbilitySpace
             while (remainingCooldown > 0)
             {
                 //Update the UI every frame from our abstract class method;
-                UpdateAbilityUI(abilityIcon, false, 0.05f, cooldownTimer, remainingCooldown);
+                UpdateAbilityUI(currentAbilityIcon, false, 0.05f, cooldownTimer, remainingCooldown);
 
                 //Wait for the next frame
                 yield return null;
@@ -103,7 +102,7 @@ namespace AbilitySpace
 
             //Ensure cooldown is fully complete
             remainingCooldown = 0f;
-            UpdateAbilityUI(abilityIcon, true, 1f, cooldownTimer, remainingCooldown);
+            UpdateAbilityUI(currentAbilityIcon, true, 1f, cooldownTimer, remainingCooldown);
             cooldownTimer.SetActive(false);
 
             isAvailable = true; // Make the ability available again
@@ -150,6 +149,16 @@ namespace AbilitySpace
             }
 
             return null;
+        }
+
+        public Sprite GetImage()
+        {
+            return abilityIcon;
+        }
+
+        public void SetAbilityIcon(Image icon)
+        {
+            currentAbilityIcon = icon;
         }
     }
 
