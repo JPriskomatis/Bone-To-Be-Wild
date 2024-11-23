@@ -14,6 +14,8 @@ namespace WeaponSpace
         public int playerStrength;
         public int playerLuck;
 
+        private int extraDamageAbility;
+
         private void Start()
         {
             playerStrength = GetComponentInParent<AbilityScores>().mainStats.power;
@@ -22,15 +24,28 @@ namespace WeaponSpace
 
         public int TryDoAttack()
         {
+            int damageResult;
+
             if (CriticalStrike())
             {
-                return (int)(damageType?.DoDamage(damage*2 + playerStrength));
+                damageResult = (int)(damageType?.DoDamage(damage * 2 + playerStrength));
+                Debug.Log(damageResult);
             }
             else
             {
-                return (int) damageType?.DoDamage(damage + playerStrength);
-
+                damageResult = (int)(damageType?.DoDamage(damage + playerStrength + extraDamageAbility));
+                Debug.Log(damageResult);
             }
+
+            //Reset extra damage from ability;
+            extraDamageAbility = 0;
+
+            return damageResult;
+        }
+
+        public void AbilityAttack(int extraDamage = 0)
+        {
+            extraDamageAbility = extraDamage;
         }
 
         public bool CriticalStrike()

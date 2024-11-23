@@ -1,3 +1,4 @@
+using AbilitySpace;
 using Audio;
 using Damageables;
 using Dialoguespace;
@@ -35,6 +36,8 @@ namespace combat
         private Quaternion initialSwordRotation;
 
         private bool paused;
+
+        private IABility currentAbility;
 
 
         [SerializeField] private float detectionRadius;
@@ -115,6 +118,10 @@ namespace combat
             sheathedSword = true;
         }
 
+        public void SetCurrentAbility(IABility ability)
+        {
+            currentAbility = ability;
+        }
         private void Attack()
         {
             //Check if peasants are nearby
@@ -157,6 +164,12 @@ namespace combat
         {
             boxCollider.enabled = false;
             meleeWeaponTrail.Emit = false;
+            
+            if(currentAbility != null)
+            {
+                currentAbility.Deactivate();
+            }
+            currentAbility = null;
         }
 
         private void OnTriggerEnter(Collider other)
