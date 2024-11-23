@@ -18,6 +18,7 @@ namespace AbilitySpace
 
         Sprite GetImage();
         void SetAbilityIcon(Image icon);
+        void SetCooldownIcon(GameObject go_cooldown);
     }
 
 }

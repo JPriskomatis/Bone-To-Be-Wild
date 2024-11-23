@@ -11,6 +11,7 @@ namespace AbilitySpace
         
         [SerializeField] protected Sprite abilityIcon;
         public Image currentAbilityIcon;
+        public GameObject currentCooldownIcon;
         protected void UpdateAbilityUI(Image abilityIcon, bool isAvailable, float alphaValue, GameObject cooldownTimer, float cooldownValue)
         {
             cooldownTimer.SetActive(true);

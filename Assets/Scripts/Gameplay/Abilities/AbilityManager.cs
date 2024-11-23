@@ -57,7 +57,6 @@ namespace AbilitySpace
                     Debug.Log($"Ability added: {ability.GetType().Name} assigned to key {abilityKeys[abilities.Count - 1]}");
 
                     //We want to add the ability to the correct UI gameobject now;
-
                     KeyCode assignedKey = abilityKeys[abilities.Count - 1];
 
                     if (abilityIcons.TryGetValue(assignedKey, out GameObject abilityUIObject))
@@ -70,6 +69,15 @@ namespace AbilitySpace
                         ability.SetAbilityIcon(icon);
 
                         Debug.Log($"Activated UI GameObject for {assignedKey}: {abilityUIObject.name}");
+
+                        //Add the correct cooldownTime gameobject;
+
+                        Debug.Log(abilityUIObject.transform.GetChild(1).gameObject.name);
+                        ability.SetCooldownIcon(abilityUIObject.transform.GetChild(1).gameObject);
+                        
+
+
+
                     }
 
                 }

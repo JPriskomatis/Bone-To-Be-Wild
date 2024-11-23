@@ -160,6 +160,12 @@ namespace AbilitySpace
         {
             currentAbilityIcon = icon;
         }
+
+        public void SetCooldownIcon(GameObject go_cooldown)
+        {
+            currentCooldownIcon = go_cooldown;
+            cooldownTimer = go_cooldown;
+        }
     }
 
 }
