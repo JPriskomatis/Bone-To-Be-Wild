@@ -97,11 +97,11 @@
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Tavern_Civilain.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_ArenaGuard.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityLibrary.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\FlamingStrike.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\Weapon_base.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Town_Civilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\TransitionToChase.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\FlamingStrike.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />

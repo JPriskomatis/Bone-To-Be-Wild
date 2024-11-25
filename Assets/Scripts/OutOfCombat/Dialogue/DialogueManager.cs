@@ -138,10 +138,10 @@ namespace Dialoguespace
 
 
 
-        private IEnumerator ExitDialogueMode()
+        public IEnumerator ExitDialogueMode()
         {
             yield return new WaitForSeconds(0.2f);
-
+            Debug.Log("terminate");
             dialogueIsPlaying = false;
             dialogueCanvas.SetActive(false);
             dialogueText.text = "";

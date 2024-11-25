@@ -1,4 +1,7 @@
+using Codice.Client.BaseCommands;
+using gameStateSpace;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +12,8 @@ namespace Dialoguespace
 
         // Declare a delegate for OpenGate
         private Action leaveTownDelegate;
+        [Header("Map UI")]
+        [SerializeField] private GameObject map;
 
         protected override Dictionary<string, System.Action> GetExternalFunctions()
         {
@@ -33,7 +38,22 @@ namespace Dialoguespace
         private void LeaveTown()
         {
             Debug.Log("ExitTownGuard function called.");
-            SceneTransition.Instance.GoToScene(ConstantValues.CAVE_SCENE);
+            
+            //Exit the dialogue;
+            StartCoroutine(DialogueManager.GetInstance().ExitDialogueMode());
+
+            //Open the Map;
+            StartCoroutine(OpenMap());
+            
+            
+            //SceneTransition.Instance.GoToScene(ConstantValues.CAVE_SCENE);
+        }
+        IEnumerator OpenMap()
+        {
+            yield return new WaitForSeconds(0.3f);
+            
+            MapState.Instance.SetState(MapState.StateOfMap.Open);
+            
         }
     }
 }
