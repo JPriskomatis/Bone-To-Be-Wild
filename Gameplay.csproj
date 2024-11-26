@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Blacksmith.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Benjamin.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Civilain.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Wizard.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemy.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_NPC.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\ZapAbility.cs" />
