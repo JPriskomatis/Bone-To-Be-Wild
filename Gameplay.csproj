@@ -66,10 +66,13 @@
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Enemy.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AcquireAbility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\Bandit.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemSO.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_TavernCivilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Icesword\IceDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Monsters\Golem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Barman.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\PickUpWeapon.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\Player_Combat.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerMovement.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Civ_Dialogue.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\MeleeAttack.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Goblin\Goblin.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Normal\NormalDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Enemy_Level.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\Bandit_Weapon.cs" />
@@ -103,6 +107,8 @@
     <Compile Include="Assets\Scripts\Gameplay\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Town_Civilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\TransitionToChase.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\PickUpItem.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\PotionSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />

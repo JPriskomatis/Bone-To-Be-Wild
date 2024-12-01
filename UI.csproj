@@ -57,14 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\TextAppear.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\ItemSO.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\UI\StatInfoPoint.cs" />
     <Compile Include="Assets\Scripts\UI\Enemy_UI.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableWindow.cs" />
     <Compile Include="Assets\Scripts\UI\Map\MapState.cs" />
     <Compile Include="Assets\Scripts\UI\GameMenu\HoverColorText.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\ItemController.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\BloodSplash.cs" />
     <Compile Include="Assets\Scripts\UI\Map\InfoPoint.cs" />
     <Compile Include="Assets\Scripts\UI\GameMenu\GameMenu.cs" />
