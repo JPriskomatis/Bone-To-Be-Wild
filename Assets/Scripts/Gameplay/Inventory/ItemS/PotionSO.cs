@@ -4,7 +4,7 @@ using UnityEngine;
 using AbilitySpace;
 using PlayerSpace;
 
-namespace UI
+namespace InventorySpace
 {
     [CreateAssetMenu(fileName = "New Potion", menuName = "Items/Create New Potion")]
     public class PotionSO : ItemSO

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace UI
+namespace InventorySpace
 {
     public class Inventory : MonoBehaviour
     {

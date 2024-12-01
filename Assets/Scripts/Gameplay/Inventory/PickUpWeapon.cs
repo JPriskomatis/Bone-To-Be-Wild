@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
-namespace Interaction
+namespace InventorySpace
 {
-    public class PickUpWeapon : MonoBehaviour, IInteractable
+    public class PickUpWeapon : MonoBehaviour
     {
 
         [SerializeField] private GameObject weapon;
 
         [SerializeField] private GameObject weaponHolder;
+
+        private void Start()
+        {
+            weaponHolder = GameObject.FindGameObjectWithTag("WeapoHold");
+        }
 
         private GameObject CheckForActiveWeapon()
         {
@@ -23,13 +28,20 @@ namespace Interaction
             }
             return null;
         }
-        private void WeaponPickUp()
+        public void WeaponPickUp()
         {
-            //We add the weapon to our inventory;
-            Inventory.Instance.Add(GetComponent<ItemController>().item);
-            Inventory.Instance.ListItems();
+            weaponHolder = GameObject.FindGameObjectWithTag("WeaponHold");
+            if(weaponHolder == null)
+            {
+                Debug.Log("Weapon holder null");
+            }
+            else
+            {
+                Debug.Log("Weapont holder NOT null");
+            }
 
             GameObject activeWeapo = CheckForActiveWeapon();
+            weapon = weaponHolder.transform.GetChild(0).gameObject;
             if(activeWeapo != null)
             {
                 activeWeapo.SetActive(false);
@@ -40,25 +52,6 @@ namespace Interaction
                 weapon.SetActive(true);
             }
 
-        }
-
-        public void Interact()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                WeaponPickUp();
-                Destroy(gameObject);
-            }
-        }
-
-        public void OnInteractEnter()
-        {
-            TextAppear.SetText("Interact");
-        }
-
-        public void OnInteractExit()
-        {
-            TextAppear.SetText("End of Interaction");
         }
     }
 
