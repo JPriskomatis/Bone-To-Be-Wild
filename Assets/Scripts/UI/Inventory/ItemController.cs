@@ -8,7 +8,17 @@ namespace UI
     {
         public ItemSO item;
 
-        
+        public void ClickItem()
+        {
+            if(item.itemAction == ItemSO.Action.Equip)
+            {
+                Debug.Log("Equip!");
+            }
+            else
+            {
+                Debug.Log("Activate!");
+            }
+        }
     }
 
 }

@@ -7,13 +7,14 @@ namespace UI
     [CreateAssetMenu(fileName ="New Item", menuName ="Items/Create New Item")]
     public class ItemSO : ScriptableObject
     {
-        public int id;
+        [Header("Item Values")]
         public string itemName;
         public string itemDescription;
-        public int value;
         public Sprite icon;
 
-
+        [System.Serializable]
+        public enum Action { Equip, Activate };
+        public Action itemAction;
     }
 
 }

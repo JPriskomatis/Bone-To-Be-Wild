@@ -75,6 +75,7 @@ namespace UI
             ListItems();
         }
 
+
         public void ListItems()
         {
             foreach (Transform child in itemContent)
@@ -84,7 +85,11 @@ namespace UI
             foreach (ItemSO item in Items)
             {
                 //We create a new gameobject in the UI, we create the item prefab;
-                GameObject obj = Instantiate(InventoryItem, itemContent);                
+                GameObject obj = Instantiate(InventoryItem, itemContent);
+
+                //Add the ItemSO
+                obj.GetComponent<ItemController>().item = item;
+
 
                 //similar to above;
                 var itemIcon = obj.transform.Find("ItemImage").GetComponent<Image>();
