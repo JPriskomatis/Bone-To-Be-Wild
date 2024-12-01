@@ -84,6 +84,7 @@
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\EquipmentObjectEditor.cs" />
     <Compile Include="Assets\InfinityPBR\Editor\InfinityPBRManager.cs" />
     <Compile Include="Assets\InfinityPBR\Editor\SFB_BlendShapesManagerEditor.cs" />
+    <Compile Include="Assets\Samples\Toolbar Extender\1.4.2\Scene switcher buttons\Editor\SceneSelectionToolbar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -72,11 +72,16 @@ namespace UI
         public void Add(ItemSO item)
         {
             Items.Add(item);
+            ListItems();
         }
 
         public void ListItems()
         {
-            foreach(ItemSO item in Items)
+            foreach (Transform child in itemContent)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (ItemSO item in Items)
             {
                 //We create a new gameobject in the UI, we create the item prefab;
                 GameObject obj = Instantiate(InventoryItem, itemContent);                
