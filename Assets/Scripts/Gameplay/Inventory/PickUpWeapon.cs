@@ -42,7 +42,8 @@ namespace InventorySpace
         public void WeaponPickUp()
         {
             weaponHolder = GameObject.FindGameObjectWithTag("WeaponHold");
-            if(weaponHolder == null)
+
+            if (weaponHolder == null)
             {
                 Debug.Log("Weapon holder null");
             }
@@ -52,15 +53,13 @@ namespace InventorySpace
             }
 
             GameObject activeWeapo = CheckForActiveWeapon();
-            if(weaponName == WeaponName.normalSword)
-            {
-                weapon = weaponHolder.transform.GetChild(0).gameObject;
-            }
-            else
-            {
-                weapon = weaponHolder.transform.GetChild(1).gameObject;
-            }
+            CheckWhichWeaponToEquip();
+            EquipmentOfWeapon(activeWeapo);
 
+        }
+
+        private void EquipmentOfWeapon(GameObject activeWeapo)
+        {
             EquipItemManager.Instance.EquipItem(currentWeaponSO);
 
 
@@ -73,7 +72,18 @@ namespace InventorySpace
             {
                 weapon.SetActive(true);
             }
+        }
 
+        private void CheckWhichWeaponToEquip()
+        {
+            if (weaponName == WeaponName.normalSword)
+            {
+                weapon = weaponHolder.transform.GetChild(0).gameObject;
+            }
+            else
+            {
+                weapon = weaponHolder.transform.GetChild(1).gameObject;
+            }
         }
     }
 
