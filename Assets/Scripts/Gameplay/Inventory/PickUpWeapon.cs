@@ -11,6 +11,7 @@ namespace InventorySpace
         [Header("Weapon settings")]
         [SerializeField] private GameObject weapon;
         [SerializeField] private GameObject weaponHolder;
+        private WeaponSO currentWeaponSO;
         public enum WeaponName
         {
             normalSword,
@@ -34,6 +35,10 @@ namespace InventorySpace
             }
             return null;
         }
+        public void SetItemSO(WeaponSO weaponToPlace)
+        {
+            currentWeaponSO = weaponToPlace;
+        }
         public void WeaponPickUp()
         {
             weaponHolder = GameObject.FindGameObjectWithTag("WeaponHold");
@@ -55,6 +60,10 @@ namespace InventorySpace
             {
                 weapon = weaponHolder.transform.GetChild(1).gameObject;
             }
+
+            EquipItemManager.Instance.EquipItem(currentWeaponSO);
+
+
             if (activeWeapo != null)
             {
                 activeWeapo.SetActive(false);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace InventorySpace
 {
@@ -19,6 +20,8 @@ namespace InventorySpace
         [System.Serializable]
         public enum Category { Weapon, Potion};
         public Category itemCategory;
+
+
 
         public void PerformAction()
         {

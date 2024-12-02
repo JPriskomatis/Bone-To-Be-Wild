@@ -81,6 +81,20 @@ namespace InventorySpace
             ListItems();
         }
 
+        public GameObject FindGameObjectByItemSO(ItemSO itemToFind)
+        {
+            foreach (Transform child in itemContent)
+            {
+                ItemController itemController = child.GetComponent<ItemController>();
+                if (itemController != null && itemController.item == itemToFind)
+                {
+                    return child.gameObject;
+                }
+            }
+
+            // Return null if no matching GameObject is found
+            return null;
+        }
 
         public void ListItems()
         {

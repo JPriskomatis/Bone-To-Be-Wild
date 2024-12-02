@@ -1,3 +1,5 @@
+using System;
+using System.Net;
 using UnityEngine;
 
 namespace InventorySpace
@@ -11,12 +13,12 @@ namespace InventorySpace
         [Header("Weapon field")]
         public GameObject weaponPrefab;
 
-        
 
         protected override void Equip()
         {
+            weaponPrefab.GetComponent<PickUpWeapon>().SetItemSO(this);
             weaponPrefab.GetComponent<PickUpWeapon>().WeaponPickUp();
-
+            
         }
 
 
