@@ -71,7 +71,9 @@
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Icesword\IceDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Monsters\Golem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Barman.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\PickUpItem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemS\WeaponSO.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Inventory\PickUpWeapon.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\Player_Combat.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AbilityManager.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Civilain.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Wizard.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemS\PotionSO.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_NPC.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Abilities\Abilities\ZapAbility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\MeleeWeaponTrail.cs" />
@@ -107,9 +110,6 @@
     <Compile Include="Assets\Scripts\Gameplay\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Town_Civilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\TransitionToChase.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Inventory\PickUpItem.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemS\PotionSO.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemS\WeaponSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />

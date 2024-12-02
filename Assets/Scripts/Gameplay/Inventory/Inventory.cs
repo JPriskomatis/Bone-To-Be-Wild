@@ -75,6 +75,12 @@ namespace InventorySpace
             ListItems();
         }
 
+        public void Remove(ItemSO item)
+        {
+            Items.Remove(item);
+            ListItems();
+        }
+
 
         public void ListItems()
         {

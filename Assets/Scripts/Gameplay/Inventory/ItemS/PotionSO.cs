@@ -16,6 +16,9 @@ namespace InventorySpace
         {
             Debug.Log("Healed for :" + healAmount);
             AbilityScores.Instance.IncreaseStat(AbilityScores.StatType.CurrentHP, healAmount);
+
+            //Remove item from the Inventory;
+            Inventory.Instance.Remove(this);
         }
 
     }
