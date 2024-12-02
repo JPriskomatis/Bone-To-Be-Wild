@@ -8,6 +8,7 @@ TagManager:
   - Bandit
   - Goblin
   - Golem
+  - WeaponHold
   layers:
   - Default
   - TransparentFX

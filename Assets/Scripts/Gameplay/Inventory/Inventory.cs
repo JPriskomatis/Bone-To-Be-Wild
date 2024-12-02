@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace UI
+namespace InventorySpace
 {
     public class Inventory : MonoBehaviour
     {
@@ -75,6 +75,27 @@ namespace UI
             ListItems();
         }
 
+        public void Remove(ItemSO item)
+        {
+            Items.Remove(item);
+            ListItems();
+        }
+
+        public GameObject FindGameObjectByItemSO(ItemSO itemToFind)
+        {
+            foreach (Transform child in itemContent)
+            {
+                ItemController itemController = child.GetComponent<ItemController>();
+                if (itemController != null && itemController.item == itemToFind)
+                {
+                    return child.gameObject;
+                }
+            }
+
+            // Return null if no matching GameObject is found
+            return null;
+        }
+
         public void ListItems()
         {
             foreach (Transform child in itemContent)
@@ -84,7 +105,11 @@ namespace UI
             foreach (ItemSO item in Items)
             {
                 //We create a new gameobject in the UI, we create the item prefab;
-                GameObject obj = Instantiate(InventoryItem, itemContent);                
+                GameObject obj = Instantiate(InventoryItem, itemContent);
+
+                //Add the ItemSO
+                obj.GetComponent<ItemController>().item = item;
+
 
                 //similar to above;
                 var itemIcon = obj.transform.Find("ItemImage").GetComponent<Image>();

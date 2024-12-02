@@ -76,6 +76,7 @@
     <Compile Include="Assets\InfinityPBR\Editor\ObjExporterScript.cs" />
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\WardrobePrefabManagerEditor.cs" />
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\Editor\BasicInkExampleEditor.cs" />
+    <Compile Include="Assets\Samples\Toolbar Extender\1.4.2\Scene switcher buttons\Editor\SceneSelectionToolbar.cs" />
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\PrefabAndObjectManagerEditor.cs" />
     <Compile Include="Assets\InfinityPBR\---Game Modules\Audio Clip Combiner\Editor\AudioClipCombiner.cs" />
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\BlendShapesPresetManagerEditor.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="Assets\InfinityPBR - Magic Pig Games\Equipment System\Editor\EquipmentObjectEditor.cs" />
     <Compile Include="Assets\InfinityPBR\Editor\InfinityPBRManager.cs" />
     <Compile Include="Assets\InfinityPBR\Editor\SFB_BlendShapesManagerEditor.cs" />
-    <Compile Include="Assets\Samples\Toolbar Extender\1.4.2\Scene switcher buttons\Editor\SceneSelectionToolbar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

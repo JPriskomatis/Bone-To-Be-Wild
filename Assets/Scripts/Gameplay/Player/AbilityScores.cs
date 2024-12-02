@@ -206,7 +206,7 @@ namespace PlayerSpace
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                GainXP(25);
+                DecreaseStat(StatType.CurrentHP, 10);
             }
         }
         public void GainXP(int amount)
