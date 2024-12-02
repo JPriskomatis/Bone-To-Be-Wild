@@ -8,10 +8,16 @@ namespace InventorySpace
     public class PickUpWeapon : MonoBehaviour
     {
 
+        [Header("Weapon settings")]
         [SerializeField] private GameObject weapon;
-
         [SerializeField] private GameObject weaponHolder;
+        public enum WeaponName
+        {
+            normalSword,
+            magicSword
+        }
 
+        public WeaponName weaponName;
         private void Start()
         {
             weaponHolder = GameObject.FindGameObjectWithTag("WeapoHold");
@@ -41,8 +47,15 @@ namespace InventorySpace
             }
 
             GameObject activeWeapo = CheckForActiveWeapon();
-            weapon = weaponHolder.transform.GetChild(0).gameObject;
-            if(activeWeapo != null)
+            if(weaponName == WeaponName.normalSword)
+            {
+                weapon = weaponHolder.transform.GetChild(0).gameObject;
+            }
+            else
+            {
+                weapon = weaponHolder.transform.GetChild(1).gameObject;
+            }
+            if (activeWeapo != null)
             {
                 activeWeapo.SetActive(false);
                 weapon.SetActive(true);
