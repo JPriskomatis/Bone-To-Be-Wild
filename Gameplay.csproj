@@ -111,6 +111,8 @@
     <Compile Include="Assets\Scripts\Gameplay\Weapons\IDoDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Civilains\Town_Civilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\TransitionToChase.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Monsters\Spider.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Monsters\BaseMonster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Gameplay\Gameplay.asmdef" />
