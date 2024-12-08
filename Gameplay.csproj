@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Abilities\AcquireAbility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemies\Bandit\Bandit.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemS\ItemSO.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Monsters\Spider.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_TavernCivilian.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Weapons\DamageTypes\Icesword\IceDamage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Monsters\Golem.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_Civilain.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\NPCs\NPC_Wizard.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Monsters\BaseMonster.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Inventory\EquipItemManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Inventory\ItemS\PotionSO.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NPC\Base_NPC.cs" />

@@ -27,6 +27,7 @@ namespace monster
             if (currentHealth > 1)
             {
                 anim.SetTrigger("GotHit");
+                Debug.Log("Got hit");
 
             }
 

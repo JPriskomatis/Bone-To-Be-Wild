@@ -68,6 +68,13 @@ namespace PlayerSpace
                             golem.GetComponent<Golem>().CloseToPlayer(player.transform.gameObject);
                         }
                         break;
+                    case "Spider":
+                        if (distance <= golemRadius)
+                        {
+                            Spider spider = hit.GetComponentInParent<Spider>();
+                            spider.GetComponent<Spider>().CloseToPlayer(player.transform.gameObject);
+                        }
+                        break;
 
                     default:
                         break;

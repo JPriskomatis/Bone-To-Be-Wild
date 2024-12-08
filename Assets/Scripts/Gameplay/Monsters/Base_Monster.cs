@@ -13,6 +13,7 @@ namespace monster
         public int currentHealth;
         public int moveSpeed;
         public int damage;
+        [SerializeField] protected float attackRadius;
 
         [Header("Components")]
         public Animator anim;
@@ -41,6 +42,7 @@ namespace monster
             if(Input.GetKeyDown(KeyCode.G))
             {
                 TransitionToState(MonsterState.Hurt);
+                currentHealth -= 15;
             }
         }
         #region States
@@ -110,14 +112,16 @@ namespace monster
             Debug.Log("Combat");
             
         }
-        #endregion
 
-        #region Combat Functions
         protected virtual void DeathState()
         {
             //PerformAttack
             Debug.Log("Death");
         }
+        #endregion
+
+        #region Combat Functions
+
 
         public void SpellDamageable()
         {
@@ -145,7 +149,7 @@ namespace monster
             if(currentState!= MonsterState.Death){
                 Debug.Log("Player is within range");
 
-                StartCoroutine(LookTowardsPlayer(player, 10f));
+                StartCoroutine(LookTowardsPlayer(player, 2f));
                 if (!inAttack)
                 {
                     StartCoroutine(MoveTowardsPlayer(player));
@@ -164,7 +168,7 @@ namespace monster
             Quaternion targetRotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
             // Smoothly rotate towards the target rotation
-            while (true)
+            while (!(currentState==MonsterState.Death))
             {
                 // Update the direction to the player
                 relativePos = player.transform.position - transform.position;
@@ -186,7 +190,7 @@ namespace monster
         {
             
             
-            while (Vector3.Distance(transform.position, player.transform.position) > 5f && !inAttack)
+            while (Vector3.Distance(transform.position, player.transform.position) > attackRadius && !inAttack)
             {
                 
                 TransitionToState(MonsterState.Running);
