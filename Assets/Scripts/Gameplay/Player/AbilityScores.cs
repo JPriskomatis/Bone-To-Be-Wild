@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PlayerSpace
 {
@@ -25,6 +26,8 @@ namespace PlayerSpace
         [SerializeField] private TextMeshProUGUI charismaTxt;
         [SerializeField] private TextMeshProUGUI currentXPTxt;
         [SerializeField] private TextMeshProUGUI levelXPTxt;
+
+        [SerializeField] private Slider xpSlider;
 
         [System.Serializable]   //We make them serializable so that we can modify them through inspector;
         public class MainStats
@@ -228,6 +231,10 @@ namespace PlayerSpace
             knowledgeTxt.text = mainStats.knowledge.ToString();
             fateTxt.text = mainStats.fate.ToString();
             charismaTxt.text = mainStats.charisma.ToString();
+
+            xpSlider.value = secondaryStats.currentXP;
+            xpSlider.maxValue = secondaryStats.LevelUpXP;
+
             currentXPTxt.text = secondaryStats.currentXP.ToString()+"/ ";
             levelXPTxt.text = secondaryStats.LevelUpXP.ToString();
         }
