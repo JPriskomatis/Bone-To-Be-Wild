@@ -1,6 +1,7 @@
 using Damageables;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using static monster.Base_Monster;
 
@@ -9,8 +10,8 @@ namespace monster
     public class BaseMonster : MonoBehaviour, ISwordDamageable
     {
         [Header("Monster Stats")]
-        [SerializeField] protected int currentHealth;
-        protected int maxHealth;
+        protected int currentHealth;
+        [SerializeField] protected int maxHealth;
         public float moveSpeed;
 
         [Header("Environement")]
@@ -19,12 +20,18 @@ namespace monster
 
         [Header("Components")]
         [SerializeField] protected Animator anim;
+        [SerializeField] private Enemy_UI enemy_UI;
 
         //Attributes;
         [SerializeField] protected float attackSpeed;
         protected bool canAttack = true;
         private WaitForSeconds waitForSeconds;
 
+
+        private void Start()
+        {
+            currentHealth = maxHealth;
+        }
 
         //States;
         protected enum State
@@ -76,6 +83,7 @@ namespace monster
         }
         protected virtual void HurtState()
         {
+            enemy_UI.UpdateSlider(currentHealth, maxHealth);
             Debug.Log("Hurt State");
         }
         protected virtual void DeathState()
@@ -92,6 +100,8 @@ namespace monster
             }
             else
             {
+                currentHealth = 0;
+                enemy_UI.UpdateSlider(currentHealth, maxHealth);
                 TransitionToState(State.Death);
             }
         }
@@ -111,7 +121,6 @@ namespace monster
             while (true)
             {
                 transform.LookAt(player.transform.position);
-                Debug.Log(Vector3.Distance(transform.position, player.transform.position));
 
                 if (Vector3.Distance(transform.position, player.transform.position) <= attackDist)
                 {
