@@ -32,7 +32,8 @@ namespace monster
         protected override void DeathState()
         {
             base.DeathState();
-            anim.SetTrigger("Death1");
+            anim.SetTrigger("death1");
+            Destroy(this);
         }
     }
 }

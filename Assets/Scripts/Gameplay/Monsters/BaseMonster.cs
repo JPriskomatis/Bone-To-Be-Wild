@@ -122,10 +122,13 @@ namespace monster
             {
                 transform.LookAt(player.transform.position);
 
+                //If monster is close enough to attack;
                 if (Vector3.Distance(transform.position, player.transform.position) <= attackDist)
                 {
                     TransitionToState(State.Combat);
-                } else
+                }
+                //If monster is not close enough to attack;
+                else
                 {
                     if (Vector3.Distance(transform.position, player.transform.position) <= chaseDist)
                     {
