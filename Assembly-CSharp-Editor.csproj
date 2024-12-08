@@ -1029,6 +1029,10 @@
       <Project>{78981C26-DCC4-7928-C628-6019D5DB2BE2}</Project>
       <Name>UI</Name>
     </ProjectReference>
+    <ProjectReference Include="QuickOutline.csproj">
+      <Project>{5F26A89D-D23E-6D8D-F811-224EC735A497}</Project>
+      <Name>QuickOutline</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

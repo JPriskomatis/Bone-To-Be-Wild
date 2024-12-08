@@ -10,6 +10,7 @@ TagManager:
   - Golem
   - WeaponHold
   - Spider
+  - Item
   layers:
   - Default
   - TransparentFX

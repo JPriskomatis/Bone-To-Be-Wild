@@ -1,16 +1,16 @@
+using QuickOutline;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UI;
 using UnityEngine;
-
 namespace Interaction
 {
     public interface IInteractable
     {
         void Interact();
-        void OnInteractEnter(); // Called when detection with the object starts
-        void OnInteractExit();  // Called when detection with the object ends
+        void OnInteractEnter(); //Called when detection with the object starts;
+        void OnInteractExit();  //Called when detection with the object ends;
     }
     
     public class Interactor : MonoBehaviour
@@ -44,12 +44,18 @@ namespace Interaction
                 {
                     if (currentInteractable != interactObj)
                     {
-                        // Exit the previous interactable object if exists
+                        //Exit the previous interactable object if exists;
                         if (currentInteractable != null)
                             currentInteractable.OnInteractExit();
 
-                        // Enter the new interactable object
+                        //Enter the new interactable object;
                         interactObj.OnInteractEnter();
+
+                        //If its an item;
+                        if (detectedObject.CompareTag("Item"))
+                        {
+                            detectedObject.GetComponent<Outline>().enabled = true;
+                        }
                         currentInteractable = interactObj;
                     }
                     interactObj.Interact();
@@ -63,7 +69,10 @@ namespace Interaction
                     currentInteractable.OnInteractExit();
                     currentInteractable = null;
                 }
-
+                if (detectedObject.CompareTag("Item"))
+                {
+                    detectedObject.GetComponent<Outline>().enabled = false;
+                }
                 text.text = "";
                 text.gameObject.SetActive(false);
             }

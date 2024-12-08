@@ -808,6 +808,10 @@
       <Project>{762C5A3F-C07F-9533-DDEF-79DF44099B0B}</Project>
       <Name>UtilsAssembly</Name>
     </ProjectReference>
+    <ProjectReference Include="QuickOutline.csproj">
+      <Project>{5F26A89D-D23E-6D8D-F811-224EC735A497}</Project>
+      <Name>QuickOutline</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
