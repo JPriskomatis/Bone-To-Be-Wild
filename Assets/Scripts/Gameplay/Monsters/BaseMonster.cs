@@ -1,4 +1,5 @@
 using Damageables;
+using PlayerSpace;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
@@ -13,6 +14,7 @@ namespace monster
         protected int currentHealth;
         [SerializeField] protected int maxHealth;
         public float moveSpeed;
+        [SerializeField] private int xpBonus;
 
         [Header("Environement")]
         [SerializeField] protected float chaseDist;
@@ -89,6 +91,7 @@ namespace monster
         protected virtual void DeathState()
         {
             Debug.Log("Death State");
+            AbilityScores.Instance.GainXP(xpBonus);
         }
 
         public void SwordDamageable(int damage)
