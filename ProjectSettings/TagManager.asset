@@ -9,6 +9,8 @@ TagManager:
   - Goblin
   - Golem
   - WeaponHold
+  - Spider
+  - Item
   layers:
   - Default
   - TransparentFX

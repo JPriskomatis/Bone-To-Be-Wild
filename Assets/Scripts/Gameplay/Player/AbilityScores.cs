@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PlayerSpace
 {
@@ -25,6 +26,8 @@ namespace PlayerSpace
         [SerializeField] private TextMeshProUGUI charismaTxt;
         [SerializeField] private TextMeshProUGUI currentXPTxt;
         [SerializeField] private TextMeshProUGUI levelXPTxt;
+
+        [SerializeField] private Slider xpSlider;
 
         [System.Serializable]   //We make them serializable so that we can modify them through inspector;
         public class MainStats
@@ -133,18 +136,6 @@ namespace PlayerSpace
                 case StatType.MaxHP:
                     mainStats.maxHP += increaseAmount;
                     break;
-
-                case StatType.currentXP:
-                    if (secondaryStats.currentXP + increaseAmount > secondaryStats.LevelUpXP)
-                    {
-                        //Invoke the level up event;
-                        increaseAmount = secondaryStats.LevelUpXP- secondaryStats.currentXP;
-                        secondaryStats.currentXP = increaseAmount;
-                        secondaryStats.LevelUpXP = secondaryStats.LevelUpXP * 2;
-                    }
-                    //Here invoke the Level up event
-                    secondaryStats.currentXP+= increaseAmount;
-                    break;
                 default:
                     Debug.LogError("Unknown stat type.");
                     break;
@@ -194,8 +185,10 @@ namespace PlayerSpace
         public void IncreaseLevel()
         {
             level++;
-            secondaryStats.currentXP = secondaryStats.currentXP - secondaryStats.LevelUpXP;
+
             secondaryStats.LevelUpXP = secondaryStats.LevelUpXP * 2;
+            var overXP = secondaryStats.LevelUpXP - secondaryStats.currentXP;
+            secondaryStats.currentXP = overXP;
 
             mainStats.maxHP += 5;
             mainStats.currentHP += 5;
@@ -238,6 +231,10 @@ namespace PlayerSpace
             knowledgeTxt.text = mainStats.knowledge.ToString();
             fateTxt.text = mainStats.fate.ToString();
             charismaTxt.text = mainStats.charisma.ToString();
+
+            xpSlider.value = secondaryStats.currentXP;
+            xpSlider.maxValue = secondaryStats.LevelUpXP;
+
             currentXPTxt.text = secondaryStats.currentXP.ToString()+"/ ";
             levelXPTxt.text = secondaryStats.LevelUpXP.ToString();
         }

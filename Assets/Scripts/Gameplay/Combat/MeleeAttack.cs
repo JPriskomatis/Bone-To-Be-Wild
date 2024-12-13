@@ -174,7 +174,7 @@ namespace combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Enemy")) // Use CompareTag for better performance
+            if (other.CompareTag("Enemy")) //I use CompareTag for better performancel
             {
                 Debug.Log(other.transform.root.name);
 
