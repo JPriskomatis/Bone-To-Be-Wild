@@ -22,6 +22,8 @@ namespace monster
         private bool combatRange;
         protected bool inAttack;
 
+        private Enemy_UI enemyUI; >().UpdateSlider
+
         //States;
         public enum MonsterState { Idle, Combat, Running, Hurt, Death};
         [Header("State")]
@@ -31,6 +33,7 @@ namespace monster
 
         private void Start()
         {
+            enemyUI = GetComponent<Enemy_UI>();
             currentState = startingState;
             currentHealth = maxHealth;
         }
@@ -87,7 +90,7 @@ namespace monster
             //PerformAttack
             Debug.Log("Hurt");
             //Update the health slider;
-            GetComponent<Enemy_UI>().UpdateSlider(currentHealth, maxHealth);
+            enemyUI.UpdateSlider(currentHealth, maxHealth);
             if(currentHealth <= 0)
             {
                 TransitionToState(MonsterState.Death);
