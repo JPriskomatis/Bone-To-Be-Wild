@@ -59,6 +59,9 @@
   - Hit
   - Death
 
+### Modular Ability System
+- Create new abilities by inheriting from a shared base class and implementing the required interface.
+- Designed to make adding new player abilities straightforward.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/0c6c4ab3-abe4-4edf-b589-1d574d1700a6"
