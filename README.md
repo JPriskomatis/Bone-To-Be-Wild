@@ -15,7 +15,7 @@
 <div align="left">
  
 
-  <h2>⚔️ The Adventure Begins</h2>
+  <h2> The Adventure Begins</h2>
    <img src="https://github.com/user-attachments/assets/63522a0a-f2e8-477e-9446-10c78dcbb45a"
        width="48%"
        align="right"
